@@ -1,6 +1,6 @@
-import { Localization } from '../domain/models/localization.model';
+import { Localization } from '../domain/entities/localization.entity';
+import { OnEarthLocalization } from '../domain/entities/on-earth-localization.entity';
 import { LocalizationQueries } from '../domain/services/weather.service';
-import { OnEarthLocalization } from '../domain/models/on-earth-localization.model';
 import MetaweatherService from './metaweatherapi.service';
 
 const Service = new MetaweatherService();

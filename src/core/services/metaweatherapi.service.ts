@@ -1,25 +1,18 @@
+import { getLocalizationSearchArgument, getUnlockedURL } from '../utils';
+import { Localization } from '../domain/entities/localization.entity';
+import { LocalizationQueries } from '../domain/services/weather.service';
 import { LocalizationType } from '../constants/localization-type.constant';
+import { MetaweatherApiResponse } from '../api/metaweather.api';
+import { MetaweatherLocalization } from '../api/metaweather.api';
+import { MetaweatherOnEarthLocalization } from '../api/metaweather.api';
+import { OnEarthLocalization } from '../domain/entities/on-earth-localization.entity';
+import { Weather } from '../domain/entities/weather.entity';
+import { WeatherService } from '../domain/services/weather.service';
+import { WeatherState } from '../domain/entities/weather-state.entity';
 import { WeatherStateAbbr } from '../constants/weather-state-abbr.constant';
 import { WeatherStateName } from '../constants/weather-state.constat';
-import { Localization } from '../domain/models/localization.model';
-import {
-	MetaweatherApiResponse,
-	MetaweatherLocalization,
-	MetaweatherOnEarthLocalization,
-} from '../domain/models/metaweather.api';
-
-import { OnEarthLocalization } from '../domain/models/on-earth-localization.model';
-import { WeatherState } from '../domain/models/weather/weather-state.model';
-import { WeatherTemperature } from '../domain/models/weather/weather-temperature.model';
-import { WeatherWind } from '../domain/models/weather/weather-wind.model';
-import { Weather } from '../domain/models/weather/weather.model';
-
-import {
-	LocalizationQueries,
-	WeatherService,
-} from '../domain/services/weather.service';
-
-import { getLocalizationSearchArgument, getUnlockedURL } from '../utils';
+import { WeatherTemperature } from '../domain/entities/weather-temperature.entity';
+import { WeatherWind } from '../domain/entities/weather-wind.entity';
 
 class MetaweatherService implements WeatherService {
 	private readonly api_url: string;

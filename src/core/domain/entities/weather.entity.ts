@@ -1,20 +1,7 @@
-import { WeatherState } from './weather-state.model';
-import { WeatherTemperature } from './weather-temperature.model';
-import { WeatherWind } from './weather-wind.model';
-
-interface WeatherModel {
-	air_pressure: number;
-	applicable_date: string;
-	created: string;
-	humidity: number;
-	id: number;
-	predictability: number;
-	state: WeatherState;
-	temperature: WeatherTemperature;
-	visibility: number;
-	wind: WeatherWind;
-	img: string;
-}
+import { WeatherModel } from '../models/weather.model';
+import { WeatherStateModel } from '../models/weather-state.model';
+import { WeatherTemperatureModel } from '../models/weather-temperature.model';
+import { WeatherWindModel } from '../models/weather-wind.model';
 
 class Weather implements WeatherModel {
 	readonly air_pressure: number;
@@ -23,10 +10,10 @@ class Weather implements WeatherModel {
 	readonly humidity: number;
 	readonly id: number;
 	readonly predictability: number;
-	readonly state: WeatherState;
-	readonly temperature: WeatherTemperature;
+	readonly state: WeatherStateModel;
+	readonly temperature: WeatherTemperatureModel;
 	readonly visibility: number;
-	readonly wind: WeatherWind;
+	readonly wind: WeatherWindModel;
 	readonly img: string;
 
 	constructor({
@@ -48,10 +35,10 @@ class Weather implements WeatherModel {
 		humidity: number;
 		id: number;
 		predictability: number;
-		state: WeatherState;
-		temperature: WeatherTemperature;
+		state: WeatherStateModel;
+		temperature: WeatherTemperatureModel;
 		visibility: number;
-		wind: WeatherWind;
+		wind: WeatherWindModel;
 		img: string;
 	}) {
 		this.air_pressure = air_pressure;

@@ -1,5 +1,5 @@
-import { Localization } from '../models/localization.model';
-import { OnEarthLocalization } from '../models/on-earth-localization.model';
+import { Localization } from '../entities/localization.entity';
+import { OnEarthLocalization } from '../entities/on-earth-localization.entity';
 
 export type LocalizationQueries = {
 	query?: string;

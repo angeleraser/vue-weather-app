@@ -1,10 +1,6 @@
 import { WeatherStateAbbr } from '@/core/constants/weather-state-abbr.constant';
 import { WeatherStateName } from '@/core/constants/weather-state.constat';
-
-interface WeatherStateModel {
-	name: WeatherStateName;
-	abbr: WeatherStateAbbr;
-}
+import { WeatherStateModel } from '../models/weather-state.model';
 
 class WeatherState implements WeatherStateModel {
 	readonly name: WeatherStateName;

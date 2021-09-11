@@ -1,8 +1,4 @@
-interface WeatherTemperatureModel {
-	min: number;
-	current: number;
-	max: number;
-}
+import { WeatherTemperatureModel } from '../models/weather-temperature.model';
 
 class WeatherTemperature implements WeatherTemperatureModel {
 	readonly min: number;
