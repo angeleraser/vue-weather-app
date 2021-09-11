@@ -1,3 +1,16 @@
+enum WeatherStateAbbrEnum {
+	Snow = 'sn',
+	Sleet = 'sl',
+	Hail = 'h',
+	Thunderstorm = 't',
+	HeavyRain = 'hr',
+	LightRain = 'lr',
+	Showers = 's',
+	HeavyCloud = 'hc',
+	LightCloud = 'lc',
+	Clear = 'c',
+}
+
 type WeatherStateAbbr =
 	| 'sn'
 	| 'sl'
@@ -10,4 +23,4 @@ type WeatherStateAbbr =
 	| 'lc'
 	| 'c';
 
-export { WeatherStateAbbr };
+export { WeatherStateAbbr, WeatherStateAbbrEnum };

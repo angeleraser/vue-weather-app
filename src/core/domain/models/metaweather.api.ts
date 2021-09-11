@@ -5,6 +5,18 @@ interface MetaweatherLocalization {
 	woeid: number;
 }
 
+type MetaweatherApiResponse = {
+	contents: string; // JSON String
+
+	status: {
+		url: string;
+		content_type: string;
+		content_length: number;
+		http_code: number;
+		response_time: number;
+	};
+};
+
 interface MetaweatherOnEarthLocalization {
 	consolidated_weather: Array<MetaweatherConsolidatedWeather>;
 	latt_long: string;
@@ -38,4 +50,8 @@ interface MetaweatherConsolidatedWeather {
 	predictability: number;
 }
 
-export { MetaweatherLocalization, MetaweatherOnEarthLocalization };
+export {
+	MetaweatherLocalization,
+	MetaweatherOnEarthLocalization,
+	MetaweatherApiResponse,
+};

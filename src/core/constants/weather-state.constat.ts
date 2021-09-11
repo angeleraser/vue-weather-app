@@ -1,3 +1,16 @@
+enum WeatherStateNameEnum {
+	Snow = 'Snow',
+	Sleet = 'Sleet',
+	Hail = 'Hail',
+	Thunderstorm = 'Thunderstorm',
+	HeavyRain = 'HeavyRain',
+	LightRain = 'LightRain',
+	Showers = 'Snowers',
+	HeavyCloud = 'HeavyCloud',
+	LightCloud = 'LightCloud',
+	Clear = 'Clear',
+}
+
 type WeatherStateName =
 	| 'Snow'
 	| 'Sleet'
@@ -10,4 +23,4 @@ type WeatherStateName =
 	| 'Light Cloud'
 	| 'Clear';
 
-export { WeatherStateName };
+export { WeatherStateName, WeatherStateNameEnum };
