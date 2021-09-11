@@ -13,6 +13,7 @@ interface WeatherModel {
 	temperature: WeatherTemperature;
 	visibility: number;
 	wind: WeatherWind;
+	img: string;
 }
 
 class Weather implements WeatherModel {
@@ -26,6 +27,7 @@ class Weather implements WeatherModel {
 	readonly temperature: WeatherTemperature;
 	readonly visibility: number;
 	readonly wind: WeatherWind;
+	readonly img: string;
 
 	constructor({
 		air_pressure,
@@ -38,6 +40,7 @@ class Weather implements WeatherModel {
 		temperature,
 		visibility,
 		wind,
+		img,
 	}: {
 		air_pressure: number;
 		applicable_date: string;
@@ -49,6 +52,7 @@ class Weather implements WeatherModel {
 		temperature: WeatherTemperature;
 		visibility: number;
 		wind: WeatherWind;
+		img: string;
 	}) {
 		this.air_pressure = air_pressure;
 		this.applicable_date = applicable_date;
@@ -60,6 +64,7 @@ class Weather implements WeatherModel {
 		this.temperature = temperature;
 		this.visibility = visibility;
 		this.wind = wind;
+		this.img = img;
 	}
 }
 

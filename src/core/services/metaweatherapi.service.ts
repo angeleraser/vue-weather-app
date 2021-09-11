@@ -80,6 +80,10 @@ class MetaweatherService implements WeatherService {
 						id: weather.id,
 						predictability: weather.predictability,
 
+						img: this.getWeatherImgUrl(
+							weather.weather_state_abbr as WeatherStateAbbr,
+						),
+
 						state: new WeatherState({
 							name: weather.weather_state_name as WeatherStateName,
 							abbr: weather.weather_state_abbr as WeatherStateAbbr,
@@ -107,6 +111,10 @@ class MetaweatherService implements WeatherService {
 				woeid: contents.parent.woeid,
 			}),
 		});
+	};
+
+	private getWeatherImgUrl = (state: WeatherStateAbbr): string => {
+		return `https://www.metaweather.com/static/img/weather/${state}.svg`;
 	};
 }
 
