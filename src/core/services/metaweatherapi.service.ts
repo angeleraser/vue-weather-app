@@ -4,6 +4,7 @@ import {
 	MetaweatherLocalization,
 	MetaweatherOnEarthLocalization,
 } from '../domain/models/metaweather.api';
+
 import { OnEarthLocalization } from '../domain/models/on-earth-localization.model';
 
 import {
@@ -11,12 +12,12 @@ import {
 	MetaweatherApiService,
 } from '../domain/services/metaweatherapi.service';
 
+import { getLocalizationSearchArgument, getUnlockedURL } from '../utils';
+
 import {
 	formatMetaweatherApiLocalizationData,
 	formatMetaweatherApiOnEarthLocalizationData,
-	getLocalizationSearchArgument,
-	getUnlockedURL,
-} from '../utils';
+} from '../utils/metaweatherapi.utils';
 
 class MetaweatherService implements MetaweatherApiService {
 	readonly api_url: string;
