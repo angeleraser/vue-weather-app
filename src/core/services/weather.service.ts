@@ -9,7 +9,7 @@ class ApplicationWeatherService {
 	public searchLocalizationByParams = async (
 		params: LocalizationQueries,
 	): Promise<Localization[]> => {
-		return await Service.getLocalization(params);
+		return await Service.findLocalizations(params);
 	};
 
 	public findOnEarthById = async (

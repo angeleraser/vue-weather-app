@@ -28,7 +28,7 @@ class MetaweatherService implements WeatherService {
 		this.api_url = 'https://www.metaweather.com/api';
 	}
 
-	public getLocalization = async (
+	public findLocalizations = async (
 		params: LocalizationQueries,
 	): Promise<Localization[]> => {
 		const searchArguments = getLocalizationSearchArgument(params);
