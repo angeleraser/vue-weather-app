@@ -22,7 +22,7 @@ import {
 import { getLocalizationSearchArgument, getUnlockedURL } from '../utils';
 
 class MetaweatherService implements WeatherService {
-	private api_url: string;
+	private readonly api_url: string;
 
 	constructor() {
 		this.api_url = 'https://www.metaweather.com/api';
