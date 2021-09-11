@@ -8,15 +8,15 @@ import store from './store';
 const service = new ApplicationWeatherService();
 
 async function init() {
-	const localizations = await service.searchLocalizationByParams({
+	const Localizations = await service.searchLocalizationByParams({
 		query: 'san',
 	});
 
-	const onEarthLocalization = await service.findOnEarthById(
-		localizations[0].woeid,
+	const OnEarthLocalization = await service.findOnEarthById(
+		Localizations[0].woeid,
 	);
 
-	console.log({ localizations, onEarthLocalization });
+	console.log({ Localizations, OnEarthLocalization });
 }
 
 init();
