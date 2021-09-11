@@ -1,4 +1,4 @@
-import { LocalizationQueries } from '../domain/services/metaweatherapi.service';
+import { LocalizationQueries } from '../domain/services/weather.service';
 
 const getLocalizationSearchArgument = (params: LocalizationQueries): string => {
 	if (!params.latt_long && !params.query) return ``;

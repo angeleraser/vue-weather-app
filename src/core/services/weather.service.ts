@@ -1,7 +1,9 @@
 import { Localization } from '../domain/models/localization.model';
-import { LocalizationQueries } from '../domain/services/metaweatherapi.service';
+import {
+	LocalizationQueries,
+	WeatherService,
+} from '../domain/services/weather.service';
 import { OnEarthLocalization } from '../domain/models/on-earth-localization.model';
-import { WeatherService } from '../domain/services/weather.service';
 import MetaweatherService from './metaweatherapi.service';
 
 const MetaweatherApiService = new MetaweatherService();
