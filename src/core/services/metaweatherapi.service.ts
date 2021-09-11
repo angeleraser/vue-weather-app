@@ -26,7 +26,7 @@ class MetaweatherService implements MetaweatherApiService {
 		this.api_url = 'https://www.metaweather.com/api';
 	}
 
-	getLocalization = async (
+	public getLocalization = async (
 		params: LocalizationQueries,
 	): Promise<Localization[]> => {
 		const searchArguments = getLocalizationSearchArgument(params);
@@ -44,7 +44,7 @@ class MetaweatherService implements MetaweatherApiService {
 		);
 	};
 
-	getOnEarthLocalization = async (
+	public getOnEarthLocalization = async (
 		woeid: number,
 	): Promise<OnEarthLocalization> => {
 		const url = `${this.api_url}/location/${woeid}`;
