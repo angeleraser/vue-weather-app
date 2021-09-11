@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import App from './App.vue';
-import MetaweatherService from './core/services/metaweatherapi.service';
+
+import ApplicationWeatherService from './core/services/weather.service';
 import router from './router';
 import store from './store';
 
-const service = new MetaweatherService();
+const service = new ApplicationWeatherService();
 
 async function init() {
 	const localizations = await service.getLocalization({ query: 'san' });

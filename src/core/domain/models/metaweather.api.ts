@@ -53,5 +53,6 @@ interface MetaweatherConsolidatedWeather {
 export {
 	MetaweatherLocalization,
 	MetaweatherOnEarthLocalization,
+	MetaweatherConsolidatedWeather,
 	MetaweatherApiResponse,
 };

@@ -1,7 +1,5 @@
-import {
-	MetaweatherLocalization,
-	MetaweatherOnEarthLocalization,
-} from '../models/metaweather.api';
+import { Localization } from '../models/localization.model';
+import { OnEarthLocalization } from '../models/on-earth-localization.model';
 
 export type LocalizationQueries = {
 	query?: string;
@@ -11,13 +9,9 @@ export type LocalizationQueries = {
 interface MetaweatherApiService {
 	readonly api_url: string;
 
-	getLocalization: (
-		params: LocalizationQueries,
-	) => Promise<MetaweatherLocalization[]>;
+	getLocalization: (params: LocalizationQueries) => Promise<Localization[]>;
 
-	getOnEarthLocalization: (
-		woeid: number,
-	) => Promise<MetaweatherOnEarthLocalization>;
+	getOnEarthLocalization: (woeid: number) => Promise<OnEarthLocalization>;
 }
 
 export { MetaweatherApiService };

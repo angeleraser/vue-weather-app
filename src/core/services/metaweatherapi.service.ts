@@ -1,15 +1,22 @@
+import { Localization } from '../domain/models/localization.model';
 import {
 	MetaweatherApiResponse,
 	MetaweatherLocalization,
 	MetaweatherOnEarthLocalization,
 } from '../domain/models/metaweather.api';
+import { OnEarthLocalization } from '../domain/models/on-earth-localization.model';
 
 import {
 	LocalizationQueries,
 	MetaweatherApiService,
 } from '../domain/services/metaweatherapi.service';
 
-import { getLocalizationSearchArgument, getUnlockedURL } from '../utils';
+import {
+	formatMetaweatherApiLocalizationData,
+	formatMetaweatherApiOnEarthLocalizationData,
+	getLocalizationSearchArgument,
+	getUnlockedURL,
+} from '../utils';
 
 class MetaweatherService implements MetaweatherApiService {
 	readonly api_url: string;
@@ -20,7 +27,7 @@ class MetaweatherService implements MetaweatherApiService {
 
 	getLocalization = async (
 		params: LocalizationQueries,
-	): Promise<MetaweatherLocalization[]> => {
+	): Promise<Localization[]> => {
 		const searchArguments = getLocalizationSearchArgument(params);
 
 		const url = `${this.api_url}/location/search/?${searchArguments}`;
@@ -31,12 +38,14 @@ class MetaweatherService implements MetaweatherApiService {
 
 		const contents = JSON.parse(data.contents) as MetaweatherLocalization[];
 
-		return contents;
+		return contents.map(localization =>
+			formatMetaweatherApiLocalizationData(localization),
+		);
 	};
 
 	getOnEarthLocalization = async (
 		woeid: number,
-	): Promise<MetaweatherOnEarthLocalization> => {
+	): Promise<OnEarthLocalization> => {
 		const url = `${this.api_url}/location/${woeid}`;
 
 		const response = await fetch(getUnlockedURL(url));
@@ -47,7 +56,7 @@ class MetaweatherService implements MetaweatherApiService {
 			data.contents,
 		) as MetaweatherOnEarthLocalization;
 
-		return contents;
+		return formatMetaweatherApiOnEarthLocalizationData(contents);
 	};
 }
 
