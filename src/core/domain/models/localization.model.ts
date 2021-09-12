@@ -5,7 +5,7 @@ interface LocalizationModel {
 	coordinates: CoordinatesModel;
 	type: LocalizationType;
 	title: string;
-	woeid: number;
+	oeid: number;
 }
 
 export { LocalizationModel };

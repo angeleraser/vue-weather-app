@@ -39,7 +39,7 @@ class MetaweatherService implements WeatherService {
 			localization =>
 				new Localization({
 					title: localization.title,
-					woeid: localization.woeid,
+					oeid: localization.woeid,
 					coordinates: new Coordinates({
 						...Coordinates.getFromStr(localization.latt_long),
 					}),
@@ -108,7 +108,7 @@ class MetaweatherService implements WeatherService {
 				}),
 				type: contents.parent.location_type as LocalizationType,
 				title: contents.parent.title,
-				woeid: contents.parent.woeid,
+				oeid: contents.parent.woeid,
 			}),
 		});
 	};

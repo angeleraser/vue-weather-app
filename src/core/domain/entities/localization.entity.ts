@@ -5,24 +5,24 @@ import { LocalizationModel } from '../models/localization.model';
 class Localization implements LocalizationModel {
 	readonly type: LocalizationType;
 	readonly title: string;
-	readonly woeid: number;
+	readonly oeid: number;
 	readonly coordinates: CoordinatesModel;
 
 	constructor({
 		coordinates,
 		type,
 		title,
-		woeid,
+		oeid,
 	}: {
 		coordinates: CoordinatesModel;
 		type: LocalizationType;
 		title: string;
-		woeid: number;
+		oeid: number;
 	}) {
 		this.coordinates = coordinates;
 		this.type = type;
 		this.title = title;
-		this.woeid = woeid;
+		this.oeid = oeid;
 	}
 }
 

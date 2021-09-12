@@ -13,7 +13,7 @@ async function init() {
 	});
 
 	const OnEarthLocalization = await service.findOnEarthById(
-		Localizations[0].woeid,
+		Localizations[0].oeid,
 	);
 
 	console.log({ Localizations, OnEarthLocalization });
