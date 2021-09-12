@@ -13,6 +13,7 @@ import { WeatherStateAbbr } from '../constants/weather-state-abbr.constant';
 import { WeatherStateName } from '../constants/weather-state.constat';
 import { WeatherTemperature } from '../domain/entities/weather-temperature.entity';
 import { WeatherWind } from '../domain/entities/weather-wind.entity';
+import { Coordinates } from '../domain/entities/coordinates.entity';
 
 class MetaweatherService implements WeatherService {
 	private readonly api_url: string;
@@ -39,7 +40,9 @@ class MetaweatherService implements WeatherService {
 				new Localization({
 					title: localization.title,
 					woeid: localization.woeid,
-					latitude_longitude: localization.latt_long,
+					coordinates: new Coordinates({
+						...Coordinates.getFromStr(localization.latt_long),
+					}),
 					type: localization.location_type as LocalizationType,
 				}),
 		);
@@ -59,7 +62,9 @@ class MetaweatherService implements WeatherService {
 		) as MetaweatherOnEarthLocalization;
 
 		return new OnEarthLocalization({
-			latitude_longitude: contents.latt_long,
+			coordinates: new Coordinates({
+				...Coordinates.getFromStr(contents.latt_long),
+			}),
 			time: contents.time,
 			title: contents.title,
 			type: contents.location_type as LocalizationType,
@@ -98,7 +103,9 @@ class MetaweatherService implements WeatherService {
 					}),
 			),
 			parent: new Localization({
-				latitude_longitude: contents.parent.latt_long,
+				coordinates: new Coordinates({
+					...Coordinates.getFromStr(contents.parent.latt_long),
+				}),
 				type: contents.parent.location_type as LocalizationType,
 				title: contents.parent.title,
 				woeid: contents.parent.woeid,

@@ -1,4 +1,5 @@
 import { LocalizationType } from '@/core/constants/localization-type.constant';
+import { CoordinatesModel } from '../models/coordinates.model';
 import { LocalizationModel } from '../models/localization.model';
 import { OnEarthLocalizationModel } from '../models/on-earth-localization.model';
 import { WeatherModel } from '../models/weather.model';
@@ -9,31 +10,31 @@ class OnEarthLocalization implements OnEarthLocalizationModel {
 	readonly parent: LocalizationModel;
 	readonly time: string;
 	readonly weathers: WeatherModel[];
-	readonly latitude_longitude: string;
 	readonly type: LocalizationType;
 	readonly title: string;
+	readonly coordinates: CoordinatesModel;
 
 	constructor({
 		parent,
 		time,
 		weathers,
-		latitude_longitude,
 		type,
 		title,
+		coordinates,
 	}: {
 		parent: Localization;
 		time: string;
 		weathers: Array<Weather>;
-		latitude_longitude: string;
 		type: LocalizationType;
 		title: string;
+		coordinates: CoordinatesModel;
 	}) {
 		this.parent = parent;
 		this.time = time;
 		this.weathers = weathers;
-		this.latitude_longitude = latitude_longitude;
 		this.type = type;
 		this.title = title;
+		this.coordinates = coordinates;
 	}
 }
 

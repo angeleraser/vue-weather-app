@@ -1,24 +1,25 @@
 import { LocalizationType } from '@/core/constants/localization-type.constant';
+import { CoordinatesModel } from '../models/coordinates.model';
 import { LocalizationModel } from '../models/localization.model';
 
 class Localization implements LocalizationModel {
-	readonly latitude_longitude: string;
 	readonly type: LocalizationType;
 	readonly title: string;
 	readonly woeid: number;
+	readonly coordinates: CoordinatesModel;
 
 	constructor({
-		latitude_longitude,
+		coordinates,
 		type,
 		title,
 		woeid,
 	}: {
-		latitude_longitude: string;
+		coordinates: CoordinatesModel;
 		type: LocalizationType;
 		title: string;
 		woeid: number;
 	}) {
-		this.latitude_longitude = latitude_longitude;
+		this.coordinates = coordinates;
 		this.type = type;
 		this.title = title;
 		this.woeid = woeid;
