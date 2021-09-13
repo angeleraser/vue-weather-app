@@ -1,0 +1,103 @@
+<template>
+	<button
+		@click="$emit('on-click')"
+		:class="classNames"
+		class="v-btn text-medium font-raleway"
+	>
+		Click me
+	</button>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
+	props: {
+		color: {
+			type: String,
+		},
+
+		disabled: {
+			type: Boolean,
+		},
+
+		outlined: {
+			type: Boolean,
+		},
+	},
+
+	computed: {
+		classNames: function () {
+			return {
+				[`v-btn--is-${this.color}`]: this.color,
+
+				[`v-btn--is-disabled`]: this.disabled,
+
+				[`v-btn--is-${this.color}-outlined`]: this.outlined && this.color,
+			};
+		},
+	},
+});
+</script>
+
+<style lang="scss">
+.v-btn {
+	background-color: transparent;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 2px;
+	color: black;
+	font-size: $text-s;
+	letter-spacing: 0.05em;
+	outline: none;
+	padding: 14px;
+	transition: 0.3s all;
+
+	&--is-blue {
+		background-color: $blue;
+		color: $white;
+
+		&-outlined {
+			color: $blue;
+			background-color: $white;
+			border-color: $blue;
+
+			&:hover {
+				background-color: rgba($color: $blue, $alpha: 0.1);
+			}
+		}
+	}
+
+	&--is-gray {
+		background-color: $dark-gray;
+		color: $white;
+		box-shadow: 0px 4px 4px 0px #00000040;
+
+		&-outlined {
+			color: $dark-gray;
+			background-color: transparent;
+			border-color: $dark-gray;
+
+			&:hover {
+				background-color: rgba($color: $dark-gray, $alpha: 0.1);
+			}
+		}
+	}
+
+	&:hover {
+		filter: brightness(0.9);
+	}
+
+	&:active {
+		transform: scale(0.98);
+	}
+
+	&--is-disabled {
+		background-color: rgba(0, 0, 0, 0.12) !important;
+		pointer-events: none !important;
+		color: rgba(0, 0, 0, 0.26) !important;
+		box-shadow: none !important;
+		user-select: none;
+	}
+}
+</style>

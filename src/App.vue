@@ -1,10 +1,17 @@
 <template>
 	<div class="notranslate" id="app">
-		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti ea,
-		dolorum aperiam explicabo nesciunt unde deleniti eum labore vero voluptatum
-		vel, quisquam quia ducimus in. Quis repellendus laudantium beatae eveniet?
+		<v-btn color="gray" outlined />
 	</div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue';
+import VBtn from './components/v-btn.vue';
+
+export default Vue.extend({
+	components: { VBtn },
+});
+</script>
 
 <style lang="scss">
 @import '@/assets/scss/main.scss';
