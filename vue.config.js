@@ -9,7 +9,7 @@ module.exports = {
 	css: {
 		loaderOptions: {
 			scss: {
-				// additionalData: '@import "@/assets/scss/variables.scss";',
+				prependData: '@import "@/assets/scss/vars.scss";',
 			},
 		},
 	},

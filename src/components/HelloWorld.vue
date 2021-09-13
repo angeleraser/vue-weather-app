@@ -125,6 +125,7 @@ export default Vue.extend({
 <style scoped lang="scss">
 h3 {
 	margin: 40px 0 0;
+	background-color: $dark-blue;
 }
 ul {
 	list-style-type: none;
