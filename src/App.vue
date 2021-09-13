@@ -1,6 +1,6 @@
 <template>
 	<div class="notranslate" id="app">
-		<v-btn color="gray" outlined />
+		<v-btn color="gray" />
 	</div>
 </template>
 

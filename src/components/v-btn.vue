@@ -4,7 +4,7 @@
 		:class="classNames"
 		class="v-btn text-medium font-raleway"
 	>
-		Click me
+		Click
 	</button>
 </template>
 
@@ -24,6 +24,10 @@ export default Vue.extend({
 		outlined: {
 			type: Boolean,
 		},
+
+		round: {
+			type: Boolean,
+		},
 	},
 
 	computed: {
@@ -32,6 +36,8 @@ export default Vue.extend({
 				[`v-btn--is-${this.color}`]: this.color,
 
 				[`v-btn--is-disabled`]: this.disabled,
+
+				[`v-btn--is-round`]: this.round,
 
 				[`v-btn--is-${this.color}-outlined`]: this.outlined && this.color,
 			};
@@ -49,9 +55,11 @@ export default Vue.extend({
 	color: black;
 	font-size: $text-s;
 	letter-spacing: 0.05em;
+	line-height: 1.75em;
 	outline: none;
-	padding: 14px;
+	padding: 4px 14px;
 	transition: 0.3s all;
+	height: auto;
 
 	&--is-blue {
 		background-color: $blue;
@@ -90,6 +98,13 @@ export default Vue.extend({
 
 	&:active {
 		transform: scale(0.98);
+	}
+
+	&--is-round {
+		border-radius: 50%;
+		min-width: 3em;
+		min-height: 3em;
+		padding: 0;
 	}
 
 	&--is-disabled {
