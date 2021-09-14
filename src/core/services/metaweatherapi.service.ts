@@ -1,5 +1,5 @@
 import { Coordinates } from '../domain/entities/coordinates.entity';
-import { getLocalizationSearchArgument, allowCors, formatDate } from '../utils';
+import { getLocalizationSearchArgument, allowCors } from '../utils';
 import { Localization } from '../domain/entities/localization.entity';
 import { LocalizationQueries } from '../domain/services/weather.service';
 import { LocalizationType } from '../constants/localization-type.constant';
@@ -72,7 +72,7 @@ class MetaweatherService implements WeatherService {
 				weather =>
 					new Weather({
 						air_pressure: weather.air_pressure,
-						applicable_date: formatDate(weather.applicable_date),
+						applicable_date: weather.applicable_date,
 						humidity: weather.humidity,
 						id: weather.id,
 						predictability: weather.predictability,
