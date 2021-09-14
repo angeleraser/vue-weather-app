@@ -1,18 +1,34 @@
 <template>
 	<div class="notranslate" id="app">
-		<v-btn color="gray" label="Click" />
+		<v-btn color="gray" label="Search for places" />
+		<v-btn color="blue" label="Search" />
 
 		<search-result-item chevron> London </search-result-item>
+
+		<search-input v-model="val" />
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import SearchInput from './components/search-input.vue';
 import SearchResultItem from './components/search-result-item.vue';
 import VBtn from './components/v-btn.vue';
 
 export default Vue.extend({
-	components: { VBtn, SearchResultItem },
+	components: { VBtn, SearchResultItem, SearchInput },
+
+	data: function () {
+		return {
+			val: '',
+		};
+	},
+
+	watch: {
+		val: function () {
+			console.log(this.val);
+		},
+	},
 });
 </script>
 
