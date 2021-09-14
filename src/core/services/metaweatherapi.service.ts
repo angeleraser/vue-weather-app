@@ -1,4 +1,5 @@
-import { getLocalizationSearchArgument, getUnlockedURL } from '../utils';
+import { Coordinates } from '../domain/entities/coordinates.entity';
+import { getLocalizationSearchArgument, allowCors, formatDate } from '../utils';
 import { Localization } from '../domain/entities/localization.entity';
 import { LocalizationQueries } from '../domain/services/weather.service';
 import { LocalizationType } from '../constants/localization-type.constant';
@@ -13,7 +14,6 @@ import { WeatherStateAbbr } from '../constants/weather-state-abbr.constant';
 import { WeatherStateName } from '../constants/weather-state.constat';
 import { WeatherTemperature } from '../domain/entities/weather-temperature.entity';
 import { WeatherWind } from '../domain/entities/weather-wind.entity';
-import { Coordinates } from '../domain/entities/coordinates.entity';
 
 class MetaweatherService implements WeatherService {
 	private readonly api_url: string;
@@ -29,7 +29,7 @@ class MetaweatherService implements WeatherService {
 
 		const url = `${this.api_url}/location/search/?${searchArguments}`;
 
-		const response = await fetch(getUnlockedURL(url));
+		const response = await fetch(allowCors(url));
 
 		const data = (await response.json()) as MetaweatherApiResponse;
 
@@ -53,7 +53,7 @@ class MetaweatherService implements WeatherService {
 	): Promise<OnEarthLocalization> => {
 		const url = `${this.api_url}/location/${woeid}`;
 
-		const response = await fetch(getUnlockedURL(url));
+		const response = await fetch(allowCors(url));
 
 		const data = (await response.json()) as MetaweatherApiResponse;
 
@@ -72,19 +72,17 @@ class MetaweatherService implements WeatherService {
 				weather =>
 					new Weather({
 						air_pressure: weather.air_pressure,
-						applicable_date: weather.applicable_date,
-						created: weather.created,
+						applicable_date: formatDate(weather.applicable_date),
 						humidity: weather.humidity,
 						id: weather.id,
 						predictability: weather.predictability,
 
-						img: this.getWeatherImgUrl(
-							weather.weather_state_abbr as WeatherStateAbbr,
-						),
-
 						state: new WeatherState({
 							name: weather.weather_state_name as WeatherStateName,
 							abbr: weather.weather_state_abbr as WeatherStateAbbr,
+							icon: this.getWeatherImgUrl(
+								weather.weather_state_abbr as WeatherStateAbbr,
+							),
 						}),
 
 						temperature: new WeatherTemperature({

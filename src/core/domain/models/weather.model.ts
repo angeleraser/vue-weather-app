@@ -5,10 +5,8 @@ import { WeatherWindModel } from './weather-wind.model';
 interface WeatherModel {
 	air_pressure: number;
 	applicable_date: string;
-	created: string;
 	humidity: number;
 	id: number;
-	img: string;
 	predictability: number;
 	state: WeatherStateModel;
 	temperature: WeatherTemperatureModel;

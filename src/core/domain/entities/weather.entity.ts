@@ -6,7 +6,6 @@ import { WeatherWindModel } from '../models/weather-wind.model';
 class Weather implements WeatherModel {
 	readonly air_pressure: number;
 	readonly applicable_date: string;
-	readonly created: string;
 	readonly humidity: number;
 	readonly id: number;
 	readonly predictability: number;
@@ -14,12 +13,10 @@ class Weather implements WeatherModel {
 	readonly temperature: WeatherTemperatureModel;
 	readonly visibility: number;
 	readonly wind: WeatherWindModel;
-	readonly img: string;
 
 	constructor({
 		air_pressure,
 		applicable_date,
-		created,
 		humidity,
 		id,
 		predictability,
@@ -27,11 +24,9 @@ class Weather implements WeatherModel {
 		temperature,
 		visibility,
 		wind,
-		img,
 	}: {
 		air_pressure: number;
 		applicable_date: string;
-		created: string;
 		humidity: number;
 		id: number;
 		predictability: number;
@@ -39,11 +34,9 @@ class Weather implements WeatherModel {
 		temperature: WeatherTemperatureModel;
 		visibility: number;
 		wind: WeatherWindModel;
-		img: string;
 	}) {
 		this.air_pressure = air_pressure;
 		this.applicable_date = applicable_date;
-		this.created = created;
 		this.humidity = humidity;
 		this.id = id;
 		this.predictability = predictability;
@@ -51,7 +44,6 @@ class Weather implements WeatherModel {
 		this.temperature = temperature;
 		this.visibility = visibility;
 		this.wind = wind;
-		this.img = img;
 	}
 }
 
