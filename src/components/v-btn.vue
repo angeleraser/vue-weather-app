@@ -4,7 +4,11 @@
 		:class="classNames"
 		class="v-btn text-medium font-raleway"
 	>
-		Click
+		<span class="v-btn__content">
+			<slot v-if="!label"> </slot>
+
+			{{ label }}
+		</span>
 	</button>
 </template>
 
@@ -13,6 +17,10 @@ import Vue from 'vue';
 
 export default Vue.extend({
 	props: {
+		label: {
+			type: String,
+		},
+
 		color: {
 			type: String,
 		},
