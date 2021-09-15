@@ -8,17 +8,20 @@
 			</v-btn>
 		</div>
 
-		<div class="drawer__content"></div>
+		<div class="drawer__content">
+			<drawer-weather-section />
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
 import VBtn from './v-btn.vue';
+import Vue from 'vue';
 
 export default Vue.extend({
-	components: { VBtn, GpsFixedIcon },
+	components: { VBtn, GpsFixedIcon, DrawerWeatherSection },
 });
 </script>
 
@@ -26,7 +29,6 @@ export default Vue.extend({
 .drawer {
 	display: flex;
 	flex-direction: column;
-	background-color: $dark-blue;
 	padding: 18px 12px;
 
 	&__actions {

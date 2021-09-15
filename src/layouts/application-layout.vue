@@ -24,6 +24,11 @@ export default {};
 	&__drawer,
 	&__content {
 		flex: 100%;
+		overflow-y: auto;
+	}
+
+	&__drawer {
+		background-color: $dark-blue;
 	}
 
 	@media screen and (min-width: $breakpoint) {

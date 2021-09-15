@@ -1,7 +1,7 @@
 <template>
 	<div class="notranslate" id="app">
 		<application-layout>
-			<template v-slot:drawer>
+			<template #drawer>
 				<drawer />
 			</template>
 		</application-layout>
@@ -11,21 +11,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import Drawer from './components/drawer.vue';
-import applicationLayout from './layouts/application-layout.vue';
+import ApplicationLayout from './layouts/application-layout.vue';
 
 export default Vue.extend({
-	components: { applicationLayout, Drawer },
-	data: function () {
-		return {
-			val: '',
-		};
-	},
-
-	watch: {
-		val: function () {
-			console.log(this.val);
-		},
-	},
+	components: { ApplicationLayout, Drawer },
 });
 </script>
 
