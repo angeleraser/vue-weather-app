@@ -65,9 +65,10 @@ export default Vue.extend({
 	letter-spacing: 0.05em;
 	line-height: 1.75em;
 	outline: none;
-	padding: 4px 14px;
+	padding: 4px 12px;
 	transition: 0.3s all;
 	height: auto;
+	display: inline-flex;
 
 	&--is-blue {
 		background-color: $blue;
@@ -113,6 +114,14 @@ export default Vue.extend({
 		min-width: 3em;
 		min-height: 3em;
 		padding: 0;
+		align-items: center;
+
+		.v-btn__content {
+			display: flex;
+			width: 100%;
+			align-items: center;
+			justify-content: center;
+		}
 	}
 
 	&--is-disabled {

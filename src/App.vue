@@ -1,23 +1,20 @@
 <template>
 	<div class="notranslate" id="app">
-		<v-btn color="gray" label="Search for places" />
-		<v-btn color="blue" label="Search" />
-
-		<search-result-item chevron> London </search-result-item>
-
-		<search-input v-model="val" />
+		<application-layout>
+			<template v-slot:drawer>
+				<drawer />
+			</template>
+		</application-layout>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import SearchInput from './components/search-input.vue';
-import SearchResultItem from './components/search-result-item.vue';
-import VBtn from './components/v-btn.vue';
+import Drawer from './components/drawer.vue';
+import applicationLayout from './layouts/application-layout.vue';
 
 export default Vue.extend({
-	components: { VBtn, SearchResultItem, SearchInput },
-
+	components: { applicationLayout, Drawer },
 	data: function () {
 		return {
 			val: '',
