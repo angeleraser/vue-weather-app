@@ -29,7 +29,7 @@ export default Vue.extend({
 .drawer {
 	display: flex;
 	flex-direction: column;
-	padding: 18px 12px;
+	padding: 24px 16px;
 
 	&__actions {
 		display: flex;
@@ -44,7 +44,7 @@ export default Vue.extend({
 	}
 
 	@media screen and (min-width: $breakpoint) {
-		padding: 42px 46px;
+		padding: 40px 48px;
 		height: 100%;
 	}
 }

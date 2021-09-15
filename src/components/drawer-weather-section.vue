@@ -36,9 +36,9 @@ export default Vue.extend({
 
 <style lang="scss">
 .drawer-weather-section {
-	width: 100%;
 	color: $gray-1;
 	margin-bottom: 72px;
+	width: 100%;
 
 	&__img {
 		margin: 32px 0 64px;
@@ -81,16 +81,14 @@ export default Vue.extend({
 
 	@media screen and (min-width: $breakpoint) {
 		&__img {
-			margin: 88px 0 0;
+			margin: 80px 0 0;
 		}
 
 		&__details {
-			&__temperature {
-				margin: 88px 0;
-			}
+			margin: 80px 0 0;
 
 			&__state-name {
-				margin-bottom: 88px;
+				margin: 72px 0;
 			}
 
 			&__location {

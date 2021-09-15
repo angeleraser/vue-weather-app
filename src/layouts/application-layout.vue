@@ -24,7 +24,6 @@ export default {};
 	&__drawer,
 	&__content {
 		flex: 100%;
-		overflow-y: auto;
 	}
 
 	&__drawer {
@@ -32,6 +31,11 @@ export default {};
 	}
 
 	@media screen and (min-width: $breakpoint) {
+		&__drawer,
+		&__content {
+			overflow-y: auto;
+		}
+
 		flex-direction: row;
 
 		&__drawer {
