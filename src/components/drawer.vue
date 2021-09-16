@@ -11,6 +11,8 @@
 		<div class="drawer__content">
 			<drawer-weather-section />
 		</div>
+
+		<drawer-weather-nav />
 	</div>
 </template>
 
@@ -19,9 +21,10 @@ import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
+import DrawerWeatherNav from './drawer-weather-nav.vue';
 
 export default Vue.extend({
-	components: { VBtn, GpsFixedIcon, DrawerWeatherSection },
+	components: { VBtn, GpsFixedIcon, DrawerWeatherSection, DrawerWeatherNav },
 });
 </script>
 

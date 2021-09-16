@@ -28,6 +28,7 @@ export default {};
 
 	&__drawer {
 		background-color: $dark-blue;
+		position: relative;
 	}
 
 	@media screen and (min-width: $breakpoint) {

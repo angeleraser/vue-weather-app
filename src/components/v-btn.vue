@@ -36,6 +36,10 @@ export default Vue.extend({
 		round: {
 			type: Boolean,
 		},
+
+		flat: {
+			type: Boolean,
+		},
 	},
 
 	computed: {
@@ -46,6 +50,8 @@ export default Vue.extend({
 				[`v-btn--is-disabled`]: this.disabled,
 
 				[`v-btn--is-round`]: this.round,
+
+				[`v-btn--is-flat`]: this.flat,
 
 				[`v-btn--is-${this.color}-outlined`]: this.outlined && this.color,
 			};
@@ -70,9 +76,19 @@ export default Vue.extend({
 	height: auto;
 	display: inline-flex;
 
+	&__content {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
+
 	&--is-blue {
 		background-color: $blue;
 		color: $white;
+
+		svg {
+			fill: currentColor;
+		}
 
 		&-outlined {
 			color: $blue;
@@ -122,6 +138,11 @@ export default Vue.extend({
 			align-items: center;
 			justify-content: center;
 		}
+	}
+
+	&--is-flat {
+		border: none !important;
+		background-color: transparent !important;
 	}
 
 	&--is-disabled {

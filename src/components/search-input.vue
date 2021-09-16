@@ -51,9 +51,11 @@ export default Vue.extend({
 			outline: none;
 			border: none;
 			background-color: transparent;
+			font-family: $font-raleway;
 			color: $light-gray;
 			width: 100%;
 			font-size: $text-s;
+			font-weight: $text-medium;
 
 			&::placeholder {
 				color: $gray-3;
