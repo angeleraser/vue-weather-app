@@ -1,15 +1,12 @@
 <template>
 	<div class="drawer">
 		<div class="drawer__actions">
-			<v-btn color="gray">Search for places</v-btn>
+			<v-btn @on-click="toggleShowDrawerNav" color="gray">
+				Search for places
+			</v-btn>
 
-			<v-btn
-				@on-click="toggleShowDrawerNav"
-				class="drawer__actions__gps-btn"
-				color="gray"
-				round
-			>
-				<gps-fixed-icon @click="toggleShowDrawerNav" />
+			<v-btn class="drawer__actions__gps-btn" color="gray" round>
+				<gps-fixed-icon />
 			</v-btn>
 		</div>
 
