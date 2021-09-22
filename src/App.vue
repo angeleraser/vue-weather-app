@@ -35,4 +35,8 @@ html {
 		'Segoe UI Emoji', 'Segoe UI Symbol';
 	background-color: $very-dark-blue;
 }
+
+body.no-scroll {
+	overflow: hidden;
+}
 </style>

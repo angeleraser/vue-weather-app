@@ -3,8 +3,13 @@
 		<div class="drawer__actions">
 			<v-btn color="gray">Search for places</v-btn>
 
-			<v-btn class="drawer__actions__gps-btn" round color="gray">
-				<gps-fixed-icon />
+			<v-btn
+				@on-click="toggleShowDrawerNav"
+				class="drawer__actions__gps-btn"
+				color="gray"
+				round
+			>
+				<gps-fixed-icon @click="toggleShowDrawerNav" />
 			</v-btn>
 		</div>
 
@@ -12,19 +17,45 @@
 			<drawer-weather-section />
 		</div>
 
-		<drawer-weather-nav />
+		<drawer-weather-nav
+			:class="drawerNavClassNames"
+			@on-close="toggleShowDrawerNav"
+		/>
 	</div>
 </template>
 
 <script lang="ts">
+import DrawerWeatherNav from './drawer-weather-nav.vue';
 import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
-import DrawerWeatherNav from './drawer-weather-nav.vue';
 
 export default Vue.extend({
 	components: { VBtn, GpsFixedIcon, DrawerWeatherSection, DrawerWeatherNav },
+
+	methods: {
+		toggleShowDrawerNav: function () {
+			this.showDrawerNav = !this.showDrawerNav;
+
+			if (this.showDrawerNav) document.body.classList.add('no-scroll');
+			else document.body.classList.remove('no-scroll');
+		},
+	},
+
+	computed: {
+		drawerNavClassNames: function (): { [className: string]: boolean } {
+			return {
+				'drawer-weather-nav--visible': this.showDrawerNav,
+			};
+		},
+	},
+
+	data: function () {
+		return {
+			showDrawerNav: false,
+		};
+	},
 });
 </script>
 

@@ -2,7 +2,11 @@
 	<div class="drawer-weather-nav">
 		<div class="drawer-weather-nav__wrapper">
 			<div class="drawer-weather-nav__wrapper__actions">
-				<v-btn flat class="drawer-weather-nav__close-btn">
+				<v-btn
+					@on-click="$emit('on-close')"
+					flat
+					class="drawer-weather-nav__close-btn"
+				>
 					<close-icon />
 				</v-btn>
 			</div>
@@ -10,6 +14,7 @@
 			<div class="drawer-weather-nav__wrapper__content">
 				<form @submit.prevent>
 					<search-input />
+
 					<v-btn color="blue">Search </v-btn>
 				</form>
 
@@ -39,11 +44,12 @@ export default Vue.extend({
 <style lang="scss">
 .drawer-weather-nav {
 	height: 100%;
-	left: 0;
+	left: -100%;
 	min-height: 100vh;
 	position: absolute;
 	top: 0;
 	width: 100%;
+	transition: all 0.3s;
 
 	&__wrapper {
 		display: flex;
@@ -92,6 +98,10 @@ export default Vue.extend({
 		@media screen and (min-width: $breakpoint) {
 			padding: 40px 48px;
 		}
+	}
+
+	&--visible {
+		left: 0;
 	}
 }
 </style>
