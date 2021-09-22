@@ -12,19 +12,27 @@
 					<search-input />
 					<v-btn color="blue">Search </v-btn>
 				</form>
+
+				<div class="drawer-weather-nav__wrapper__content__results">
+					<search-result-item label="Location" chevron />
+					<search-result-item label="Location" chevron />
+					<search-result-item label="Location" chevron />
+					<search-result-item label="Location" chevron />
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import CloseIcon from './icons/close-icon.vue';
 import SearchInput from './search-input.vue';
+import SearchResultItem from './search-result-item.vue';
 import VBtn from './v-btn.vue';
+import Vue from 'vue';
 
 export default Vue.extend({
-	components: { VBtn, CloseIcon, SearchInput },
+	components: { VBtn, CloseIcon, SearchInput, SearchResultItem },
 });
 </script>
 
@@ -38,6 +46,8 @@ export default Vue.extend({
 	width: 100%;
 
 	&__wrapper {
+		display: flex;
+		flex-direction: column;
 		background-color: $dark-blue;
 		height: 100%;
 		padding: 24px 16px;
@@ -56,13 +66,25 @@ export default Vue.extend({
 		&__content {
 			display: flex;
 			flex-direction: column;
+			flex: 100%;
 
 			form {
 				display: flex;
+				margin-bottom: 48px;
 
 				.search-input {
 					width: 100%;
 					margin-right: 12px;
+				}
+			}
+
+			&__results {
+				flex: 100%;
+				max-height: 480px;
+				overflow-y: auto;
+
+				.search-result-item:not(:last-child) {
+					margin-bottom: 24px;
 				}
 			}
 		}
