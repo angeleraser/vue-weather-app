@@ -1,10 +1,10 @@
 <template>
-	<button class="search-result-item font-raleway">
+	<button @click="emitOnClick" class="search-result-item font-raleway">
 		<span class="search-result-item__content">
-			<slot v-if="!label" />
+			<slot v-if="!title" />
 
 			<template v-else>
-				{{ label }}
+				{{ title }}
 			</template>
 
 			<chevron-right-icon v-if="chevron" />
@@ -18,8 +18,14 @@ import ChevronRightIcon from './icons/chevron-right-icon.vue';
 
 export default Vue.extend({
 	props: {
-		label: {
+		title: {
 			type: String,
+			required: true,
+		},
+
+		oeid: {
+			type: Number,
+			required: true,
 		},
 
 		chevron: {
@@ -28,6 +34,12 @@ export default Vue.extend({
 	},
 
 	components: { ChevronRightIcon },
+
+	methods: {
+		emitOnClick: function () {
+			this.$emit('on-click', this.oeid);
+		},
+	},
 });
 </script>
 
@@ -57,7 +69,8 @@ export default Vue.extend({
 
 		svg {
 			fill: $gray-3;
-			display: none;
+			opacity: 0;
+			transition: all 0.3s;
 		}
 	}
 
@@ -66,7 +79,7 @@ export default Vue.extend({
 		border-color: $gray-3;
 
 		svg {
-			display: inline-block;
+			opacity: 1;
 		}
 	}
 }

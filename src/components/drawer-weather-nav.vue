@@ -19,10 +19,14 @@
 				</form>
 
 				<div class="drawer-weather-nav__wrapper__content__results">
-					<search-result-item label="Location" chevron />
-					<search-result-item label="Location" chevron />
-					<search-result-item label="Location" chevron />
-					<search-result-item label="Location" chevron />
+					<search-result-item
+						v-for="(item, index) in results"
+						:key="index"
+						:title="item.title"
+						:oeid="item.oeid"
+						@on-click="handleSearchItemClick"
+						chevron
+					/>
 				</div>
 			</div>
 		</div>
@@ -37,7 +41,20 @@ import VBtn from './v-btn.vue';
 import Vue from 'vue';
 
 export default Vue.extend({
+	props: {
+		results: {
+			type: Array,
+			required: true,
+		},
+	},
+
 	components: { VBtn, CloseIcon, SearchInput, SearchResultItem },
+
+	methods: {
+		handleSearchItemClick: function (oeid: number) {
+			this.$emit('on-search-item-click', oeid);
+		},
+	},
 });
 </script>
 
