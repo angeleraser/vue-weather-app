@@ -25,12 +25,15 @@
 </template>
 
 <script lang="ts">
+import { Localization } from '@/core/domain/entities/localization.entity';
 import DrawerWeatherNav from './drawer-weather-nav.vue';
 import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
-import { Localization } from '@/core/domain/entities/localization.entity';
+import ApplicationWeatherService from '@/core/services/weather.service';
+
+const AppWeatherService = new ApplicationWeatherService();
 
 export default Vue.extend({
 	components: { VBtn, GpsFixedIcon, DrawerWeatherSection, DrawerWeatherNav },
