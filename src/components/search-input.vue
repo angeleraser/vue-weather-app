@@ -4,10 +4,12 @@
 
 		<div class="search-input__content">
 			<input
-				type="text"
+				:required="required"
 				:value="value"
 				@input="e => $emit('input', e.target.value)"
+				autocomplete="off"
 				placeholder="search location"
+				type="text"
 			/>
 		</div>
 	</div>
@@ -23,6 +25,10 @@ export default Vue.extend({
 	props: {
 		value: {
 			type: String,
+		},
+
+		required: {
+			type: Boolean,
 		},
 	},
 });

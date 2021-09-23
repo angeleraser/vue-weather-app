@@ -1,16 +1,14 @@
 import Vue from 'vue';
 import App from './App.vue';
-import ApplicationWeatherService from './core/services/weather.service';
+import WeatherService from './core/services/weather.service';
 import store from './store';
 
-const service = new ApplicationWeatherService();
-
 async function SERVICE_TEST() {
-	const Localizations = await service.searchLocalizationByParams({
+	const Localizations = await WeatherService.searchLocalizations({
 		query: 'san',
 	});
 
-	const OnEarthLocalization = await service.findOnEarthById(
+	const OnEarthLocalization = await WeatherService.findOnEarthLocalization(
 		Localizations[0].oeid,
 	);
 

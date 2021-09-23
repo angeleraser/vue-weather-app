@@ -12,20 +12,24 @@
 			</div>
 
 			<div class="drawer-weather-nav__wrapper__content">
-				<form @submit.prevent>
-					<search-input v-model="searchQuery" />
-					<v-btn @on-click="handleSearchBtnClick" color="blue"> Search </v-btn>
+				<form @submit.prevent="handleSearchSubmit">
+					<search-input required v-model="searchQuery" />
+					<v-btn type="submit" color="blue"> Search </v-btn>
 				</form>
 
 				<div class="drawer-weather-nav__wrapper__content__results">
-					<search-result-item
-						v-for="(item, index) in results"
-						:key="index"
-						:title="item.title"
-						:oeid="item.oeid"
-						@on-click="handleSearchItemClick"
-						chevron
-					/>
+					<spinner v-if="loading" />
+
+					<template v-if="!loading && !error">
+						<search-result-item
+							v-for="(item, index) in results"
+							:key="index"
+							:title="item.title"
+							:oeid="item.oeid"
+							@on-click="handleSearchItemClick"
+							chevron
+						/>
+					</template>
 				</div>
 			</div>
 		</div>
@@ -38,6 +42,7 @@ import SearchInput from './search-input.vue';
 import SearchResultItem from './search-result-item.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
+import Spinner from './spinner.vue';
 
 export default Vue.extend({
 	props: {
@@ -45,16 +50,24 @@ export default Vue.extend({
 			type: Array,
 			required: true,
 		},
+
+		loading: {
+			type: Boolean,
+		},
+
+		error: {
+			type: Boolean,
+		},
 	},
 
-	components: { VBtn, CloseIcon, SearchInput, SearchResultItem },
+	components: { VBtn, CloseIcon, SearchInput, SearchResultItem, Spinner },
 
 	methods: {
 		handleSearchItemClick: function (oeid: number) {
 			this.$emit('search-item-click', oeid);
 		},
 
-		handleSearchBtnClick: function () {
+		handleSearchSubmit: function () {
 			this.$emit('search', this.searchQuery);
 		},
 	},

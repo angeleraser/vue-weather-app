@@ -40,6 +40,11 @@ export default Vue.extend({
 		flat: {
 			type: Boolean,
 		},
+
+		type: {
+			type: String,
+			default: () => 'button',
+		},
 	},
 
 	computed: {

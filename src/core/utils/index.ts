@@ -25,4 +25,44 @@ const formatDate = (dateStr: string): string => {
 	return format(convertToDate(dateStr), 'iii, dd MMM');
 };
 
-export { getLocalizationSearchArgument, allowCors, convertToDate, formatDate };
+type FunctionOrNumber = ((...args: never) => never) | number;
+
+async function delay(
+	callbackOrDelayTime: (...args: never) => never,
+	delayTime: number,
+): Promise<void>;
+
+async function delay(
+	callbackOrDelayTime: number,
+	delayTime?: number,
+): Promise<void>;
+
+async function delay(
+	callbackOrDelayTime: FunctionOrNumber,
+	delayTime?: number,
+): Promise<void> {
+	if (typeof callbackOrDelayTime === 'number') {
+		return new Promise(resolve => {
+			const timeout = setTimeout(() => {
+				resolve();
+				clearTimeout(timeout);
+			}, callbackOrDelayTime);
+		});
+	}
+
+	return new Promise(resolve => {
+		const timeout = setTimeout(() => {
+			resolve();
+			callbackOrDelayTime();
+			clearTimeout(timeout);
+		}, delayTime);
+	});
+}
+
+export {
+	getLocalizationSearchArgument,
+	allowCors,
+	convertToDate,
+	formatDate,
+	delay,
+};

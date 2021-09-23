@@ -20,20 +20,19 @@
 			@close="toggleShowDrawerNav"
 			@search-item-click="handleSearchItemClick"
 			@search="handleSearch"
+			:loading="loading"
 		/>
 	</div>
 </template>
 
 <script lang="ts">
 import { Localization } from '@/core/domain/entities/localization.entity';
+import WeatherService from '@/core/services/weather.service';
 import DrawerWeatherNav from './drawer-weather-nav.vue';
 import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
-import ApplicationWeatherService from '@/core/services/weather.service';
-
-const AppWeatherService = new ApplicationWeatherService();
 
 export default Vue.extend({
 	components: { VBtn, GpsFixedIcon, DrawerWeatherSection, DrawerWeatherNav },
@@ -51,7 +50,18 @@ export default Vue.extend({
 		},
 
 		handleSearch: async function (query: string) {
-			console.log(query);
+			try {
+				this.loading = true;
+				const results = await WeatherService.searchLocalizations({
+					query,
+				});
+
+				this.results = results;
+			} catch (error) {
+				this.error = error.message;
+			} finally {
+				this.loading = false;
+			}
 		},
 	},
 
@@ -66,6 +76,8 @@ export default Vue.extend({
 	data: function () {
 		return {
 			showDrawerNav: false,
+			loading: false,
+			error: false,
 			results: [] as Array<Localization>,
 		};
 	},

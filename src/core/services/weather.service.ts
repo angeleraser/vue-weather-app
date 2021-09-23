@@ -6,18 +6,18 @@ import LocalMetaweatherService from './local.metaweatherapi.service';
 
 const Service = new LocalMetaweatherService();
 
-class ApplicationWeatherService {
-	public searchLocalizationByParams = async (
+class WeatherService {
+	public searchLocalizations = async (
 		params: LocalizationQueries,
 	): Promise<Localization[]> => {
 		return await Service.findLocalizations(params);
 	};
 
-	public findOnEarthById = async (
+	public findOnEarthLocalization = async (
 		localizationId: number,
 	): Promise<OnEarthLocalization> => {
 		return await Service.getOnEarthLocalization(localizationId);
 	};
 }
 
-export default ApplicationWeatherService;
+export default new WeatherService();
