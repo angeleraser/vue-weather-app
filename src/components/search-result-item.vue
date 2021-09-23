@@ -58,6 +58,11 @@ export default Vue.extend({
 	padding: 0;
 	width: 100%;
 	height: auto;
+	outline: none;
+
+	&:active {
+		outline: none;
+	}
 
 	&__content {
 		padding: 12px;

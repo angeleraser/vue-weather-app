@@ -76,6 +76,10 @@ export default Vue.extend({
 	height: auto;
 	display: inline-flex;
 
+	&:active {
+		outline: none;
+	}
+
 	&__content {
 		display: flex;
 		align-items: center;
