@@ -16,11 +16,13 @@
 
 		<drawer-weather-nav
 			:class="drawerNavClassNames"
+			:loading="loading"
+			:error="error"
 			:results="results"
+			:show-empty-results-message="isResultsEmpty"
 			@close="toggleShowDrawerNav"
 			@search-item-click="handleSearchItemClick"
 			@search="handleSearch"
-			:loading="loading"
 		/>
 	</div>
 </template>
@@ -52,11 +54,14 @@ export default Vue.extend({
 		handleSearch: async function (query: string) {
 			try {
 				this.loading = true;
-				const results = await WeatherService.searchLocalizations({
+				this.isResultsEmpty = false;
+				this.results = [];
+
+				this.results = await WeatherService.searchLocalizations({
 					query,
 				});
 
-				this.results = results;
+				if (this.results.length === 0) this.isResultsEmpty = true;
 			} catch (error) {
 				this.error = error.message;
 			} finally {
@@ -77,8 +82,9 @@ export default Vue.extend({
 		return {
 			showDrawerNav: false,
 			loading: false,
-			error: false,
+			error: '',
 			results: [] as Array<Localization>,
+			isResultsEmpty: false,
 		};
 	},
 });
