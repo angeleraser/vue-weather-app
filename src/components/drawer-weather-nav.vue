@@ -3,7 +3,7 @@
 		<div class="drawer-weather-nav__wrapper">
 			<div class="drawer-weather-nav__wrapper__actions">
 				<v-btn
-					@on-click="$emit('on-close')"
+					@on-click="$emit('close')"
 					flat
 					class="drawer-weather-nav__close-btn"
 				>
@@ -13,9 +13,8 @@
 
 			<div class="drawer-weather-nav__wrapper__content">
 				<form @submit.prevent>
-					<search-input />
-
-					<v-btn color="blue">Search </v-btn>
+					<search-input v-model="searchQuery" />
+					<v-btn @on-click="handleSearchBtnClick" color="blue"> Search </v-btn>
 				</form>
 
 				<div class="drawer-weather-nav__wrapper__content__results">
@@ -52,8 +51,18 @@ export default Vue.extend({
 
 	methods: {
 		handleSearchItemClick: function (oeid: number) {
-			this.$emit('on-search-item-click', oeid);
+			this.$emit('search-item-click', oeid);
 		},
+
+		handleSearchBtnClick: function () {
+			this.$emit('search', this.searchQuery);
+		},
+	},
+
+	data: function () {
+		return {
+			searchQuery: '',
+		};
 	},
 });
 </script>
