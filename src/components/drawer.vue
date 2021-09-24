@@ -16,7 +16,7 @@
 
 		<drawer-weather-nav
 			:class="drawerNavClassNames"
-			:error="error"
+			:fetching-localization-error="fetchingLocalizationError"
 			:is-fetching-localization="isFetchingLocalization"
 			:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
 			:results="results"
@@ -73,7 +73,7 @@ export default Vue.extend({
 
 				if (this.results.length === 0) this.isResultsEmpty = true;
 			} catch (error) {
-				this.error = error.message;
+				this.fetchingLocalizationError = error.message;
 			} finally {
 				this.isFetchingLocalization = false;
 			}
@@ -93,7 +93,7 @@ export default Vue.extend({
 			showDrawerNav: false,
 			isFetchingLocalization: false,
 			isFetchingOnEarthLocalization: false,
-			error: '',
+			fetchingLocalizationError: '',
 			results: [] as Array<Localization>,
 			isResultsEmpty: false,
 		};

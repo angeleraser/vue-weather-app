@@ -43,10 +43,10 @@
 						</div>
 					</template>
 
-					<template v-if="error && !isFetchingLocalization">
+					<template v-if="fetchingLocalizationError && !isFetchingLocalization">
 						<div class="drawer-weather-nav__wrapper__content__results__error">
 							<p class="drawer-weather-nav__wrapper__content__results__message">
-								{{ error }}
+								{{ fetchingLocalizationError }}
 							</p>
 
 							<v-btn label="Retry" color="gray" />
@@ -81,7 +81,7 @@ export default Vue.extend({
 			type: Boolean,
 		},
 
-		error: {
+		fetchingLocalizationError: {
 			type: String,
 		},
 

@@ -25,10 +25,10 @@ export default {};
 		width: 16px;
 		height: 16px;
 		margin: 2px;
-		border: 2px solid $gray-3;
+		border: 2px solid $light-gray;
 		border-radius: 50%;
 		animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-		border-color: $gray-3 transparent transparent transparent;
+		border-color: $light-gray transparent transparent transparent;
 
 		&:nth-child(1) {
 			animation-delay: -0.45s;
