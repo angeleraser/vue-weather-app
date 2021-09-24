@@ -16,13 +16,14 @@
 
 		<drawer-weather-nav
 			:class="drawerNavClassNames"
-			:loading="loading"
 			:error="error"
+			:is-fetching-localization="isFetchingLocalization"
+			:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
 			:results="results"
 			:show-empty-results-message="isResultsEmpty"
 			@close="toggleShowDrawerNav"
-			@search-item-click="handleSearchItemClick"
-			@search="handleSearch"
+			@search-item-click="handleFetchOnEarthLocalization"
+			@search="handleSearchLocalization"
 		/>
 	</div>
 </template>
@@ -47,13 +48,22 @@ export default Vue.extend({
 			else document.body.classList.remove('no-scroll');
 		},
 
-		handleSearchItemClick: function (oeid: number) {
-			console.log(oeid);
+		handleFetchOnEarthLocalization: async function (oeid: number) {
+			try {
+				this.isFetchingOnEarthLocalization = true;
+
+				const onEarth = await WeatherService.findOnEarthLocalization(oeid);
+				console.log(onEarth);
+			} catch (error) {
+				console.error(error.message);
+			} finally {
+				this.isFetchingOnEarthLocalization = false;
+			}
 		},
 
-		handleSearch: async function (query: string) {
+		handleSearchLocalization: async function (query: string) {
 			try {
-				this.loading = true;
+				this.isFetchingLocalization = true;
 				this.isResultsEmpty = false;
 				this.results = [];
 
@@ -65,7 +75,7 @@ export default Vue.extend({
 			} catch (error) {
 				this.error = error.message;
 			} finally {
-				this.loading = false;
+				this.isFetchingLocalization = false;
 			}
 		},
 	},
@@ -81,7 +91,8 @@ export default Vue.extend({
 	data: function () {
 		return {
 			showDrawerNav: false,
-			loading: false,
+			isFetchingLocalization: false,
+			isFetchingOnEarthLocalization: false,
 			error: '',
 			results: [] as Array<Localization>,
 			isResultsEmpty: false,

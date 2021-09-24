@@ -1,5 +1,9 @@
 <template>
-	<button @click="emitOnClick" class="search-result-item font-raleway">
+	<button
+		:class="classNames"
+		@click="emitOnClick"
+		class="search-result-item font-raleway"
+	>
 		<span class="search-result-item__content">
 			<slot v-if="!title" />
 
@@ -7,7 +11,8 @@
 				{{ title }}
 			</template>
 
-			<chevron-right-icon v-if="chevron" />
+			<chevron-right-icon v-if="chevron && !loading" />
+			<search-result-item-spinner v-if="loading" />
 		</span>
 	</button>
 </template>
@@ -15,6 +20,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import ChevronRightIcon from './icons/chevron-right-icon.vue';
+import SearchResultItemSpinner from './search-result-item-spinner.vue';
 
 export default Vue.extend({
 	props: {
@@ -31,12 +37,31 @@ export default Vue.extend({
 		chevron: {
 			type: Boolean,
 		},
+
+		loading: {
+			type: Boolean,
+		},
+
+		disabled: {
+			type: Boolean,
+		},
 	},
 
-	components: { ChevronRightIcon },
+	components: { ChevronRightIcon, SearchResultItemSpinner },
+
+	computed: {
+		classNames: function (): { [className: string]: boolean } {
+			return {
+				['search-result-item--loading']: this.loading,
+				['search-result-item--disabled']: this.disabled,
+			};
+		},
+	},
 
 	methods: {
 		emitOnClick: function () {
+			if (this.loading) return;
+
 			this.$emit('on-click', this.oeid);
 		},
 	},
@@ -79,6 +104,7 @@ export default Vue.extend({
 		}
 	}
 
+	&--loading,
 	&:hover {
 		background-color: rgba($color: $gray-3, $alpha: 0.2);
 		border-color: $gray-3;
@@ -86,6 +112,15 @@ export default Vue.extend({
 		svg {
 			opacity: 1;
 		}
+	}
+
+	&--disabled {
+		background-color: rgba(0, 0, 0, 0.12) !important;
+		pointer-events: none !important;
+		color: rgba(0, 0, 0, 0.26) !important;
+		box-shadow: none !important;
+		user-select: none;
+		opacity: 0.5;
 	}
 }
 </style>

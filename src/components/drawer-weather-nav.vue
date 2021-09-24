@@ -18,16 +18,22 @@
 				</form>
 
 				<div class="drawer-weather-nav__wrapper__content__results">
-					<spinner v-if="loading" />
+					<spinner v-if="isFetchingLocalization" />
 
 					<template v-if="results.length > 0">
 						<search-result-item
-							v-for="(item, index) in results"
 							:key="index"
-							:title="item.title"
 							:oeid="item.oeid"
+							:title="item.title"
+							:disabled="
+								isFetchingOnEarthLocalization && selectedOeid !== item.oeid
+							"
+							:loading="
+								isFetchingOnEarthLocalization && selectedOeid === item.oeid
+							"
 							@on-click="handleSearchItemClick"
 							chevron
+							v-for="(item, index) in results"
 						/>
 					</template>
 
@@ -37,7 +43,7 @@
 						</div>
 					</template>
 
-					<template v-if="error && !loading">
+					<template v-if="error && !isFetchingLocalization">
 						<div class="drawer-weather-nav__wrapper__content__results__error">
 							<p class="drawer-weather-nav__wrapper__content__results__message">
 								{{ error }}
@@ -67,7 +73,11 @@ export default Vue.extend({
 			required: true,
 		},
 
-		loading: {
+		isFetchingLocalization: {
+			type: Boolean,
+		},
+
+		isFetchingOnEarthLocalization: {
 			type: Boolean,
 		},
 
@@ -84,6 +94,7 @@ export default Vue.extend({
 
 	methods: {
 		handleSearchItemClick: function (oeid: number) {
+			this.selectedOeid = oeid;
 			this.$emit('search-item-click', oeid);
 		},
 
@@ -95,6 +106,7 @@ export default Vue.extend({
 	data: function () {
 		return {
 			searchQuery: '',
+			selectedOeid: 0,
 		};
 	},
 });
@@ -136,6 +148,7 @@ export default Vue.extend({
 			form {
 				display: flex;
 				margin-bottom: 48px;
+				padding: 0 1px;
 
 				.search-input {
 					width: 100%;
@@ -147,6 +160,7 @@ export default Vue.extend({
 				flex: 100%;
 				max-height: 480px;
 				overflow-y: auto;
+				padding: 0 1px;
 
 				&__message {
 					color: $light-gray;
