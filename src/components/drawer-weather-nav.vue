@@ -1,9 +1,9 @@
 <template>
-	<div class="drawer-weather-nav">
+	<div :class="drawerNavClassNames" class="drawer-weather-nav">
 		<div class="drawer-weather-nav__wrapper">
 			<div class="drawer-weather-nav__wrapper__actions">
 				<v-btn
-					@on-click="$emit('close')"
+					@on-click="$emit('input')"
 					flat
 					class="drawer-weather-nav__close-btn"
 				>
@@ -88,6 +88,10 @@ export default Vue.extend({
 		showEmptyResultsMessage: {
 			type: Boolean,
 		},
+
+		value: {
+			type: Boolean,
+		},
 	},
 
 	components: { VBtn, CloseIcon, SearchInput, SearchResultItem, Spinner },
@@ -100,6 +104,14 @@ export default Vue.extend({
 
 		handleSearchSubmit: function () {
 			this.$emit('search', this.searchQuery);
+		},
+	},
+
+	computed: {
+		drawerNavClassNames: function (): { [className: string]: boolean } {
+			return {
+				'drawer-weather-nav--visible': this.value,
+			};
 		},
 	},
 

@@ -15,7 +15,7 @@
 		</div>
 
 		<drawer-weather-nav
-			:class="drawerNavClassNames"
+			v-model="showDrawerNav"
 			:fetching-localization-error="fetchingLocalizationError"
 			:is-fetching-localization="isFetchingLocalization"
 			:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
@@ -77,14 +77,6 @@ export default Vue.extend({
 			} finally {
 				this.isFetchingLocalization = false;
 			}
-		},
-	},
-
-	computed: {
-		drawerNavClassNames: function (): { [className: string]: boolean } {
-			return {
-				'drawer-weather-nav--visible': this.showDrawerNav,
-			};
 		},
 	},
 
