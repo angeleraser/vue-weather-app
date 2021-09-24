@@ -11,34 +11,52 @@
 		</div>
 
 		<div class="drawer__content">
-			<drawer-weather-section />
+			<drawer-weather-section
+				:temperature="{ value: 50, unity: 'C' }"
+				current-location="Caracas"
+				date="Friday, Jun 3"
+				state-img="https://www.metaweather.com/static/img/weather/t.svg"
+				state="Shower"
+			/>
 		</div>
 
 		<drawer-weather-nav
-			v-model="showDrawerNav"
 			:fetching-localization-error="fetchingLocalizationError"
 			:is-fetching-localization="isFetchingLocalization"
 			:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
 			:results="results"
 			:show-empty-results-message="isResultsEmpty"
 			@close="toggleShowDrawerNav"
-			@search-item-click="handleFetchOnEarthLocalization"
-			@search="handleSearchLocalization"
+			@search-item-click="getOnEarthLocalization"
+			@search="handleSearchInDrawerNav"
+			v-model="showDrawerNav"
 		/>
 	</div>
 </template>
 
 <script lang="ts">
 import { Localization } from '@/core/domain/entities/localization.entity';
-import WeatherService from '@/core/services/weather.service';
 import DrawerWeatherNav from './drawer-weather-nav.vue';
 import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
+import WeatherService from '@/core/services/weather.service';
 
 export default Vue.extend({
-	components: { VBtn, GpsFixedIcon, DrawerWeatherSection, DrawerWeatherNav },
+	props: {
+		weather: {
+			type: Object,
+			required: true,
+		},
+	},
+
+	components: {
+		VBtn,
+		GpsFixedIcon,
+		DrawerWeatherSection,
+		DrawerWeatherNav,
+	},
 
 	methods: {
 		toggleShowDrawerNav: function () {
@@ -48,20 +66,24 @@ export default Vue.extend({
 			else document.body.classList.remove('no-scroll');
 		},
 
-		handleFetchOnEarthLocalization: async function (oeid: number) {
+		getOnEarthLocalization: async function (oeid: number) {
 			try {
+				this.$emit('fetching-on-earth-localization', true);
 				this.isFetchingOnEarthLocalization = true;
 
-				const onEarth = await WeatherService.findOnEarthLocalization(oeid);
-				console.log(onEarth);
+				const onEarthLocalization =
+					await WeatherService.findOnEarthLocalization(oeid);
+
+				this.$emit('get-on-earth-localization', onEarthLocalization);
 			} catch (error) {
-				console.error(error.message);
+				this.$emit('error-fetching-on-earth-localization', error.message);
 			} finally {
 				this.isFetchingOnEarthLocalization = false;
+				this.$emit('fetching-on-earth-localization', false);
 			}
 		},
 
-		handleSearchLocalization: async function (query: string) {
+		handleSearchInDrawerNav: async function (query: string) {
 			try {
 				this.isFetchingLocalization = true;
 				this.isResultsEmpty = false;
@@ -78,16 +100,39 @@ export default Vue.extend({
 				this.isFetchingLocalization = false;
 			}
 		},
+
+		searchCurrentLocationData: async function () {
+			try {
+				this.$emit('fetching-on-earth-localization', true);
+
+				const [currentLocation] = await WeatherService.searchLocalizations({
+					query: 'san',
+				});
+
+				const onEarthLocalization =
+					await WeatherService.findOnEarthLocalization(currentLocation.oeid);
+
+				this.$emit('get-on-earth-localization', onEarthLocalization);
+			} catch {
+				console.error('ERROR WHILE FECTHING CURRENT LOCATION');
+			} finally {
+				this.$emit('fetching-on-earth-localization', false);
+			}
+		},
+	},
+
+	created: function () {
+		this.searchCurrentLocationData();
 	},
 
 	data: function () {
 		return {
-			showDrawerNav: false,
+			fetchingLocalizationError: '',
 			isFetchingLocalization: false,
 			isFetchingOnEarthLocalization: false,
-			fetchingLocalizationError: '',
-			results: [] as Array<Localization>,
 			isResultsEmpty: false,
+			results: [] as Array<Localization>,
+			showDrawerNav: false,
 		};
 	},
 });

@@ -1,25 +1,24 @@
 <template>
 	<div class="drawer-weather-section font-raleway">
 		<div class="drawer-weather-section__img">
-			<img
-				width="150"
-				height="174"
-				lazy
-				src="https://www.metaweather.com/static/img/weather/hc.svg"
-				alt="Weather icon"
-			/>
+			<img width="150" height="174" lazy :src="stateImg" alt="Weather icon" />
 		</div>
 
 		<div class="drawer-weather-section__details">
 			<span class="drawer-weather-section__details__temperature">
-				15<span class="drawer-weather-section__details__temperature__unity">
-					℃
+				{{ temperature.value }}
+				<span class="drawer-weather-section__details__temperature__unity">
+					{{ temperature.unity }}
 				</span>
 			</span>
-			<span class="drawer-weather-section__details__state-name">Shower</span>
-			<span class="drawer-weather-section__details__date">Fri, 5 Jun</span>
+			<span class="drawer-weather-section__details__state-name">
+				{{ state }}
+			</span>
+
+			<span class="drawer-weather-section__details__date">{{ date }}</span>
+
 			<span class="drawer-weather-section__details__location">
-				<place-icon /> Helsinki
+				<place-icon /> {{ currentLocation }}
 			</span>
 		</div>
 	</div>
@@ -30,6 +29,33 @@ import Vue from 'vue';
 import PlaceIcon from './icons/place-icon.vue';
 
 export default Vue.extend({
+	props: {
+		state: {
+			type: String,
+			required: true,
+		},
+
+		stateImg: {
+			type: String,
+			required: true,
+		},
+
+		date: {
+			type: String,
+			required: true,
+		},
+
+		currentLocation: {
+			type: String,
+			required: true,
+		},
+
+		temperature: {
+			type: Object,
+			required: true,
+		},
+	},
+
 	components: { PlaceIcon },
 });
 </script>
