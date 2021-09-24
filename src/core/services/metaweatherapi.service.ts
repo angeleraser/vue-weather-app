@@ -1,5 +1,5 @@
 import { Coordinates } from '../domain/entities/coordinates.entity';
-import { getLocalizationSearchArgument, allowCors } from '../utils';
+import { getLocalizationSearchArgument } from '../utils';
 import { Localization } from '../domain/entities/localization.entity';
 import { LocalizationQueries } from '../domain/services/weather.service';
 import { LocalizationType } from '../constants/localization-type.constant';
@@ -14,6 +14,7 @@ import { WeatherStateAbbr } from '../constants/weather-state-abbr.constant';
 import { WeatherStateName } from '../constants/weather-state.constat';
 import { WeatherTemperature } from '../domain/entities/weather-temperature.entity';
 import { WeatherWind } from '../domain/entities/weather-wind.entity';
+import HttpService from './http.service';
 
 class MetaweatherService implements WeatherService {
 	private readonly api_url: string;
@@ -27,9 +28,9 @@ class MetaweatherService implements WeatherService {
 	): Promise<Localization[]> => {
 		const searchArguments = getLocalizationSearchArgument(params);
 
-		const url = `${this.api_url}/location/search/?${searchArguments}`;
+		const url = `/location/search/?${searchArguments}`;
 
-		const response = await fetch(allowCors(url));
+		const response = await this.http.get(url);
 
 		const data = (await response.json()) as MetaweatherApiResponse;
 
@@ -51,9 +52,9 @@ class MetaweatherService implements WeatherService {
 	public getOnEarthLocalization = async (
 		woeid: number,
 	): Promise<OnEarthLocalization> => {
-		const url = `${this.api_url}/location/${woeid}`;
+		const url = `/location/${woeid}`;
 
-		const response = await fetch(allowCors(url));
+		const response = await this.http.get(url);
 
 		const data = (await response.json()) as MetaweatherApiResponse;
 
@@ -110,6 +111,13 @@ class MetaweatherService implements WeatherService {
 			}),
 		});
 	};
+
+	private get http() {
+		return new HttpService({
+			apiUrl: this.api_url,
+			headers: new Headers(),
+		});
+	}
 
 	private getWeatherImgUrl = (state: WeatherStateAbbr): string => {
 		return `https://www.metaweather.com/static/img/weather/${state}.svg`;

@@ -37,19 +37,17 @@
 						/>
 					</template>
 
-					<template v-if="showEmptyResultsMessage">
-						<div class="drawer-weather-nav__wrapper__content__results__message">
-							No results was found :(
-						</div>
-					</template>
-
-					<template v-if="fetchingLocalizationError && !isFetchingLocalization">
+					<template v-if="requestError && !isFetchingLocalization">
 						<div class="drawer-weather-nav__wrapper__content__results__error">
 							<p class="drawer-weather-nav__wrapper__content__results__message">
-								{{ fetchingLocalizationError }}
+								{{ requestError.message }}
 							</p>
 
-							<v-btn label="Retry" color="gray" />
+							<v-btn
+								v-if="requestError.retry_action"
+								label="Retry"
+								color="gray"
+							/>
 						</div>
 					</template>
 				</div>
@@ -81,12 +79,8 @@ export default Vue.extend({
 			type: Boolean,
 		},
 
-		fetchingLocalizationError: {
-			type: String,
-		},
-
-		showEmptyResultsMessage: {
-			type: Boolean,
+		requestError: {
+			required: false,
 		},
 
 		value: {

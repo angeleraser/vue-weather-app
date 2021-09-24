@@ -21,14 +21,13 @@
 		</div>
 
 		<drawer-weather-nav
-			:fetching-localization-error="fetchingLocalizationError"
+			:request-error="requestError"
 			:is-fetching-localization="isFetchingLocalization"
 			:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
 			:results="results"
-			:show-empty-results-message="isResultsEmpty"
 			@close="toggleShowDrawerNav"
-			@search-item-click="getOnEarthLocalization"
-			@search="handleSearchInDrawerNav"
+			@search-item-click="handleFindOnEarthLocalization"
+			@search="handleSearchLocalizationsByQuery"
 			v-model="showDrawerNav"
 		/>
 	</div>
@@ -42,6 +41,7 @@ import GpsFixedIcon from './icons/gps-fixed-icon.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
 import WeatherService from '@/core/services/weather.service';
+import WeatherServiceError from '@/core/errors/weather.service.error';
 
 export default Vue.extend({
 	props: {
@@ -66,7 +66,23 @@ export default Vue.extend({
 			else document.body.classList.remove('no-scroll');
 		},
 
-		getOnEarthLocalization: async function (oeid: number) {
+		handleSearchLocalizationsByQuery: async function (query: string) {
+			try {
+				this.isFetchingLocalization = true;
+				this.requestError = null;
+				this.results = [];
+
+				this.results = await WeatherService.searchLocalizations({
+					query,
+				});
+			} catch (error) {
+				this.requestError = error as WeatherServiceError;
+			} finally {
+				this.isFetchingLocalization = false;
+			}
+		},
+
+		handleFindOnEarthLocalization: async function (oeid: number) {
 			try {
 				this.$emit('fetching-on-earth-localization', true);
 				this.isFetchingOnEarthLocalization = true;
@@ -83,26 +99,9 @@ export default Vue.extend({
 			}
 		},
 
-		handleSearchInDrawerNav: async function (query: string) {
+		handleSearchCurrentLocalization: async function () {
 			try {
-				this.isFetchingLocalization = true;
-				this.isResultsEmpty = false;
-				this.results = [];
-
-				this.results = await WeatherService.searchLocalizations({
-					query,
-				});
-
-				if (this.results.length === 0) this.isResultsEmpty = true;
-			} catch (error) {
-				this.fetchingLocalizationError = error.message;
-			} finally {
-				this.isFetchingLocalization = false;
-			}
-		},
-
-		searchCurrentLocationData: async function () {
-			try {
+				this.requestError = null;
 				this.$emit('fetching-on-earth-localization', true);
 
 				const [currentLocation] = await WeatherService.searchLocalizations({
@@ -113,8 +112,8 @@ export default Vue.extend({
 					await WeatherService.findOnEarthLocalization(currentLocation.oeid);
 
 				this.$emit('get-on-earth-localization', onEarthLocalization);
-			} catch {
-				console.error('ERROR WHILE FECTHING CURRENT LOCATION');
+			} catch (error) {
+				this.$emit('request-error', error as WeatherServiceError);
 			} finally {
 				this.$emit('fetching-on-earth-localization', false);
 			}
@@ -122,15 +121,14 @@ export default Vue.extend({
 	},
 
 	created: function () {
-		this.searchCurrentLocationData();
+		this.handleSearchCurrentLocalization();
 	},
 
 	data: function () {
 		return {
-			fetchingLocalizationError: '',
+			requestError: null as null | WeatherServiceError,
 			isFetchingLocalization: false,
 			isFetchingOnEarthLocalization: false,
-			isResultsEmpty: false,
 			results: [] as Array<Localization>,
 			showDrawerNav: false,
 		};

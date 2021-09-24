@@ -3,9 +3,10 @@
 		<application-layout>
 			<template #drawer>
 				<drawer
+					:weather="displayedWeather"
 					@fetching-on-earth-localization="handleFetchOnEarthLocalization"
 					@get-on-earth-localization="handleGetOnEarthLocalization"
-					:weather="displayedWeather"
+					@request-error="handleRequestError"
 				/>
 			</template>
 		</application-layout>
@@ -13,11 +14,12 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Drawer from './components/drawer.vue';
 import { OnEarthLocalization } from './core/domain/entities/on-earth-localization.entity';
 import { Weather } from './core/domain/entities/weather.entity';
 import ApplicationLayout from './layouts/application-layout.vue';
+import Drawer from './components/drawer.vue';
+import Vue from 'vue';
+import WeatherServiceError from './core/errors/weather.service.error';
 
 export default Vue.extend({
 	components: { ApplicationLayout, Drawer },
@@ -36,6 +38,10 @@ export default Vue.extend({
 
 			this.displayedWeather = todayWeather;
 			console.log(onEarthLocalization);
+		},
+
+		handleRequestError: function (error: WeatherServiceError) {
+			console.log({ ...error });
 		},
 	},
 
