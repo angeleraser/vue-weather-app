@@ -1,5 +1,15 @@
 <template>
 	<div class="drawer">
+		<div class="drawer__actions">
+			<v-btn @on-click="toggleShowDrawerNav" color="gray">
+				Search for places
+			</v-btn>
+
+			<v-btn class="drawer__actions__gps-btn" color="gray" round>
+				<gps-fixed-icon />
+			</v-btn>
+		</div>
+
 		<render-component
 			:loading="isFetchingCurrentLocationData || isFetchingOnEarthLocalization"
 			:error="Boolean(fetchCurrentLocationDataError || fetchOnEarthError)"
@@ -11,16 +21,6 @@
 			</template>
 
 			<template #content>
-				<div class="drawer__actions">
-					<v-btn @on-click="toggleShowDrawerNav" color="gray">
-						Search for places
-					</v-btn>
-
-					<v-btn class="drawer__actions__gps-btn" color="gray" round>
-						<gps-fixed-icon />
-					</v-btn>
-				</div>
-
 				<div class="drawer__content">
 					<drawer-weather-section
 						:temperature="{ value: 50, unity: 'C' }"
@@ -31,18 +31,18 @@
 					/>
 				</div>
 			</template>
-
-			<drawer-weather-nav
-				:is-fetching-localization="isFetchingLocalization"
-				:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
-				:request-error="fetchLocalizationError"
-				:results="results"
-				@close="toggleShowDrawerNav"
-				@search-item-click="handleGetOnEarth"
-				@search="handleSearchLocalizations"
-				v-model="showDrawerNav"
-			/>
 		</render-component>
+
+		<drawer-weather-nav
+			:is-fetching-localization="isFetchingLocalization"
+			:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
+			:request-error="fetchLocalizationError"
+			:results="results"
+			@close="toggleShowDrawerNav"
+			@search-item-click="handleGetOnEarth"
+			@search="handleSearchLocalizations"
+			v-model="showDrawerNav"
+		/>
 	</div>
 </template>
 
@@ -179,7 +179,8 @@ export default Vue.extend({
 	height: 100%;
 	position: relative;
 
-	.render-component--loading {
+	& > .render-component--loading,
+	&__content {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -188,12 +189,6 @@ export default Vue.extend({
 
 	&__clouds-spinner {
 		margin: auto;
-	}
-
-	&__content {
-		height: 100%;
-		display: flex;
-		align-items: center;
 	}
 
 	&__actions {
