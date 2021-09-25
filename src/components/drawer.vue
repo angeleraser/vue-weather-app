@@ -13,8 +13,9 @@
 		<div class="drawer__content">
 			<render-component
 				:loading="
-					isFetchingOnEarthLocalization || isFetchingCurrentLocationData
+					isFetchingCurrentLocationData || isFetchingOnEarthLocalization
 				"
+				:error="Boolean(fetchCurrentLocationDataError || fetchOnEarthError)"
 			>
 				<template #loading>
 					<spinner />
@@ -35,7 +36,7 @@
 		<drawer-weather-nav
 			:is-fetching-localization="isFetchingLocalization"
 			:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
-			:request-error="requestError"
+			:request-error="fetchLocalizationError"
 			:results="results"
 			@close="toggleShowDrawerNav"
 			@search-item-click="handleGetOnEarth"
@@ -86,7 +87,7 @@ export default Vue.extend({
 
 			try {
 				this.isFetchingLocalization = true;
-				this.requestError = null;
+				this.fetchLocalizationError = null;
 				this.results = [];
 
 				const results = await searchLocalizations({
@@ -95,7 +96,7 @@ export default Vue.extend({
 
 				this.results = [...results];
 			} catch (error) {
-				this.requestError = error as WeatherServiceError;
+				this.fetchLocalizationError = error as WeatherServiceError;
 			} finally {
 				this.isFetchingLocalization = false;
 			}
@@ -107,12 +108,14 @@ export default Vue.extend({
 			try {
 				this.$emit('is-fetching-on-earth-localization', true);
 				this.isFetchingOnEarthLocalization = true;
+				this.fetchOnEarthError = null;
 
 				const onEarthLocalization = await getOnEarthLocalization(oeid);
 
 				this.$emit('get-on-earth-localization', onEarthLocalization);
 			} catch (error) {
-				this.$emit('request-error', error.message);
+				this.fetchOnEarthError = error as WeatherServiceError;
+				this.$emit('fetch-on-earth-localization-error', this.fetchOnEarthError);
 			} finally {
 				this.isFetchingOnEarthLocalization = false;
 				this.$emit('is-fetching-on-earth-localization', false);
@@ -125,6 +128,7 @@ export default Vue.extend({
 			try {
 				this.$emit('is-fetching-current-location-data', true);
 				this.isFetchingCurrentLocationData = true;
+				this.fetchCurrentLocationDataError = null;
 
 				const results = await searchLocalizations({
 					query: 'san',
@@ -134,7 +138,12 @@ export default Vue.extend({
 
 				await this.handleGetOnEarth(currentLocation.oeid);
 			} catch (error) {
-				this.$emit('request-error', error as WeatherServiceError);
+				this.fetchCurrentLocationDataError = error as WeatherServiceError;
+
+				this.$emit(
+					'fetch-current-location-data-error',
+					this.fetchCurrentLocationDataError,
+				);
 			} finally {
 				this.$emit('is-fetching-current-location-data', false);
 				this.isFetchingCurrentLocationData = false;
@@ -148,10 +157,12 @@ export default Vue.extend({
 
 	data: function () {
 		return {
+			fetchCurrentLocationDataError: null as null | WeatherServiceError,
+			fetchLocalizationError: null as null | WeatherServiceError,
+			fetchOnEarthError: null as null | WeatherServiceError,
 			isFetchingCurrentLocationData: false,
 			isFetchingLocalization: false,
 			isFetchingOnEarthLocalization: false,
-			requestError: null as null | WeatherServiceError,
 			results: [] as Array<Localization>,
 			showDrawerNav: false,
 		};

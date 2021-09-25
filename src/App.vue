@@ -4,10 +4,11 @@
 			<template #drawer>
 				<drawer
 					:weather="displayedWeather"
+					@fetch-current-location-data-error="handleRequestError"
+					@fetch-on-earth-localization-error="handleRequestError"
 					@get-on-earth-localization="handleGetOnEarth"
 					@is-fetching-current-location-data="handleShowLoadingState"
 					@is-fetching-on-earth-localization="handleShowLoadingState"
-					@request-error="handleRequestError"
 				/>
 			</template>
 

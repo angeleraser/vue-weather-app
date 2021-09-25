@@ -2,9 +2,9 @@
 	<div>
 		<slot v-if="loading && !error" name="loading" />
 
-		<slot v-else-if="!loading && error" name="error" />
+		<slot v-if="!loading && error" name="error" />
 
-		<template v-else>
+		<template v-if="!error && !loading">
 			<slot name="content" />
 			<slot />
 		</template>
@@ -20,10 +20,6 @@ export default Vue.extend({
 		},
 
 		error: {
-			type: Boolean,
-		},
-
-		content: {
 			type: Boolean,
 		},
 	},
