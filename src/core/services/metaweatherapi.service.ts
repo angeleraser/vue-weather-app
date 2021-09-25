@@ -9,6 +9,7 @@ import { MetaweatherOnEarthLocalization } from '../api/metaweather.api';
 import { OnEarthLocalization } from '../domain/entities/on-earth-localization.entity';
 import { Weather } from '../domain/entities/weather.entity';
 import { WeatherService } from '../domain/services/weather.service';
+import { WeatherServiceErrorMessages } from '../constants/errors-messages.constant';
 import { WeatherState } from '../domain/entities/weather-state.entity';
 import { WeatherStateAbbr } from '../constants/weather-state-abbr.constant';
 import { WeatherStateName } from '../constants/weather-state.constat';
@@ -16,7 +17,6 @@ import { WeatherTemperature } from '../domain/entities/weather-temperature.entit
 import { WeatherWind } from '../domain/entities/weather-wind.entity';
 import HttpService from './http.service';
 import WeatherServiceError from '../errors/weather.service.error';
-import { WeatherServiceErrorMessages } from '../constants/errors-messages.constant';
 
 class MetaweatherService implements WeatherService {
 	private readonly api_url: string;
@@ -98,6 +98,7 @@ class MetaweatherService implements WeatherService {
 							min: weather.min_temp,
 							current: weather.the_temp,
 							max: weather.max_temp,
+							unity: 'celcius',
 						}),
 
 						visibility: weather.visibility,

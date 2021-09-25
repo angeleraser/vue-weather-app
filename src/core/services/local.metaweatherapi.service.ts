@@ -14,14 +14,13 @@ import {
 	MetaweatherLocalizationsMock,
 	MetaweatherOnEarthLocalizationMock,
 } from '../mocks/metaweatherapi.service.mock';
-import { delay } from '../utils';
 
 class LocalMetaweatherService implements WeatherService {
 	public findLocalizations = async (
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		_params: LocalizationQueries,
 	): Promise<Localization[]> => {
-		await delay(5000);
+		// await delay(5000);
 
 		return MetaweatherLocalizationsMock.map(
 			localization =>
@@ -40,7 +39,7 @@ class LocalMetaweatherService implements WeatherService {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		_woeid: number,
 	): Promise<OnEarthLocalization> => {
-		await delay(5000);
+		// await delay(5000);
 
 		const contents = MetaweatherOnEarthLocalizationMock;
 
@@ -72,6 +71,7 @@ class LocalMetaweatherService implements WeatherService {
 							min: weather.min_temp,
 							current: weather.the_temp,
 							max: weather.max_temp,
+							unity: 'celcius',
 						}),
 
 						visibility: weather.visibility,

@@ -3,7 +3,7 @@
 		<application-layout>
 			<template #drawer>
 				<drawer
-					:weather="displayedWeather"
+					:computed-weather="computedWeather"
 					@fetch-current-location-data-error="handleRequestError"
 					@fetch-on-earth-localization-error="handleRequestError"
 					@get-on-earth-localization="handleGetOnEarth"
@@ -32,14 +32,35 @@
 </template>
 
 <script lang="ts">
+import { formatDate, getTemperatureObject } from './core/utils';
 import { OnEarthLocalization } from './core/domain/entities/on-earth-localization.entity';
 import { Weather } from './core/domain/entities/weather.entity';
+import { WeatherTemperature } from './core/domain/entities/weather-temperature.entity';
 import ApplicationLayout from './layouts/application-layout.vue';
 import Drawer from './components/drawer.vue';
 import RenderComponent from './components/render-component.vue';
 import Spinner from './components/spinner.vue';
 import Vue from 'vue';
 import WeatherServiceError from './core/errors/weather.service.error';
+
+interface ComputedWeather {
+	temperature: WeatherTemperature;
+	date: string;
+	state: string;
+	state_img: string;
+}
+
+export const getComputedWeather = (
+	weather: Weather,
+	options: { temp_unity: WeatherTemperature['unity'] },
+): ComputedWeather => {
+	return {
+		date: formatDate(weather.applicable_date),
+		state_img: weather.state.icon,
+		state: weather.state.name,
+		temperature: getTemperatureObject(weather.temperature, options.temp_unity),
+	};
+};
 
 export default Vue.extend({
 	components: { ApplicationLayout, Drawer, RenderComponent, Spinner },
@@ -62,12 +83,23 @@ export default Vue.extend({
 		},
 	},
 
+	computed: {
+		computedWeather: function (): ComputedWeather | null {
+			const weather = this.displayedWeather as Weather | null;
+
+			if (!weather) return null;
+
+			return getComputedWeather(weather, { temp_unity: this.tempUnity });
+		},
+	},
+
 	data: function () {
 		return {
 			displayedWeather: null as Weather | null,
 			isLoading: false,
 			onEarthLocalization: null as null | OnEarthLocalization,
 			requestError: null as null | WeatherServiceError,
+			tempUnity: 'celcius' as WeatherTemperature['unity'],
 		};
 	},
 });

@@ -146,6 +146,7 @@ export default Vue.extend({
 	top: 0;
 	width: 100%;
 	transition: all 0.3s;
+	z-index: 999;
 
 	&__wrapper {
 		display: flex;

@@ -36,11 +36,11 @@
 			<template #content>
 				<div class="drawer__content">
 					<drawer-weather-section
-						:temperature="{ value: 50, unity: 'C' }"
+						:date="computedWeather.date"
+						:state-img="computedWeather.state_img"
+						:state="computedWeather.state"
+						:temperature="computedWeather.temperature"
 						current-location="Caracas"
-						date="Friday, Jun 3"
-						state-img="https://www.metaweather.com/static/img/weather/t.svg"
-						state="Shower"
 					/>
 				</div>
 			</template>
@@ -86,7 +86,7 @@ import WeatherServiceError from '@/core/errors/weather.service.error';
 
 export default Vue.extend({
 	props: {
-		weather: {
+		computedWeather: {
 			required: true,
 		},
 	},
@@ -209,7 +209,6 @@ export default Vue.extend({
 	display: flex;
 	flex-direction: column;
 	padding: 24px 16px;
-	min-height: 700px;
 	height: 100%;
 	position: relative;
 

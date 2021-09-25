@@ -12,7 +12,7 @@
 
 		<div class="drawer-weather-section__details">
 			<span class="drawer-weather-section__details__temperature">
-				{{ temperature.value }}
+				{{ temperature.current }}
 				<span class="drawer-weather-section__details__temperature__unity">
 					{{ temperature.unity }}
 				</span>
@@ -21,7 +21,7 @@
 				{{ state }}
 			</span>
 
-			<span class="drawer-weather-section__details__date">{{ date }}</span>
+			<span class="drawer-weather-section__details__date"> {{ date }}</span>
 
 			<span class="drawer-weather-section__details__location">
 				<place-icon /> {{ currentLocation }}
