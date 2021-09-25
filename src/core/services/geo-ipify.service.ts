@@ -1,5 +1,4 @@
 import { GeoIpifyApiResponse } from '../api/geo-ipify.api';
-import { AllowCorsServiceResponse } from '../api/metaweather.api';
 import { GeoIpifyService } from '../domain/services/geo-ipify.service';
 import HttpService from './http.service';
 
@@ -9,11 +8,9 @@ class ApiGeoIpifyService implements GeoIpifyService {
 			`?apiKey=${process.env.VUE_APP_GEOIPIFY_API_KEY}`,
 		);
 
-		const data = (await resp.json()) as AllowCorsServiceResponse;
+		const data = (await resp.json()) as GeoIpifyApiResponse;
 
-		const geoIpifyData = JSON.parse(data.contents) as GeoIpifyApiResponse;
-
-		return geoIpifyData;
+		return data;
 	};
 
 	private get http() {

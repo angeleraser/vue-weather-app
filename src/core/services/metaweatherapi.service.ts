@@ -1,9 +1,9 @@
+import { AllowCorsServiceResponse } from '../api/metaweather.api';
 import { Coordinates } from '../domain/entities/coordinates.entity';
 import { getLocalizationSearchArgument } from '../utils';
 import { Localization } from '../domain/entities/localization.entity';
 import { LocalizationQueries } from '../domain/services/weather.service';
 import { LocalizationType } from '../constants/localization-type.constant';
-import { AllowCorsServiceResponse } from '../api/metaweather.api';
 import { MetaweatherLocalization } from '../api/metaweather.api';
 import { MetaweatherOnEarthLocalization } from '../api/metaweather.api';
 import { OnEarthLocalization } from '../domain/entities/on-earth-localization.entity';
@@ -125,6 +125,7 @@ class MetaweatherService implements WeatherService {
 		return new HttpService({
 			apiUrl: this.api_url,
 			headers: new Headers(),
+			use_allow_cors: true,
 		});
 	}
 

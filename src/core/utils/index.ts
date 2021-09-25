@@ -18,12 +18,10 @@ const allowCors = (url: string): string => {
 
 const convertToDate = (dateStr: string /*yyyy-mm-dd*/): Date => {
 	const [year, month, day] = dateStr.split('-').map(val => Number(val));
-
 	return new Date(year, month - 1, day);
 };
 
 const formatDate = (dateStr: string): string => {
-	console.log(dateStr);
 	return format(convertToDate(dateStr), 'iii, dd MMM');
 };
 

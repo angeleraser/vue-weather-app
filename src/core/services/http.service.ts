@@ -5,15 +5,18 @@ import { allowCors } from '../utils';
 interface HttpServiceConfig {
 	apiUrl: string;
 	headers: HeadersInit;
+	use_allow_cors?: boolean;
 }
 
 export default class HttpService {
 	private api_url: string;
 	private req_headers: HeadersInit;
+	private use_allow_cors?: boolean;
 
-	constructor({ apiUrl, headers }: HttpServiceConfig) {
+	constructor({ apiUrl, headers, use_allow_cors }: HttpServiceConfig) {
 		this.api_url = apiUrl;
 		this.req_headers = headers;
+		this.use_allow_cors = use_allow_cors || false;
 	}
 
 	public async get(endpoint: string): Promise<Response> {
@@ -49,11 +52,12 @@ export default class HttpService {
 		endpoint: string,
 		options: unknown,
 	): Promise<Response> {
+		const url = this.use_allow_cors
+			? allowCors(`${this.api_url}${endpoint}`)
+			: `${this.api_url}${endpoint}`;
+
 		try {
-			return await fetch(
-				allowCors(`${this.api_url}${endpoint}`),
-				options as RequestInit,
-			);
+			return await fetch(url, options as RequestInit);
 		} catch {
 			if (!navigator.onLine) {
 				throw new WeatherServiceError({
