@@ -1,5 +1,12 @@
 <template>
-	<div class="render-component">
+	<div
+		:class="{
+			'render-component--loading': loading && !error,
+			'render-component--error': !loading && error,
+			'render-component--content': !loading && !error,
+		}"
+		class="render-component"
+	>
 		<slot v-if="loading && !error" name="loading" />
 
 		<slot v-if="!loading && error" name="error" />
@@ -13,6 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 export default Vue.extend({
 	props: {
 		loading: {
@@ -26,9 +34,4 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
-.render-component {
-	width: 100%;
-	height: 100%;
-}
-</style>
+<style lang="scss"></style>

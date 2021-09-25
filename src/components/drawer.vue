@@ -1,29 +1,27 @@
 <template>
 	<div class="drawer">
-		<div class="drawer__actions">
-			<v-btn @on-click="toggleShowDrawerNav" color="gray">
-				Search for places
-			</v-btn>
+		<render-component
+			:loading="isFetchingCurrentLocationData || isFetchingOnEarthLocalization"
+			:error="Boolean(fetchCurrentLocationDataError || fetchOnEarthError)"
+		>
+			<template #loading>
+				<div class="drawer__clouds-spinner">
+					<clouds-spinner />
+				</div>
+			</template>
 
-			<v-btn class="drawer__actions__gps-btn" color="gray" round>
-				<gps-fixed-icon />
-			</v-btn>
-		</div>
+			<template #content>
+				<div class="drawer__actions">
+					<v-btn @on-click="toggleShowDrawerNav" color="gray">
+						Search for places
+					</v-btn>
 
-		<div class="drawer__content">
-			<render-component
-				:loading="
-					isFetchingCurrentLocationData || isFetchingOnEarthLocalization
-				"
-				:error="Boolean(fetchCurrentLocationDataError || fetchOnEarthError)"
-			>
-				<template #loading>
-					<div class="drawer__content__clouds-spinner">
-						<clouds-spinner />
-					</div>
-				</template>
+					<v-btn class="drawer__actions__gps-btn" color="gray" round>
+						<gps-fixed-icon />
+					</v-btn>
+				</div>
 
-				<template #content>
+				<div class="drawer__content">
 					<drawer-weather-section
 						:temperature="{ value: 50, unity: 'C' }"
 						current-location="Caracas"
@@ -31,20 +29,20 @@
 						state-img="https://www.metaweather.com/static/img/weather/t.svg"
 						state="Shower"
 					/>
-				</template>
-			</render-component>
-		</div>
+				</div>
+			</template>
 
-		<drawer-weather-nav
-			:is-fetching-localization="isFetchingLocalization"
-			:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
-			:request-error="fetchLocalizationError"
-			:results="results"
-			@close="toggleShowDrawerNav"
-			@search-item-click="handleGetOnEarth"
-			@search="handleSearchLocalizations"
-			v-model="showDrawerNav"
-		/>
+			<drawer-weather-nav
+				:is-fetching-localization="isFetchingLocalization"
+				:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
+				:request-error="fetchLocalizationError"
+				:results="results"
+				@close="toggleShowDrawerNav"
+				@search-item-click="handleGetOnEarth"
+				@search="handleSearchLocalizations"
+				v-model="showDrawerNav"
+			/>
+		</render-component>
 	</div>
 </template>
 
@@ -179,18 +177,23 @@ export default Vue.extend({
 	padding: 24px 16px;
 	min-height: 700px;
 	height: 100%;
+	position: relative;
+
+	.render-component--loading {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex: 100%;
+	}
+
+	&__clouds-spinner {
+		margin: auto;
+	}
 
 	&__content {
 		height: 100%;
 		display: flex;
 		align-items: center;
-
-		&__clouds-spinner {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 100%;
-		}
 	}
 
 	&__actions {
@@ -208,6 +211,16 @@ export default Vue.extend({
 	@media screen and (min-width: $breakpoint) {
 		padding: 40px 48px;
 		height: 100%;
+
+		.clouds-spinner {
+			width: 280px;
+		}
+	}
+
+	@media screen and (min-width: 480px) {
+		.clouds-spinner {
+			width: 280px;
+		}
 	}
 }
 </style>
