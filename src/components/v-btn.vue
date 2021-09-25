@@ -155,11 +155,10 @@ export default Vue.extend({
 	}
 
 	&--is-disabled {
-		background-color: rgba(0, 0, 0, 0.12) !important;
 		pointer-events: none !important;
-		color: rgba(0, 0, 0, 0.26) !important;
 		box-shadow: none !important;
 		user-select: none;
+		opacity: 0.25;
 	}
 }
 </style>

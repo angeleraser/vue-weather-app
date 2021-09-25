@@ -15,8 +15,6 @@ import {
 	MetaweatherOnEarthLocalizationMock,
 } from '../mocks/metaweatherapi.service.mock';
 import { delay } from '../utils';
-import { WeatherServiceErrorMessages } from '../constants/errors-messages.constant';
-import WeatherServiceError from '../errors/weather.service.error';
 
 class LocalMetaweatherService implements WeatherService {
 	public findLocalizations = async (
@@ -24,11 +22,6 @@ class LocalMetaweatherService implements WeatherService {
 		_params: LocalizationQueries,
 	): Promise<Localization[]> => {
 		await delay(5000);
-
-		throw new WeatherServiceError({
-			message: WeatherServiceErrorMessages.UNKNOW,
-			retry_action: true,
-		});
 
 		return MetaweatherLocalizationsMock.map(
 			localization =>

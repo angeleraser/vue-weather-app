@@ -1,24 +1,31 @@
 <template>
 	<div class="drawer">
 		<div class="drawer__actions">
-			<render-component :loading="isFetchingCurrentLocationData">
-				<template #loading> Loading... </template>
+			<v-btn
+				:disabled="
+					isFetchingCurrentLocationData || isFetchingOnEarthLocalization
+				"
+				@on-click="toggleShowDrawerNav"
+				color="gray"
+			>
+				Search for places
+			</v-btn>
 
-				<template #content>
-					<v-btn @on-click="toggleShowDrawerNav" color="gray">
-						Search for places
-					</v-btn>
-
-					<v-btn class="drawer__actions__gps-btn" color="gray" round>
-						<gps-fixed-icon />
-					</v-btn>
-				</template>
-			</render-component>
+			<v-btn
+				:disabled="
+					isFetchingCurrentLocationData || isFetchingOnEarthLocalization
+				"
+				class="drawer__actions__gps-btn"
+				color="gray"
+				round
+			>
+				<gps-fixed-icon />
+			</v-btn>
 		</div>
 
 		<render-component
 			:loading="isFetchingCurrentLocationData || isFetchingOnEarthLocalization"
-			:error="Boolean(drawerError)"
+			:error="fetchCurrentLocationDataError"
 		>
 			<template #loading>
 				<div class="drawer__clouds-spinner">
@@ -39,13 +46,15 @@
 			</template>
 
 			<template #error>
-				<v-btn
-					@on-click="handleSearchCurrentLocation"
-					color="blue"
-					v-if="drawerError.retry_action"
-				>
-					Retry
-				</v-btn>
+				<div class="drawer__error">
+					<v-btn
+						@on-click="handleSearchCurrentLocation"
+						color="blue"
+						v-if="drawerError.retry_action"
+					>
+						Retry
+					</v-btn>
+				</div>
 			</template>
 		</render-component>
 
@@ -218,11 +227,9 @@ export default Vue.extend({
 	}
 
 	&__actions {
-		.render-component--content {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-		}
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 
 		.drawer__actions__gps-btn {
 			svg {
