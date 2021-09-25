@@ -12,8 +12,8 @@
 
 		<div class="drawer-weather-section__details">
 			<span class="drawer-weather-section__details__temperature">
-				{{ temperature.current }}
-				<span class="drawer-weather-section__details__temperature__unity">
+				{{ temperature.current
+				}}<span class="drawer-weather-section__details__temperature__unity">
 					{{ temperature.unity }}
 				</span>
 			</span>
@@ -24,7 +24,7 @@
 			<span class="drawer-weather-section__details__date"> {{ date }}</span>
 
 			<span class="drawer-weather-section__details__location">
-				<place-icon /> {{ currentLocation }}
+				<place-icon /> {{ location }}
 			</span>
 		</div>
 	</div>
@@ -52,7 +52,7 @@ export default Vue.extend({
 			required: true,
 		},
 
-		currentLocation: {
+		location: {
 			type: String,
 			required: true,
 		},

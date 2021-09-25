@@ -33,18 +33,6 @@
 				</div>
 			</template>
 
-			<template #content>
-				<div class="drawer__content">
-					<drawer-weather-section
-						:date="computedWeather.date"
-						:state-img="computedWeather.state_img"
-						:state="computedWeather.state"
-						:temperature="computedWeather.temperature"
-						current-location="Caracas"
-					/>
-				</div>
-			</template>
-
 			<template #error>
 				<div class="drawer__error">
 					<v-btn
@@ -54,6 +42,18 @@
 					>
 						Retry
 					</v-btn>
+				</div>
+			</template>
+
+			<template #content>
+				<div class="drawer__content">
+					<drawer-weather-section
+						:date="computedWeather.date"
+						:state-img="computedWeather.state_img"
+						:state="computedWeather.state"
+						:temperature="computedWeather.temperature"
+						:location="localization"
+					/>
 				</div>
 			</template>
 		</render-component>
@@ -135,9 +135,11 @@ export default Vue.extend({
 				this.$emit('is-fetching-on-earth-localization', true);
 				this.isFetchingOnEarthLocalization = true;
 				this.fetchOnEarthError = null;
+				this.localization = '';
 
 				const onEarthLocalization = await getOnEarthLocalization(oeid);
 
+				this.localization = onEarthLocalization.title;
 				this.$emit('get-on-earth-localization', onEarthLocalization);
 			} catch (error) {
 				this.fetchOnEarthError = error as WeatherServiceError;
@@ -194,6 +196,7 @@ export default Vue.extend({
 			fetchCurrentLocationDataError: null as null | WeatherServiceError,
 			fetchLocalizationError: null as null | WeatherServiceError,
 			fetchOnEarthError: null as null | WeatherServiceError,
+			localization: '',
 			isFetchingCurrentLocationData: false,
 			isFetchingLocalization: false,
 			isFetchingOnEarthLocalization: false,
