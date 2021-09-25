@@ -1,13 +1,19 @@
 <template>
 	<div class="drawer">
 		<div class="drawer__actions">
-			<v-btn @on-click="toggleShowDrawerNav" color="gray">
-				Search for places
-			</v-btn>
+			<render-component :loading="isFetchingCurrentLocationData">
+				<template #loading> Loading... </template>
 
-			<v-btn class="drawer__actions__gps-btn" color="gray" round>
-				<gps-fixed-icon />
-			</v-btn>
+				<template #content>
+					<v-btn @on-click="toggleShowDrawerNav" color="gray">
+						Search for places
+					</v-btn>
+
+					<v-btn class="drawer__actions__gps-btn" color="gray" round>
+						<gps-fixed-icon />
+					</v-btn>
+				</template>
+			</render-component>
 		</div>
 
 		<render-component
@@ -48,6 +54,7 @@
 
 <script lang="ts">
 import { Localization } from '@/core/domain/entities/localization.entity';
+import CloudsSpinner from './clouds-spinner.vue';
 import DrawerWeatherNav from './drawer-weather-nav.vue';
 import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
@@ -56,7 +63,6 @@ import VBtn from './v-btn.vue';
 import Vue from 'vue';
 import WeatherService from '@/core/services/weather.service';
 import WeatherServiceError from '@/core/errors/weather.service.error';
-import CloudsSpinner from './clouds-spinner.vue';
 
 export default Vue.extend({
 	props: {
@@ -192,9 +198,11 @@ export default Vue.extend({
 	}
 
 	&__actions {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		.render-component--content {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
 
 		.drawer__actions__gps-btn {
 			svg {
