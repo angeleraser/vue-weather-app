@@ -3,7 +3,7 @@ import { getLocalizationSearchArgument } from '../utils';
 import { Localization } from '../domain/entities/localization.entity';
 import { LocalizationQueries } from '../domain/services/weather.service';
 import { LocalizationType } from '../constants/localization-type.constant';
-import { MetaweatherApiResponse } from '../api/metaweather.api';
+import { AllowCorsServiceResponse } from '../api/metaweather.api';
 import { MetaweatherLocalization } from '../api/metaweather.api';
 import { MetaweatherOnEarthLocalization } from '../api/metaweather.api';
 import { OnEarthLocalization } from '../domain/entities/on-earth-localization.entity';
@@ -34,7 +34,7 @@ class MetaweatherService implements WeatherService {
 
 		const response = await this.http.get(url);
 
-		const data = (await response.json()) as MetaweatherApiResponse;
+		const data = (await response.json()) as AllowCorsServiceResponse;
 
 		const contents = JSON.parse(data.contents) as MetaweatherLocalization[];
 
@@ -64,7 +64,7 @@ class MetaweatherService implements WeatherService {
 
 		const response = await this.http.get(url);
 
-		const data = (await response.json()) as MetaweatherApiResponse;
+		const data = (await response.json()) as AllowCorsServiceResponse;
 
 		const contents = JSON.parse(
 			data.contents,

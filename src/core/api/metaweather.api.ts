@@ -5,7 +5,7 @@ interface MetaweatherLocalization {
 	woeid: number;
 }
 
-type MetaweatherApiResponse = {
+type AllowCorsServiceResponse = {
 	contents: string; // JSON String
 
 	status: {
@@ -54,5 +54,5 @@ export {
 	MetaweatherLocalization,
 	MetaweatherOnEarthLocalization,
 	MetaweatherConsolidatedWeather,
-	MetaweatherApiResponse,
+	AllowCorsServiceResponse,
 };
