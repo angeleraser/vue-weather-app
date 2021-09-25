@@ -23,10 +23,10 @@ class LocalMetaweatherService implements WeatherService {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		_params: LocalizationQueries,
 	): Promise<Localization[]> => {
-		await delay(1000);
+		await delay(5000);
 
 		throw new WeatherServiceError({
-			message: WeatherServiceErrorMessages.NO_NETWORK_CONNECTION,
+			message: WeatherServiceErrorMessages.UNKNOW,
 			retry_action: true,
 		});
 

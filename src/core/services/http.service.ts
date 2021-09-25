@@ -54,7 +54,13 @@ export default class HttpService {
 				allowCors(`${this.api_url}${endpoint}`),
 				options as RequestInit,
 			);
-		} catch (error) {
+		} catch {
+			if (!navigator.onLine) {
+				throw new WeatherServiceError({
+					message: WeatherServiceErrorMessages.NO_NETWORK_CONNECTION,
+				});
+			}
+
 			throw new WeatherServiceError({
 				message: WeatherServiceErrorMessages.UNKNOW,
 			});

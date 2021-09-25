@@ -19,10 +19,6 @@
 				>
 					<template v-slot:loading> <spinner /> </template>
 
-					<template v-slot:error>
-						{{ requestError.message }}
-					</template>
-
 					<template v-slot:content>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
 						saepe. Aspernatur placeat quis molestiae corporis. Accusantium sint
@@ -68,9 +64,9 @@ export default Vue.extend({
 
 	data: function () {
 		return {
-			onEarthLocalization: null as null | OnEarthLocalization,
 			displayedWeather: null as Weather | null,
 			isLoading: false,
+			onEarthLocalization: null as null | OnEarthLocalization,
 			requestError: null as null | WeatherServiceError,
 		};
 	},

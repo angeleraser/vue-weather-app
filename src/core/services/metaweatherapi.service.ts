@@ -1,5 +1,5 @@
 import { Coordinates } from '../domain/entities/coordinates.entity';
-import { delay, getLocalizationSearchArgument } from '../utils';
+import { getLocalizationSearchArgument } from '../utils';
 import { Localization } from '../domain/entities/localization.entity';
 import { LocalizationQueries } from '../domain/services/weather.service';
 import { LocalizationType } from '../constants/localization-type.constant';
@@ -15,6 +15,8 @@ import { WeatherStateName } from '../constants/weather-state.constat';
 import { WeatherTemperature } from '../domain/entities/weather-temperature.entity';
 import { WeatherWind } from '../domain/entities/weather-wind.entity';
 import HttpService from './http.service';
+import WeatherServiceError from '../errors/weather.service.error';
+import { WeatherServiceErrorMessages } from '../constants/errors-messages.constant';
 
 class MetaweatherService implements WeatherService {
 	private readonly api_url: string;
@@ -26,8 +28,6 @@ class MetaweatherService implements WeatherService {
 	public findLocalizations = async (
 		params: LocalizationQueries,
 	): Promise<Localization[]> => {
-		await delay(10000);
-
 		const searchArguments = getLocalizationSearchArgument(params);
 
 		const url = `/location/search/?${searchArguments}`;
@@ -37,6 +37,12 @@ class MetaweatherService implements WeatherService {
 		const data = (await response.json()) as MetaweatherApiResponse;
 
 		const contents = JSON.parse(data.contents) as MetaweatherLocalization[];
+
+		if (contents.length === 0) {
+			throw new WeatherServiceError({
+				message: WeatherServiceErrorMessages.EMPTY_SEARCH,
+			});
+		}
 
 		return contents.map(
 			localization =>
@@ -54,8 +60,6 @@ class MetaweatherService implements WeatherService {
 	public getOnEarthLocalization = async (
 		woeid: number,
 	): Promise<OnEarthLocalization> => {
-		await delay(1000);
-
 		const url = `/location/${woeid}`;
 
 		const response = await this.http.get(url);

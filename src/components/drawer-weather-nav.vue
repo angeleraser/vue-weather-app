@@ -1,5 +1,5 @@
 <template>
-	<div :class="drawerNavClassNames" class="drawer-weather-nav">
+	<div :class="drawerNavClassNames" class="drawer-weather-nav font-raleway">
 		<div class="drawer-weather-nav__wrapper">
 			<div class="drawer-weather-nav__wrapper__actions">
 				<v-btn
@@ -39,6 +39,7 @@
 									v-if="requestError.retry_action"
 									label="Retry"
 									color="gray"
+									@on-click="$emit('retry-fetch-localization')"
 								/>
 							</div>
 						</template>
@@ -199,6 +200,7 @@ export default Vue.extend({
 				&__error {
 					display: flex;
 					align-items: center;
+					justify-content: space-between;
 
 					p {
 						margin-right: 16px;

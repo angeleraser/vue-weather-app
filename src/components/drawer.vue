@@ -18,7 +18,7 @@
 
 		<render-component
 			:loading="isFetchingCurrentLocationData || isFetchingOnEarthLocalization"
-			:error="Boolean(fetchCurrentLocationDataError || fetchOnEarthError)"
+			:error="Boolean(drawerError)"
 		>
 			<template #loading>
 				<div class="drawer__clouds-spinner">
@@ -37,6 +37,16 @@
 					/>
 				</div>
 			</template>
+
+			<template #error>
+				<v-btn
+					@on-click="handleSearchCurrentLocation"
+					color="blue"
+					v-if="drawerError.retry_action"
+				>
+					Retry
+				</v-btn>
+			</template>
 		</render-component>
 
 		<drawer-weather-nav
@@ -45,6 +55,7 @@
 			:request-error="fetchLocalizationError"
 			:results="results"
 			@close="toggleShowDrawerNav"
+			@retry-fetch-localization="handleSearchLocalizations"
 			@search-item-click="handleGetOnEarth"
 			@search="handleSearchLocalizations"
 			v-model="showDrawerNav"
@@ -157,6 +168,14 @@ export default Vue.extend({
 		},
 	},
 
+	computed: {
+		drawerError: function (): WeatherServiceError | null {
+			const { fetchCurrentLocationDataError, fetchOnEarthError } = this;
+
+			return fetchCurrentLocationDataError || fetchOnEarthError;
+		},
+	},
+
 	created: async function () {
 		await this.handleSearchCurrentLocation();
 	},
@@ -186,6 +205,7 @@ export default Vue.extend({
 	position: relative;
 
 	& > .render-component--loading,
+	& > .render-component--error,
 	&__content {
 		display: flex;
 		justify-content: center;
