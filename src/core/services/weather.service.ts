@@ -13,7 +13,7 @@ class WeatherService {
 		return await MetaweatherServiceInstansce.findLocalizations(params);
 	};
 
-	public findOnEarthLocalization = async (
+	public getOnEarthLocalization = async (
 		localizationId: number,
 	): Promise<OnEarthLocalization> => {
 		return await MetaweatherServiceInstansce.getOnEarthLocalization(

@@ -18,38 +18,48 @@
 				</form>
 
 				<div class="drawer-weather-nav__wrapper__content__results">
-					<spinner v-if="isFetchingLocalization" />
+					<render-component
+						:content="results.length > 0"
+						:error="Boolean(requestError) && !isFetchingLocalization"
+						:loading="isFetchingLocalization"
+					>
+						<template #loading>
+							<spinner />
+						</template>
 
-					<template v-if="results.length > 0">
-						<search-result-item
-							:key="index"
-							:oeid="item.oeid"
-							:title="item.title"
-							:disabled="
-								isFetchingOnEarthLocalization && selectedOeid !== item.oeid
-							"
-							:loading="
-								isFetchingOnEarthLocalization && selectedOeid === item.oeid
-							"
-							@on-click="handleSearchItemClick"
-							chevron
-							v-for="(item, index) in results"
-						/>
-					</template>
+						<template #error>
+							<div class="drawer-weather-nav__wrapper__content__results__error">
+								<p
+									class="drawer-weather-nav__wrapper__content__results__message"
+								>
+									{{ requestError.message }}
+								</p>
 
-					<template v-if="requestError && !isFetchingLocalization">
-						<div class="drawer-weather-nav__wrapper__content__results__error">
-							<p class="drawer-weather-nav__wrapper__content__results__message">
-								{{ requestError.message }}
-							</p>
+								<v-btn
+									v-if="requestError.retry_action"
+									label="Retry"
+									color="gray"
+								/>
+							</div>
+						</template>
 
-							<v-btn
-								v-if="requestError.retry_action"
-								label="Retry"
-								color="gray"
+						<template #content>
+							<search-result-item
+								:key="index"
+								:oeid="item.oeid"
+								:title="item.title"
+								:disabled="
+									isFetchingOnEarthLocalization && selectedOeid !== item.oeid
+								"
+								:loading="
+									isFetchingOnEarthLocalization && selectedOeid === item.oeid
+								"
+								@on-click="handleSearchItemClick"
+								chevron
+								v-for="(item, index) in results"
 							/>
-						</div>
-					</template>
+						</template>
+					</render-component>
 				</div>
 			</div>
 		</div>
@@ -63,6 +73,7 @@ import SearchResultItem from './search-result-item.vue';
 import Spinner from './spinner.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
+import RenderComponent from './render-component.vue';
 
 export default Vue.extend({
 	props: {
@@ -88,7 +99,14 @@ export default Vue.extend({
 		},
 	},
 
-	components: { VBtn, CloseIcon, SearchInput, SearchResultItem, Spinner },
+	components: {
+		VBtn,
+		CloseIcon,
+		SearchInput,
+		SearchResultItem,
+		Spinner,
+		RenderComponent,
+	},
 
 	methods: {
 		handleSearchItemClick: function (oeid: number) {
