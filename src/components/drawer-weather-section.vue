@@ -1,7 +1,13 @@
 <template>
 	<div class="drawer-weather-section font-raleway">
 		<div class="drawer-weather-section__img">
-			<img width="150" height="174" lazy :src="stateImg" alt="Weather icon" />
+			<weather-state-img
+				width="150"
+				height="174"
+				:src="stateImg"
+				alt="Weather icon"
+				aria-label="Weather state represantive image"
+			/>
 		</div>
 
 		<div class="drawer-weather-section__details">
@@ -27,6 +33,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import PlaceIcon from './icons/place-icon.vue';
+import WeatherStateImg from './weather-state-img.vue';
 
 export default Vue.extend({
 	props: {
@@ -56,11 +63,11 @@ export default Vue.extend({
 		},
 	},
 
-	components: { PlaceIcon },
+	components: { PlaceIcon, WeatherStateImg },
 });
 </script>
 
-<style lang="scss">
+<style WeatherStateImg lang="scss">
 .drawer-weather-section {
 	color: $gray-1;
 	margin-bottom: 72px;
