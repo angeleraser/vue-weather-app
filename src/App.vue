@@ -24,7 +24,10 @@
 					</template>
 
 					<template v-slot:content>
-						<pre>	{{ displayedWeather }}</pre>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
+						saepe. Aspernatur placeat quis molestiae corporis. Accusantium sint
+						accusamus nesciunt natus molestiae, facilis debitis, amet sunt
+						architecto voluptatum dicta voluptate magnam.
 					</template>
 				</render-component>
 			</template>
@@ -84,7 +87,7 @@ html {
 #app {
 	width: 100%;
 	height: 100%;
-	min-width: 360px;
+	min-width: 375px;
 	min-height: 100vh;
 	font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, Roboto,
 		'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',

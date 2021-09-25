@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="render-component">
 		<slot v-if="loading && !error" name="loading" />
 
 		<slot v-if="!loading && error" name="error" />
@@ -25,3 +25,10 @@ export default Vue.extend({
 	},
 });
 </script>
+
+<style lang="scss">
+.render-component {
+	width: 100%;
+	height: 100%;
+}
+</style>

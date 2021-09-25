@@ -1,5 +1,5 @@
 import { Coordinates } from '../domain/entities/coordinates.entity';
-import { getLocalizationSearchArgument } from '../utils';
+import { delay, getLocalizationSearchArgument } from '../utils';
 import { Localization } from '../domain/entities/localization.entity';
 import { LocalizationQueries } from '../domain/services/weather.service';
 import { LocalizationType } from '../constants/localization-type.constant';
@@ -26,6 +26,8 @@ class MetaweatherService implements WeatherService {
 	public findLocalizations = async (
 		params: LocalizationQueries,
 	): Promise<Localization[]> => {
+		await delay(10000);
+
 		const searchArguments = getLocalizationSearchArgument(params);
 
 		const url = `/location/search/?${searchArguments}`;
@@ -52,6 +54,8 @@ class MetaweatherService implements WeatherService {
 	public getOnEarthLocalization = async (
 		woeid: number,
 	): Promise<OnEarthLocalization> => {
+		await delay(1000);
+
 		const url = `/location/${woeid}`;
 
 		const response = await this.http.get(url);

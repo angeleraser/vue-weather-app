@@ -21,14 +21,13 @@ export default {};
 	width: 100%;
 	height: 100%;
 
-	&__drawer,
-	&__content {
-		flex: 100%;
-	}
-
 	&__drawer {
 		background-color: $dark-blue;
 		position: relative;
+	}
+
+	&__content {
+		background-color: $very-dark-blue;
 	}
 
 	@media screen and (min-width: $breakpoint) {

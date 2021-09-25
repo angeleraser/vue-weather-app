@@ -18,7 +18,9 @@
 				:error="Boolean(fetchCurrentLocationDataError || fetchOnEarthError)"
 			>
 				<template #loading>
-					<spinner />
+					<div class="drawer__content__clouds-spinner">
+						<clouds-spinner />
+					</div>
 				</template>
 
 				<template #content>
@@ -52,11 +54,11 @@ import DrawerWeatherNav from './drawer-weather-nav.vue';
 import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
 import RenderComponent from './render-component.vue';
-import Spinner from './spinner.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
 import WeatherService from '@/core/services/weather.service';
 import WeatherServiceError from '@/core/errors/weather.service.error';
+import CloudsSpinner from './clouds-spinner.vue';
 
 export default Vue.extend({
 	props: {
@@ -70,8 +72,8 @@ export default Vue.extend({
 		GpsFixedIcon,
 		DrawerWeatherSection,
 		DrawerWeatherNav,
-		Spinner,
 		RenderComponent,
+		CloudsSpinner,
 	},
 
 	methods: {
@@ -175,6 +177,21 @@ export default Vue.extend({
 	display: flex;
 	flex-direction: column;
 	padding: 24px 16px;
+	min-height: 700px;
+	height: 100%;
+
+	&__content {
+		height: 100%;
+		display: flex;
+		align-items: center;
+
+		&__clouds-spinner {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+		}
+	}
 
 	&__actions {
 		display: flex;
