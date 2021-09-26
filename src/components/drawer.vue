@@ -18,6 +18,7 @@
 				class="drawer__actions__gps-btn"
 				color="gray"
 				round
+				@on-click="handleSearchCurrentLocation"
 			>
 				<gps-fixed-icon />
 			</v-btn>
