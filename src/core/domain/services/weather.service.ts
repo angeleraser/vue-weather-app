@@ -9,6 +9,9 @@ export type LocalizationQueries = {
 interface WeatherService {
 	findLocalizations: (params: LocalizationQueries) => Promise<Localization[]>;
 	getOnEarthLocalization: (woeid: number) => Promise<OnEarthLocalization>;
+	getCurrentOnEarthLocalization: (
+		params: LocalizationQueries,
+	) => Promise<OnEarthLocalization>;
 }
 
 export { WeatherService };

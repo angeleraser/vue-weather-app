@@ -20,6 +20,14 @@ class WeatherService {
 			localizationId,
 		);
 	};
+
+	public getCurrentOnEarthLocalization = async (
+		params: LocalizationQueries,
+	) => {
+		return await MetaweatherServiceInstansce.getCurrentOnEarthLocalization(
+			params,
+		);
+	};
 }
 
 export default new WeatherService();

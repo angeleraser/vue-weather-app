@@ -17,6 +17,7 @@ import { WeatherTemperature } from '../domain/entities/weather-temperature.entit
 import { WeatherWind } from '../domain/entities/weather-wind.entity';
 import HttpService from './http.service';
 import WeatherServiceError from '../errors/weather.service.error';
+import { ApiGeoIpifyService } from './geo-ipify.service';
 
 class MetaweatherService implements WeatherService {
 	private readonly api_url: string;
@@ -121,12 +122,38 @@ class MetaweatherService implements WeatherService {
 		});
 	};
 
+	public getCurrentOnEarthLocalization = async (
+		params: LocalizationQueries,
+	): Promise<OnEarthLocalization> => {
+		try {
+			const geoIpifyData = await this.geoIpifyService.getCurrentLocation();
+
+			const localizations = await this.findLocalizations({
+				latt_long: `${geoIpifyData.location.lat},${geoIpifyData.location.lng}`,
+			});
+
+			const [current] = localizations;
+
+			return await this.getOnEarthLocalization(current.oeid);
+		} catch {
+			const localizations = await this.findLocalizations({
+				query: params.query,
+			});
+
+			return await this.getOnEarthLocalization(localizations[0].oeid);
+		}
+	};
+
 	private get http() {
 		return new HttpService({
 			apiUrl: this.api_url,
 			headers: new Headers(),
 			use_allow_cors: true,
 		});
+	}
+
+	private get geoIpifyService() {
+		return new ApiGeoIpifyService();
 	}
 
 	private getWeatherImgUrl = (state: WeatherStateAbbr): string => {

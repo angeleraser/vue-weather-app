@@ -74,6 +74,7 @@
 
 <script lang="ts">
 import { Localization } from '@/core/domain/entities/localization.entity';
+import { OnEarthLocalization } from '@/core/domain/entities/on-earth-localization.entity';
 import CloudsSpinner from './clouds-spinner.vue';
 import DrawerWeatherNav from './drawer-weather-nav.vue';
 import DrawerWeatherSection from './drawer-weather-section.vue';
@@ -139,8 +140,7 @@ export default Vue.extend({
 
 				const onEarthLocalization = await getOnEarthLocalization(oeid);
 
-				this.localization = onEarthLocalization.title;
-				this.$emit('get-on-earth-localization', onEarthLocalization);
+				this.dispatchAfterGetOnEarth(onEarthLocalization);
 			} catch (error) {
 				this.fetchOnEarthError = error as WeatherServiceError;
 				this.$emit('fetch-on-earth-localization-error', this.fetchOnEarthError);
@@ -151,20 +151,18 @@ export default Vue.extend({
 		},
 
 		handleSearchCurrentLocation: async function () {
-			const { searchLocalizations } = WeatherService;
+			const { getCurrentOnEarthLocalization } = WeatherService;
 
 			try {
 				this.$emit('is-fetching-current-location-data', true);
 				this.isFetchingCurrentLocationData = true;
 				this.fetchCurrentLocationDataError = null;
 
-				const results = await searchLocalizations({
+				const onEarthLocalization = await getCurrentOnEarthLocalization({
 					query: 'san',
 				});
 
-				const [currentLocation] = results;
-
-				await this.handleGetOnEarth(currentLocation.oeid);
+				await this.dispatchAfterGetOnEarth(onEarthLocalization);
 			} catch (error) {
 				this.fetchCurrentLocationDataError = error as WeatherServiceError;
 
@@ -176,6 +174,13 @@ export default Vue.extend({
 				this.$emit('is-fetching-current-location-data', false);
 				this.isFetchingCurrentLocationData = false;
 			}
+		},
+
+		dispatchAfterGetOnEarth: async function (
+			onEarthLocalization: OnEarthLocalization,
+		) {
+			this.localization = onEarthLocalization.title;
+			this.$emit('get-on-earth-localization', onEarthLocalization);
 		},
 	},
 
