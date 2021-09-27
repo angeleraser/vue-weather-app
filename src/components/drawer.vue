@@ -223,6 +223,7 @@ export default Vue.extend({
 	flex-direction: column;
 	padding: 24px 16px;
 	height: 100%;
+	min-height: 480px;
 	position: relative;
 
 	& > .render-component--loading,
@@ -232,6 +233,7 @@ export default Vue.extend({
 		justify-content: center;
 		align-items: center;
 		flex: 100%;
+		z-index: 50;
 	}
 
 	&__clouds-spinner {
@@ -242,6 +244,7 @@ export default Vue.extend({
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		z-index: 50;
 
 		.drawer__actions__gps-btn {
 			svg {
@@ -255,6 +258,7 @@ export default Vue.extend({
 		top: 68px;
 		font-size: 105px;
 		width: calc(100% - 32px);
+		z-index: 10;
 	}
 
 	@media screen and (min-width: $breakpoint) {
