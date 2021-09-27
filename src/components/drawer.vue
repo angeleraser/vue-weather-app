@@ -252,7 +252,7 @@ export default Vue.extend({
 
 	&__clouds-background {
 		position: absolute;
-		top: 48px;
+		top: 68px;
 		font-size: 105px;
 		width: calc(100% - 32px);
 	}
@@ -262,7 +262,7 @@ export default Vue.extend({
 		height: 100%;
 
 		&__clouds-background {
-			top: 80px;
+			top: 100px;
 			font-size: 125px;
 			width: calc(100% - 48px);
 		}

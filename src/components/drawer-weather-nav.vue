@@ -14,7 +14,9 @@
 			<div class="drawer-weather-nav__wrapper__content">
 				<form @submit.prevent="handleSearchSubmit">
 					<search-input required v-model="searchQuery" />
-					<v-btn type="submit" color="blue"> Search </v-btn>
+					<v-btn :disabled="isFetchingLocalization" type="submit" color="blue">
+						Search
+					</v-btn>
 				</form>
 
 				<div class="drawer-weather-nav__wrapper__content__results">
