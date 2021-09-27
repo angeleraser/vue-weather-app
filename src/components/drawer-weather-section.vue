@@ -21,7 +21,9 @@
 				{{ state }}
 			</span>
 
-			<span class="drawer-weather-section__details__date"> {{ date }}</span>
+			<span class="drawer-weather-section__details__date">
+				<span>Today</span>{{ date }}</span
+			>
 
 			<span class="drawer-weather-section__details__location">
 				<place-icon /> {{ location }}
@@ -84,6 +86,24 @@ export default Vue.extend({
 		align-items: center;
 		font-weight: $text-semibold;
 		font-size: 1.125rem;
+
+		&__date {
+			span {
+				display: inline-flex;
+				align-items: center;
+				font-weight: $text-medium;
+
+				&::after {
+					display: inline-block;
+					content: '';
+					width: 4px;
+					height: 4px;
+					border-radius: 50%;
+					background-color: $gray-1;
+					margin: 0 16px;
+				}
+			}
+		}
 
 		&__temperature {
 			font-size: 8rem;

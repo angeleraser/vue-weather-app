@@ -5,12 +5,14 @@
 			<v-btn color="pale-blue" round> °F </v-btn>
 		</div>
 
-		<div class="weather-content__weather-cards">
-			<weather-mini-card />
-			<weather-mini-card />
-			<weather-mini-card />
-			<weather-mini-card />
-			<weather-mini-card />
+		<div :key="computedWeathers.length" class="weather-content__weather-cards">
+			<weather-mini-card
+				v-for="(weather, index) in computedWeathers"
+				:key="index"
+				:date="index === 0 ? 'Tomorrow' : weather.date"
+				:state-img="weather.state_img"
+				:temperature="weather.temperature"
+			/>
 		</div>
 	</div>
 </template>
@@ -21,6 +23,11 @@ import VBtn from './v-btn.vue';
 import WeatherMiniCard from './weather-mini-card.vue';
 
 export default Vue.extend({
+	props: {
+		computedWeathers: {
+			type: Array,
+		},
+	},
 	components: { VBtn, WeatherMiniCard },
 });
 </script>
@@ -29,7 +36,7 @@ export default Vue.extend({
 .weather-content {
 	display: flex;
 	flex-direction: column;
-	padding: 24-px 16px;
+	padding: 24px 16px;
 	height: 100%;
 	width: 100%;
 	max-width: 1140px;
@@ -55,13 +62,17 @@ export default Vue.extend({
 
 	&__weather-cards {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, 120px);
+		grid-template-columns: repeat(auto-fill, 124px);
 		justify-content: center;
 		justify-items: center;
 		gap: 26px;
 		width: 100%;
 		max-width: calc(120px * 6);
 		margin: 0 auto;
+
+		.weather-mini-card {
+			width: 100%;
+		}
 	}
 
 	@media screen and (min-width: $breakpoint) {
@@ -74,7 +85,7 @@ export default Vue.extend({
 		}
 
 		&__weather-cards {
-			grid-template-columns: repeat(5, 120px);
+			grid-template-columns: repeat(5, 140px);
 			justify-content: space-between;
 			max-width: 100%;
 		}

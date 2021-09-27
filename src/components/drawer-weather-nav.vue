@@ -3,7 +3,7 @@
 		<div class="drawer-weather-nav__wrapper">
 			<div class="drawer-weather-nav__wrapper__actions">
 				<v-btn
-					@on-click="$emit('input')"
+					@on-click="$emit('input', !value)"
 					flat
 					class="drawer-weather-nav__close-btn"
 				>

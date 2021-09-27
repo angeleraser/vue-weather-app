@@ -1,21 +1,26 @@
 <template>
 	<div class="weather-mini-card">
 		<div class="weather-mini-card__content">
-			<div class="weather-mini-card__content__date">Sun, 7 Jun</div>
+			<div class="weather-mini-card__content__date">{{ date }}</div>
 
 			<div class="weather-mini-card__content__img">
 				<weather-state-img
 					width="56"
 					height="62"
-					src="https://www.metaweather.com/static/img/weather/hr.svg"
+					:src="stateImg"
 					alt="Weather icon"
 					aria-label="Weather state representative image"
 				/>
 			</div>
 
 			<div class="weather-mini-card__content__temperature">
-				<div class="weather-mini-card__content__temperature__current">16 C</div>
-				<div class="weather-mini-card__content__temperature__min">11 C</div>
+				<div class="weather-mini-card__content__temperature__current">
+					{{ `${temperature.current}${temperature.unity}` }}
+				</div>
+
+				<div class="weather-mini-card__content__temperature__min">
+					{{ `${temperature.min}${temperature.unity}` }}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -26,6 +31,23 @@ import Vue from 'vue';
 import WeatherStateImg from './weather-state-img.vue';
 
 export default Vue.extend({
+	props: {
+		date: {
+			type: String,
+			required: true,
+		},
+
+		stateImg: {
+			type: String,
+			required: true,
+		},
+
+		temperature: {
+			type: Object,
+			required: true,
+		},
+	},
+
 	components: { WeatherStateImg },
 });
 </script>
@@ -39,7 +61,11 @@ export default Vue.extend({
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		font-size: 16px;
+		font-size: 14px;
+
+		&__date {
+			font-weight: $text-medium;
+		}
 
 		&__img {
 			margin: 12px 0 26px;

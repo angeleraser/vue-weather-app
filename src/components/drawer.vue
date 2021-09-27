@@ -3,7 +3,7 @@
 		<div class="drawer__actions">
 			<v-btn
 				:disabled="isFetchingCurrentLocationData"
-				@on-click="toggleShowDrawerNav"
+				@on-click="enableShowDrawerNav"
 				color="gray"
 			>
 				Search for places
@@ -58,7 +58,6 @@
 			:is-fetching-on-earth-localization="isFetchingOnEarthLocalization"
 			:request-error="fetchLocalizationError"
 			:results="results"
-			@close="toggleShowDrawerNav"
 			@retry-fetch-localization="handleSearchLocalizations"
 			@search-item-click="handleGetOnEarth"
 			@search="handleSearchLocalizations"
@@ -99,11 +98,12 @@ export default Vue.extend({
 	},
 
 	methods: {
-		toggleShowDrawerNav: function () {
-			this.showDrawerNav = !this.showDrawerNav;
+		toggleBodyNoScrollClassname: function () {
+			document.body.classList.toggle('no-scroll');
+		},
 
-			if (this.showDrawerNav) document.body.classList.add('no-scroll');
-			else document.body.classList.remove('no-scroll');
+		enableShowDrawerNav: function () {
+			this.showDrawerNav = true;
 		},
 
 		handleSearchLocalizations: async function (searchQuery: string) {
@@ -201,6 +201,12 @@ export default Vue.extend({
 		},
 	},
 
+	watch: {
+		showDrawerNav: function () {
+			this.toggleBodyNoScrollClassname();
+		},
+	},
+
 	created: async function () {
 		await this.handleSearchCurrentLocation();
 	},
@@ -216,6 +222,7 @@ export default Vue.extend({
 			isFetchingOnEarthLocalization: false,
 			results: [] as Array<Localization>,
 			showDrawerNav: false,
+			oter: false,
 		};
 	},
 });
@@ -227,7 +234,7 @@ export default Vue.extend({
 	flex-direction: column;
 	padding: 24px 16px;
 	height: 100%;
-	min-height: 480px;
+	min-height: 100vh;
 	position: relative;
 
 	& > .render-component--loading,

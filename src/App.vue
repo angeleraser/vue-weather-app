@@ -13,7 +13,7 @@
 			<template #content>
 				<render-component :error="Boolean(requestError)" :loading="isLoading">
 					<template v-slot:content>
-						<weather-content />
+						<weather-content :computed-weathers="computedWeathers" />
 					</template>
 				</render-component>
 			</template>
@@ -85,6 +85,20 @@ export default Vue.extend({
 			if (!weather) return null;
 
 			return getComputedWeather(weather, { temp_unity: this.tempUnity });
+		},
+
+		computedWeathers: function (): ComputedWeather[] {
+			if (!this.onEarthLocalization) return [];
+
+			const { weathers } = this.onEarthLocalization;
+
+			const [, tomorrowWeather, ...rest] = weathers;
+
+			const computedWeathers = [tomorrowWeather, ...rest].map(weather =>
+				getComputedWeather(weather, { temp_unity: 'celcius' }),
+			);
+
+			return computedWeathers;
 		},
 	},
 
