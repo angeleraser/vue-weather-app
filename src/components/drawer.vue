@@ -2,9 +2,7 @@
 	<div class="drawer">
 		<div class="drawer__actions">
 			<v-btn
-				:disabled="
-					isFetchingCurrentLocationData || isFetchingOnEarthLocalization
-				"
+				:disabled="isFetchingCurrentLocationData"
 				@on-click="toggleShowDrawerNav"
 				color="gray"
 			>
@@ -12,9 +10,7 @@
 			</v-btn>
 
 			<v-btn
-				:disabled="
-					isFetchingCurrentLocationData || isFetchingOnEarthLocalization
-				"
+				:disabled="isFetchingCurrentLocationData"
 				class="drawer__actions__gps-btn"
 				color="gray"
 				round
@@ -25,8 +21,8 @@
 		</div>
 
 		<render-component
-			:loading="isFetchingCurrentLocationData || isFetchingOnEarthLocalization"
-			:error="Boolean(fetchCurrentLocationDataError || fetchOnEarthError)"
+			:loading="isFetchingCurrentLocationData"
+			:error="Boolean(fetchCurrentLocationDataError)"
 		>
 			<template #loading>
 				<div class="drawer__clouds-spinner">
@@ -36,11 +32,7 @@
 
 			<template #error>
 				<div class="drawer__error">
-					<v-btn
-						@on-click="handleSearchCurrentLocation"
-						color="blue"
-						v-if="drawerError.retry_action"
-					>
+					<v-btn @on-click="handleSearchCurrentLocation" color="blue">
 						Retry
 					</v-btn>
 				</div>
@@ -138,21 +130,16 @@ export default Vue.extend({
 			const { getOnEarthLocalization } = WeatherService;
 
 			try {
-				this.$emit('is-fetching-on-earth-localization', true);
-				this.isFetchingOnEarthLocalization = true;
-				this.fetchOnEarthError = null;
-				this.localization = '';
+				this.setIsFetchingOnEarthLocalization(true);
+				this.setFetchOnEarthError(null);
 
 				const onEarthLocalization = await getOnEarthLocalization(oeid);
 
 				this.dispatchAfterGetOnEarth(onEarthLocalization);
 			} catch (error) {
-				this.fetchOnEarthError = error as WeatherServiceError;
-				this.$emit('fetch-on-earth-localization-error', this.fetchOnEarthError);
+				this.setFetchOnEarthError(error as WeatherServiceError);
 			} finally {
-				this.isFetchingOnEarthLocalization = false;
-				this.$emit('is-fetching-on-earth-localization', false);
-				this.$emit('fetch-on-earth-localization-error', this.fetchOnEarthError);
+				this.setIsFetchingOnEarthLocalization(false);
 			}
 		},
 
@@ -160,9 +147,8 @@ export default Vue.extend({
 			const { getCurrentOnEarthLocalization } = WeatherService;
 
 			try {
-				this.$emit('is-fetching-current-location-data', true);
-				this.isFetchingCurrentLocationData = true;
-				this.fetchCurrentLocationDataError = null;
+				this.setIsFetchingCurrentLocationData(true);
+				this.setFetchCurrentLocationDataError(null);
 
 				const onEarthLocalization = await getCurrentOnEarthLocalization({
 					query: 'san',
@@ -170,14 +156,9 @@ export default Vue.extend({
 
 				await this.dispatchAfterGetOnEarth(onEarthLocalization);
 			} catch (error) {
-				this.fetchCurrentLocationDataError = error as WeatherServiceError;
+				this.setFetchCurrentLocationDataError(error as WeatherServiceError);
 			} finally {
-				this.$emit('is-fetching-current-location-data', false);
-				this.isFetchingCurrentLocationData = false;
-				this.$emit(
-					'fetch-current-location-data-error',
-					this.fetchCurrentLocationDataError,
-				);
+				this.setIsFetchingCurrentLocationData(false);
 			}
 		},
 
@@ -186,6 +167,29 @@ export default Vue.extend({
 		) {
 			this.localization = onEarthLocalization.title;
 			this.$emit('get-on-earth-localization', onEarthLocalization);
+			this.setFetchCurrentLocationDataError(null);
+		},
+
+		setFetchCurrentLocationDataError: function (
+			error: null | WeatherServiceError,
+		) {
+			this.fetchCurrentLocationDataError = error;
+			this.$emit('fetch-current-location-data-error', error);
+		},
+
+		setFetchOnEarthError: function (error: null | WeatherServiceError) {
+			this.fetchOnEarthError = error;
+			this.$emit('fetch-on-earth-localization-error', error);
+		},
+
+		setIsFetchingCurrentLocationData: function (state: boolean) {
+			this.$emit('is-fetching-current-location-data', state);
+			this.isFetchingCurrentLocationData = state;
+		},
+
+		setIsFetchingOnEarthLocalization: function (state: boolean) {
+			this.$emit('is-fetching-on-earth-localization', state);
+			this.isFetchingOnEarthLocalization = state;
 		},
 	},
 

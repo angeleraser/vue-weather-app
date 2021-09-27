@@ -14,6 +14,7 @@ import {
 	MetaweatherLocalizationsMock,
 	MetaweatherOnEarthLocalizationMock,
 } from '../mocks/metaweatherapi.service.mock';
+import { delay } from '../utils';
 
 class LocalMetaweatherService implements WeatherService {
 	public findLocalizations = async (
@@ -39,7 +40,7 @@ class LocalMetaweatherService implements WeatherService {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		_woeid: number,
 	): Promise<OnEarthLocalization> => {
-		// await delay(5000);
+		await delay(5000);
 
 		const contents = MetaweatherOnEarthLocalizationMock;
 
@@ -94,10 +95,14 @@ class LocalMetaweatherService implements WeatherService {
 		});
 	};
 
-	public getCurrentOnEarthLocalization =
-		async (): Promise<OnEarthLocalization> => {
-			return await this.getOnEarthLocalization(12345678);
-		};
+	public getCurrentOnEarthLocalization = async (
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		_params: LocalizationQueries,
+	): Promise<OnEarthLocalization> => {
+		await delay(5000);
+		throw new Error('');
+		return await this.getOnEarthLocalization(12345678);
+	};
 
 	private getWeatherImgUrl = (state: WeatherStateAbbr): string => {
 		return `https://www.metaweather.com/static/img/weather/${state}.svg`;

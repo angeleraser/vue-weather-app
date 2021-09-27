@@ -29,7 +29,7 @@ export default Vue.extend({
 .weather-content {
 	display: flex;
 	flex-direction: column;
-	padding: 24px 16px;
+	padding: 24-px 16px;
 	height: 100%;
 	width: 100%;
 	max-width: 1140px;

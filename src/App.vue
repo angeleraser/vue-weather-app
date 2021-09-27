@@ -5,20 +5,13 @@
 				<drawer
 					:computed-weather="computedWeather"
 					@fetch-current-location-data-error="handleRequestError"
-					@fetch-on-earth-localization-error="handleRequestError"
 					@get-on-earth-localization="handleGetOnEarth"
 					@is-fetching-current-location-data="handleShowLoadingState"
-					@is-fetching-on-earth-localization="handleShowLoadingState"
 				/>
 			</template>
 
 			<template #content>
-				<render-component
-					:error="Boolean(requestError && !isLoading)"
-					:loading="isLoading"
-				>
-					<template v-slot:loading> <spinner /> </template>
-
+				<render-component :error="Boolean(requestError)" :loading="isLoading">
 					<template v-slot:content>
 						<weather-content />
 					</template>
@@ -36,7 +29,6 @@ import { WeatherTemperature } from './core/domain/entities/weather-temperature.e
 import ApplicationLayout from './layouts/application-layout.vue';
 import Drawer from './components/drawer.vue';
 import RenderComponent from './components/render-component.vue';
-import Spinner from './components/spinner.vue';
 import Vue from 'vue';
 import WeatherContent from './components/weather-content.vue';
 import WeatherServiceError from './core/errors/weather.service.error';
@@ -65,7 +57,6 @@ export default Vue.extend({
 		ApplicationLayout,
 		Drawer,
 		RenderComponent,
-		Spinner,
 		WeatherContent,
 	},
 
