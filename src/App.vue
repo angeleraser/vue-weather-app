@@ -14,16 +14,13 @@
 
 			<template #content>
 				<render-component
-					:error="!isLoading && Boolean(requestError)"
+					:error="Boolean(requestError && !isLoading)"
 					:loading="isLoading"
 				>
 					<template v-slot:loading> <spinner /> </template>
 
 					<template v-slot:content>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
-						saepe. Aspernatur placeat quis molestiae corporis. Accusantium sint
-						accusamus nesciunt natus molestiae, facilis debitis, amet sunt
-						architecto voluptatum dicta voluptate magnam.
+						<weather-content />
 					</template>
 				</render-component>
 			</template>
@@ -41,6 +38,7 @@ import Drawer from './components/drawer.vue';
 import RenderComponent from './components/render-component.vue';
 import Spinner from './components/spinner.vue';
 import Vue from 'vue';
+import WeatherContent from './components/weather-content.vue';
 import WeatherServiceError from './core/errors/weather.service.error';
 
 interface ComputedWeather {
@@ -63,7 +61,13 @@ export const getComputedWeather = (
 };
 
 export default Vue.extend({
-	components: { ApplicationLayout, Drawer, RenderComponent, Spinner },
+	components: {
+		ApplicationLayout,
+		Drawer,
+		RenderComponent,
+		Spinner,
+		WeatherContent,
+	},
 
 	methods: {
 		handleShowLoadingState: function (state: boolean) {

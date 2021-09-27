@@ -22,7 +22,7 @@
 				<div class="drawer-weather-nav__wrapper__content__results">
 					<render-component
 						:content="results.length > 0"
-						:error="Boolean(requestError) && !isFetchingLocalization"
+						:error="Boolean(requestError)"
 						:loading="isFetchingLocalization"
 					>
 						<template #loading>

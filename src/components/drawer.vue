@@ -26,7 +26,7 @@
 
 		<render-component
 			:loading="isFetchingCurrentLocationData || isFetchingOnEarthLocalization"
-			:error="fetchCurrentLocationDataError"
+			:error="Boolean(fetchCurrentLocationDataError || fetchOnEarthError)"
 		>
 			<template #loading>
 				<div class="drawer__clouds-spinner">
@@ -152,6 +152,7 @@ export default Vue.extend({
 			} finally {
 				this.isFetchingOnEarthLocalization = false;
 				this.$emit('is-fetching-on-earth-localization', false);
+				this.$emit('fetch-on-earth-localization-error', this.fetchOnEarthError);
 			}
 		},
 
@@ -170,14 +171,13 @@ export default Vue.extend({
 				await this.dispatchAfterGetOnEarth(onEarthLocalization);
 			} catch (error) {
 				this.fetchCurrentLocationDataError = error as WeatherServiceError;
-
+			} finally {
+				this.$emit('is-fetching-current-location-data', false);
+				this.isFetchingCurrentLocationData = false;
 				this.$emit(
 					'fetch-current-location-data-error',
 					this.fetchCurrentLocationDataError,
 				);
-			} finally {
-				this.$emit('is-fetching-current-location-data', false);
-				this.isFetchingCurrentLocationData = false;
 			}
 		},
 
@@ -263,7 +263,6 @@ export default Vue.extend({
 
 	@media screen and (min-width: $breakpoint) {
 		padding: 40px 48px;
-		height: 100%;
 
 		&__clouds-background {
 			top: 100px;

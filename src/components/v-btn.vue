@@ -110,6 +110,44 @@ export default Vue.extend({
 		}
 	}
 
+	&--is-white {
+		background-color: $white;
+		color: $very-dark-blue;
+
+		svg {
+			fill: currentColor;
+		}
+
+		&-outlined {
+			color: $white;
+			background-color: transparent;
+			border-color: $white;
+
+			&:hover {
+				background-color: rgba($color: black, $alpha: 0.1);
+			}
+		}
+	}
+
+	&--is-pale-blue {
+		background-color: $pale-blue;
+		color: $white;
+
+		svg {
+			fill: currentColor;
+		}
+
+		&-outlined {
+			color: $pale-blue;
+			background-color: transparent;
+			border-color: $pale-blue;
+
+			&:hover {
+				background-color: rgba($color: black, $alpha: 0.1);
+			}
+		}
+	}
+
 	&--is-gray {
 		background-color: $dark-gray;
 		color: $white;

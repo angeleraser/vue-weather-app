@@ -94,6 +94,11 @@ class LocalMetaweatherService implements WeatherService {
 		});
 	};
 
+	public getCurrentOnEarthLocalization =
+		async (): Promise<OnEarthLocalization> => {
+			return await this.getOnEarthLocalization(12345678);
+		};
+
 	private getWeatherImgUrl = (state: WeatherStateAbbr): string => {
 		return `https://www.metaweather.com/static/img/weather/${state}.svg`;
 	};
