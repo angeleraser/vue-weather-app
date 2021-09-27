@@ -56,6 +56,8 @@
 						:location="localization"
 					/>
 				</div>
+
+				<clouds-background class="drawer__clouds-background" />
 			</template>
 		</render-component>
 
@@ -85,6 +87,7 @@ import VBtn from './v-btn.vue';
 import Vue from 'vue';
 import WeatherService from '@/core/services/weather.service';
 import WeatherServiceError from '@/core/errors/weather.service.error';
+import CloudsBackground from './clouds-background.vue';
 
 export default Vue.extend({
 	props: {
@@ -100,6 +103,7 @@ export default Vue.extend({
 		DrawerWeatherNav,
 		RenderComponent,
 		CloudsSpinner,
+		CloudsBackground,
 	},
 
 	methods: {
@@ -246,9 +250,22 @@ export default Vue.extend({
 		}
 	}
 
+	&__clouds-background {
+		position: absolute;
+		top: 48px;
+		font-size: 105px;
+		width: calc(100% - 32px);
+	}
+
 	@media screen and (min-width: $breakpoint) {
 		padding: 40px 48px;
 		height: 100%;
+
+		&__clouds-background {
+			top: 80px;
+			font-size: 125px;
+			width: calc(100% - 48px);
+		}
 
 		.clouds-spinner {
 			width: 280px;
