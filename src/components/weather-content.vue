@@ -1,8 +1,21 @@
 <template>
 	<div class="weather-content font-raleway">
 		<div class="weather-content__call-to-actions">
-			<v-btn color="white" round> °C </v-btn>
-			<v-btn color="pale-blue" round> °F </v-btn>
+			<v-btn
+				:color="temperatureUnity === 'celcius' ? 'white' : 'pale-blue'"
+				@on-click="toggleTemperatureUnity('celcius')"
+				round
+			>
+				°C
+			</v-btn>
+
+			<v-btn
+				:color="temperatureUnity === 'fahrenheit' ? 'white' : 'pale-blue'"
+				@on-click="toggleTemperatureUnity('fahrenheit')"
+				round
+			>
+				°F
+			</v-btn>
 		</div>
 
 		<div :key="computedWeathers.length" class="weather-content__weather-cards">
@@ -18,6 +31,7 @@
 </template>
 
 <script lang="ts">
+import { WeatherTemperature } from '@/core/domain/entities/weather-temperature.entity';
 import Vue from 'vue';
 import VBtn from './v-btn.vue';
 import WeatherMiniCard from './weather-mini-card.vue';
@@ -27,8 +41,20 @@ export default Vue.extend({
 		computedWeathers: {
 			type: Array,
 		},
+
+		temperatureUnity: {
+			type: String,
+			required: true,
+		},
 	},
+
 	components: { VBtn, WeatherMiniCard },
+
+	methods: {
+		toggleTemperatureUnity: function (value: WeatherTemperature['unity']) {
+			this.$emit('toggle-temperature-unity', value);
+		},
+	},
 });
 </script>
 

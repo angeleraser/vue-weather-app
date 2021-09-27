@@ -13,7 +13,11 @@
 			<template #content>
 				<render-component :error="Boolean(requestError)" :loading="isLoading">
 					<template v-slot:content>
-						<weather-content :computed-weathers="computedWeathers" />
+						<weather-content
+							:computed-weathers="computedWeathers"
+							:temperature-unity="tempUnity"
+							@toggle-temperature-unity="handleTemperatureToggle"
+						/>
 					</template>
 				</render-component>
 			</template>
@@ -76,6 +80,10 @@ export default Vue.extend({
 		handleRequestError: function (error: WeatherServiceError) {
 			this.requestError = error;
 		},
+
+		handleTemperatureToggle: function (value: WeatherTemperature['unity']) {
+			this.tempUnity = value;
+		},
 	},
 
 	computed: {
@@ -95,7 +103,7 @@ export default Vue.extend({
 			const [, tomorrowWeather, ...rest] = weathers;
 
 			const computedWeathers = [tomorrowWeather, ...rest].map(weather =>
-				getComputedWeather(weather, { temp_unity: 'celcius' }),
+				getComputedWeather(weather, { temp_unity: this.tempUnity }),
 			);
 
 			return computedWeathers;

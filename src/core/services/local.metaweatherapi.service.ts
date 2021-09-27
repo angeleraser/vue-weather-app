@@ -40,7 +40,7 @@ class LocalMetaweatherService implements WeatherService {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		_woeid: number,
 	): Promise<OnEarthLocalization> => {
-		await delay(5000);
+		await delay(2000);
 
 		const contents = MetaweatherOnEarthLocalizationMock;
 
@@ -99,8 +99,7 @@ class LocalMetaweatherService implements WeatherService {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		_params: LocalizationQueries,
 	): Promise<OnEarthLocalization> => {
-		await delay(5000);
-		throw new Error('');
+		await delay(2000);
 		return await this.getOnEarthLocalization(12345678);
 	};
 
