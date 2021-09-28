@@ -68,7 +68,7 @@ export default Vue.extend({
 		}
 
 		&__img {
-			margin: 12px 0 26px;
+			margin: 22px 0 36px;
 		}
 
 		&__temperature {

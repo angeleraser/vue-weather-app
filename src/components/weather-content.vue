@@ -18,7 +18,7 @@
 			</v-btn>
 		</div>
 
-		<div :key="computedWeathers.length" class="weather-content__weather-cards">
+		<div class="weather-content__weather-cards">
 			<weather-mini-card
 				v-for="(weather, index) in computedWeathers"
 				:key="index"
@@ -27,14 +27,22 @@
 				:temperature="weather.temperature"
 			/>
 		</div>
+
+		<div class="weather-content__today-highlights">
+			<wind-status-card value="700" unity="mph" orientation="WSW" />
+			<wind-status-card value="700" unity="mph" orientation="WSW" />
+			<wind-status-card value="700" unity="mph" orientation="WSW" />
+			<wind-status-card value="700" unity="mph" orientation="WSW" />
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { WeatherTemperature } from '@/core/domain/entities/weather-temperature.entity';
-import Vue from 'vue';
 import VBtn from './v-btn.vue';
+import Vue from 'vue';
 import WeatherMiniCard from './weather-mini-card.vue';
+import WindStatusCard from './wind-status-card.vue';
 
 export default Vue.extend({
 	props: {
@@ -48,7 +56,7 @@ export default Vue.extend({
 		},
 	},
 
-	components: { VBtn, WeatherMiniCard },
+	components: { VBtn, WeatherMiniCard, WindStatusCard },
 
 	methods: {
 		toggleTemperatureUnity: function (value: WeatherTemperature['unity']) {
@@ -88,12 +96,12 @@ export default Vue.extend({
 
 	&__weather-cards {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, 124px);
+		grid-template-columns: repeat(auto-fit, minmax(120px, 2fr));
 		justify-content: center;
 		justify-items: center;
 		gap: 26px;
 		width: 100%;
-		max-width: calc(120px * 6);
+		max-width: 480px;
 		margin: 0 auto;
 
 		.weather-mini-card {
@@ -101,8 +109,34 @@ export default Vue.extend({
 		}
 	}
 
+	&__today-highlights {
+		display: grid;
+		grid-template-columns: 1fr;
+		justify-content: center;
+		justify-items: center;
+		gap: 26px;
+		width: 100%;
+
+		.today-highlight-card {
+			width: 100%;
+			max-width: 480px;
+		}
+	}
+
 	@media screen and (min-width: $breakpoint) {
 		padding: 40px 48px;
+
+		&__weather-cards {
+			max-width: 100%;
+		}
+
+		&__today-highlights {
+			grid-template-columns: minmax(100px, 360px) minmax(100px, 360px);
+		}
+
+		.today-highlight-card {
+			max-width: 100%;
+		}
 	}
 
 	@media screen and (min-width: 1280px) {
@@ -113,7 +147,10 @@ export default Vue.extend({
 		&__weather-cards {
 			grid-template-columns: repeat(5, 140px);
 			justify-content: space-between;
-			max-width: 100%;
+		}
+
+		&__today-highlights {
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 }
