@@ -1,8 +1,8 @@
 <template>
-	<div class="search-input font-raleway">
-		<div class="search-input__icon"><search-icon /></div>
+	<div class="drawer-search-input font-raleway">
+		<div class="drawer-search-input__icon"><search-icon /></div>
 
-		<div class="search-input__content">
+		<div class="drawer-search-input__content">
 			<input
 				:required="required"
 				:value="value"
@@ -35,7 +35,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.search-input {
+.drawer-search-input {
 	padding: 14px;
 	display: flex;
 	border: 1px solid $light-gray;

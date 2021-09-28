@@ -13,7 +13,7 @@
 
 			<div class="drawer-weather-nav__wrapper__content">
 				<form @submit.prevent="handleSearchSubmit">
-					<search-input required v-model="searchQuery" />
+					<drawer-search-input required v-model="searchQuery" />
 					<v-btn :disabled="isFetchingLocalization" type="submit" color="blue">
 						Search
 					</v-btn>
@@ -73,7 +73,7 @@
 import CloseIcon from './icons/close-icon.vue';
 import RenderComponent from './render-component.vue';
 import RippleSpinner from './spinners/ripple-spinner.vue';
-import SearchInput from './search-input.vue';
+import DrawerSearchInput from './drawer-search-input.vue';
 import SearchResultItem from './search-result-item.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
@@ -105,7 +105,7 @@ export default Vue.extend({
 	components: {
 		VBtn,
 		CloseIcon,
-		SearchInput,
+		DrawerSearchInput,
 		SearchResultItem,
 		RippleSpinner,
 		RenderComponent,

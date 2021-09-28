@@ -37,7 +37,7 @@
 
 			<weather-humidity-card :value="String(displayedWeather.humidity)" />
 
-			<visibility-card
+			<weather-visibility-card
 				:value="displayedWeather.visibility.toPrecision(2)"
 				unity="miles"
 			/>
@@ -58,7 +58,7 @@ import WeatherMiniCard from './weather-mini-card.vue';
 import WeatherWindStatusCard from './weather-wind-status-card.vue';
 import WeatherHumidityCard from './weather-humidity-card.vue';
 import WeatherAirPressureCard from './weather-air-pressure-card.vue';
-import VisibilityCard from './visibility-card.vue';
+import WeatherVisibilityCard from './weather-visibility-card.vue';
 
 export default Vue.extend({
 	props: {
@@ -82,7 +82,7 @@ export default Vue.extend({
 		WeatherWindStatusCard,
 		WeatherHumidityCard,
 		WeatherAirPressureCard,
-		VisibilityCard,
+		WeatherVisibilityCard,
 	},
 
 	methods: {
