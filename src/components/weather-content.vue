@@ -28,24 +28,30 @@
 			/>
 		</div>
 
-		<div class="weather-content__today-highlights">
-			<weather-wind-status-card
-				:orientation="displayedWeather.wind.direction_compass"
-				:value="String(Math.round(displayedWeather.wind.speed))"
-				unity="mph"
-			/>
+		<div class="weather-content__today-highlights__container">
+			<div class="weather-content__today-highlights__title">
+				Today's Hightlights
+			</div>
 
-			<weather-humidity-card :value="String(displayedWeather.humidity)" />
+			<div class="weather-content__today-highlights">
+				<weather-wind-status-card
+					:orientation="displayedWeather.wind.direction_compass"
+					:value="String(Math.round(displayedWeather.wind.speed))"
+					unity="mph"
+				/>
 
-			<weather-visibility-card
-				:value="displayedWeather.visibility.toPrecision(2)"
-				unity="miles"
-			/>
+				<weather-humidity-card :value="String(displayedWeather.humidity)" />
 
-			<weather-air-pressure-card
-				:value="String(Math.round(displayedWeather.air_pressure))"
-				unity="mb"
-			/>
+				<weather-visibility-card
+					:value="displayedWeather.visibility.toPrecision(2)"
+					unity="miles"
+				/>
+
+				<weather-air-pressure-card
+					:value="String(Math.round(displayedWeather.air_pressure))"
+					unity="mb"
+				/>
+			</div>
 		</div>
 	</div>
 </template>
@@ -143,6 +149,12 @@ export default Vue.extend({
 		justify-items: center;
 		gap: 26px;
 		width: 100%;
+
+		&__title {
+			font-size: 24px;
+			font-weight: $text-bold;
+			margin-bottom: 24px;
+		}
 
 		.weather-today-highlight-card {
 			width: 100%;
