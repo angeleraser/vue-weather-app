@@ -140,8 +140,8 @@ html {
 	font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, Roboto,
 		'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji', 'Segoe UI Symbol';
-	background-color: $very-dark-blue;
-	color: $light-gray;
+	background-color: $v-dark-blue-secondary;
+	color: $v-light-gray;
 }
 
 body.no-scroll {

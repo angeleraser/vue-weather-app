@@ -153,7 +153,7 @@ export default Vue.extend({
 	&__wrapper {
 		display: flex;
 		flex-direction: column;
-		background-color: $dark-blue;
+		background-color: $v-dark-blue-primary;
 		height: 100%;
 		padding: 24px 16px;
 
@@ -191,7 +191,7 @@ export default Vue.extend({
 				padding: 0 1px;
 
 				&__message {
-					color: $light-gray;
+					color: $v-light-gray;
 					opacity: 0.5;
 					font-size: 14px;
 				}

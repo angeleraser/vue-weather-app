@@ -259,7 +259,7 @@ export default Vue.extend({
 
 		.drawer__actions__gps-btn {
 			svg {
-				fill: $white;
+				fill: $v-white;
 			}
 		}
 	}

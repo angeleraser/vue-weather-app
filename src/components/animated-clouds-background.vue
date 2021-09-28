@@ -32,7 +32,7 @@ export default Vue.extend({
 		width: 1em;
 		height: 1em;
 		animation: slide_cloud 30s linear infinite;
-		fill: $gray-1;
+		fill: $v-gray-primary;
 		opacity: 0.1;
 
 		&:nth-child(1) {

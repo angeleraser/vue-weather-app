@@ -55,7 +55,7 @@ export default Vue.extend({
 <style lang="scss">
 .weather-mini-card {
 	padding: 18px 22px;
-	background-color: $dark-blue;
+	background-color: $v-dark-blue-primary;
 
 	&__content {
 		display: flex;
@@ -78,12 +78,12 @@ export default Vue.extend({
 			font-weight: $text-semibold;
 
 			&__current {
-				color: $white;
+				color: $v-white;
 				margin-right: 12px;
 			}
 
 			&__min {
-				color: $gray-2;
+				color: $v-gray-secondary;
 			}
 		}
 	}

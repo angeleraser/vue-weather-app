@@ -53,7 +53,7 @@ export default Vue.extend({
 		margin-top: 32px;
 
 		.orientation-icon {
-			background-color: $gray-3;
+			background-color: $v-gray-tertiary;
 			border-radius: 50%;
 			height: 42px;
 			padding: 8px;
@@ -63,7 +63,7 @@ export default Vue.extend({
 			svg {
 				width: 100%;
 				height: 100%;
-				fill: $light-gray;
+				fill: $v-light-gray;
 				transform: rotate(180deg);
 			}
 		}

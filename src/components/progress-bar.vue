@@ -46,14 +46,14 @@ export default Vue.extend({
 	&__placeholder {
 		height: 10px;
 		width: 100%;
-		background-color: $light-gray;
+		background-color: $v-light-gray;
 		border-radius: 12px;
 		margin: 4px 0;
 
 		&__fill {
 			height: 100%;
 			width: 0%;
-			background-color: $yellow;
+			background-color: $v-yellow;
 			border-radius: 12px;
 			animation: fill 1s forwards linear;
 			transform-origin: left;

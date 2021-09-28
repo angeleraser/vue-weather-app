@@ -22,12 +22,12 @@ export default {};
 	height: 100%;
 
 	&__drawer {
-		background-color: $dark-blue;
+		background-color: $v-dark-blue-primary;
 		position: relative;
 	}
 
 	&__content {
-		background-color: $very-dark-blue;
+		background-color: $v-dark-blue-secondary;
 	}
 
 	@media screen and (min-width: $breakpoint) {

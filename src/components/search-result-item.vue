@@ -94,11 +94,11 @@ export default Vue.extend({
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		color: $white;
+		color: $v-white;
 		width: 100%;
 
 		svg {
-			fill: $gray-3;
+			fill: $v-gray-tertiary;
 			opacity: 0;
 			transition: all 0.3s;
 		}
@@ -106,8 +106,8 @@ export default Vue.extend({
 
 	&--loading,
 	&:hover {
-		background-color: rgba($color: $gray-3, $alpha: 0.2);
-		border-color: $gray-3;
+		background-color: rgba($color: $v-gray-tertiary, $alpha: 0.2);
+		border-color: $v-gray-tertiary;
 
 		svg {
 			opacity: 1;

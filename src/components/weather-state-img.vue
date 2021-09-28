@@ -102,7 +102,7 @@ export default Vue.extend({
 
 		span {
 			position: absolute;
-			color: $gray-3;
+			color: $v-gray-tertiary;
 			font-size: 0.4em;
 			margin-top: 8px;
 		}

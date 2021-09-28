@@ -24,7 +24,7 @@ export default {
 	width: 200px;
 
 	svg {
-		fill: $light-gray;
+		fill: $v-light-gray;
 		width: 35%;
 		height: 35%;
 	}

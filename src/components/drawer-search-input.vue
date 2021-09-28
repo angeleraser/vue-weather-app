@@ -38,7 +38,7 @@ export default Vue.extend({
 .drawer-search-input {
 	padding: 14px;
 	display: flex;
-	border: 1px solid $light-gray;
+	border: 1px solid $v-light-gray;
 
 	&__icon {
 		display: flex;
@@ -46,7 +46,7 @@ export default Vue.extend({
 		margin-right: 14px;
 
 		svg {
-			fill: $gray-3;
+			fill: $v-gray-tertiary;
 		}
 	}
 
@@ -58,13 +58,13 @@ export default Vue.extend({
 			border: none;
 			background-color: transparent;
 			font-family: $font-raleway;
-			color: $light-gray;
+			color: $v-light-gray;
 			width: 100%;
 			font-size: $text-s;
 			font-weight: $text-medium;
 
 			&::placeholder {
-				color: $gray-3;
+				color: $v-gray-tertiary;
 			}
 		}
 	}

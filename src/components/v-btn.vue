@@ -92,36 +92,36 @@ export default Vue.extend({
 	}
 
 	&--is-blue {
-		background-color: $blue;
-		color: $white;
+		background-color: $v-blue;
+		color: $v-white;
 
 		svg {
 			fill: currentColor;
 		}
 
 		&-outlined {
-			color: $blue;
-			background-color: $white;
-			border-color: $blue;
+			color: $v-blue;
+			background-color: $v-white;
+			border-color: $v-blue;
 
 			&:hover {
-				background-color: rgba($color: $blue, $alpha: 0.1);
+				background-color: rgba($color: $v-blue, $alpha: 0.1);
 			}
 		}
 	}
 
 	&--is-white {
-		background-color: $white;
-		color: $very-dark-blue;
+		background-color: $v-white;
+		color: $v-dark-blue-secondary;
 
 		svg {
 			fill: currentColor;
 		}
 
 		&-outlined {
-			color: $white;
+			color: $v-white;
 			background-color: transparent;
-			border-color: $white;
+			border-color: $v-white;
 
 			&:hover {
 				background-color: rgba($color: black, $alpha: 0.1);
@@ -130,17 +130,17 @@ export default Vue.extend({
 	}
 
 	&--is-pale-blue {
-		background-color: $pale-blue;
-		color: $white;
+		background-color: $v-pale-blue;
+		color: $v-white;
 
 		svg {
 			fill: currentColor;
 		}
 
 		&-outlined {
-			color: $pale-blue;
+			color: $v-pale-blue;
 			background-color: transparent;
-			border-color: $pale-blue;
+			border-color: $v-pale-blue;
 
 			&:hover {
 				background-color: rgba($color: black, $alpha: 0.1);
@@ -149,17 +149,17 @@ export default Vue.extend({
 	}
 
 	&--is-gray {
-		background-color: $dark-gray;
-		color: $white;
+		background-color: $v-dark-gray;
+		color: $v-white;
 		box-shadow: 0px 4px 4px 0px #00000040;
 
 		&-outlined {
-			color: $dark-gray;
+			color: $v-dark-gray;
 			background-color: transparent;
-			border-color: $dark-gray;
+			border-color: $v-dark-gray;
 
 			&:hover {
-				background-color: rgba($color: $dark-gray, $alpha: 0.1);
+				background-color: rgba($color: $v-dark-gray, $alpha: 0.1);
 			}
 		}
 	}
