@@ -37,9 +37,15 @@
 
 			<humidity-card :value="String(displayedWeather.humidity)" />
 
-			<wind-status-card value="700" unity="mph" orientation="WSW" />
+			<visibility-card
+				:value="displayedWeather.visibility.toPrecision(2)"
+				unity="miles"
+			/>
 
-			<wind-status-card value="700" unity="mph" orientation="WSW" />
+			<air-pressure-card
+				:value="String(Math.round(displayedWeather.air_pressure))"
+				unity="mb"
+			/>
 		</div>
 	</div>
 </template>
@@ -51,6 +57,8 @@ import Vue from 'vue';
 import WeatherMiniCard from './weather-mini-card.vue';
 import WindStatusCard from './wind-status-card.vue';
 import HumidityCard from './humidity-card.vue';
+import AirPressureCard from './air-pressure-card.vue';
+import VisibilityCard from './visibility-card.vue';
 
 export default Vue.extend({
 	props: {
@@ -68,7 +76,14 @@ export default Vue.extend({
 		},
 	},
 
-	components: { VBtn, WeatherMiniCard, WindStatusCard, HumidityCard },
+	components: {
+		VBtn,
+		WeatherMiniCard,
+		WindStatusCard,
+		HumidityCard,
+		AirPressureCard,
+		VisibilityCard,
+	},
 
 	methods: {
 		toggleTemperatureUnity: function (value: WeatherTemperature['unity']) {

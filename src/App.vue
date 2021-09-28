@@ -14,6 +14,7 @@
 				<render-component :error="Boolean(requestError)" :loading="isLoading">
 					<template v-slot:content>
 						<weather-content
+							:key="displayedWeather.id"
 							:computed-weathers="computedWeathers"
 							:displayed-weather="displayedWeather"
 							:temperature-unity="tempUnity"

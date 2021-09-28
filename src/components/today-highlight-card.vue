@@ -33,9 +33,9 @@ export default Vue.extend({
 		text-align: center;
 
 		&__title {
-			font-size: 14px;
+			font-size: 16px;
 			font-weight: $text-medium;
-			margin-bottom: 32px;
+			margin-bottom: 24px;
 		}
 
 		&__slot {
@@ -49,11 +49,11 @@ export default Vue.extend({
 			}
 
 			.value {
-				font-size: 64px;
+				font-size: 84px;
 			}
 
 			.unity {
-				font-size: $text-l;
+				font-size: $text-x;
 				font-weight: $text-normal;
 			}
 		}
