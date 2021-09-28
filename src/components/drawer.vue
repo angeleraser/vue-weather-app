@@ -267,8 +267,9 @@ export default Vue.extend({
 	&__clouds-background {
 		position: absolute;
 		top: 68px;
+		left: 0;
 		font-size: 105px;
-		width: calc(100% - 32px);
+		width: 100%;
 		z-index: 10;
 	}
 
@@ -278,7 +279,6 @@ export default Vue.extend({
 		&__clouds-background {
 			top: 100px;
 			font-size: 125px;
-			width: calc(100% - 48px);
 		}
 
 		.clouds-spinner {
