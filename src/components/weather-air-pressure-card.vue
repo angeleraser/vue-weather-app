@@ -1,17 +1,20 @@
 <template>
-	<today-highlight-card class="air-pressure-card" title="Air pressure">
+	<weather-today-highlight-card
+		class="weather-air-pressure-card"
+		title="Air pressure"
+	>
 		<div class="strong value">
 			{{ value }} <span class="unity">{{ unity }}</span>
 		</div>
-	</today-highlight-card>
+	</weather-today-highlight-card>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import TodayHighlightCard from './today-highlight-card.vue';
+import WeatherTodayHighlightCard from './weather-today-highlight-card.vue';
 
 export default Vue.extend({
-	components: { TodayHighlightCard },
+	components: { WeatherTodayHighlightCard },
 
 	props: {
 		value: {

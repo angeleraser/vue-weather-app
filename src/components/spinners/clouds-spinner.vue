@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import CloudIcon from './icons/cloud-icon.vue';
+import CloudIcon from '../icons/cloud-icon.vue';
+
 export default {
 	components: { CloudIcon },
 };

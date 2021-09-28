@@ -29,20 +29,20 @@
 		</div>
 
 		<div class="weather-content__today-highlights">
-			<wind-status-card
+			<weather-wind-status-card
 				:orientation="displayedWeather.wind.direction_compass"
 				:value="String(Math.round(displayedWeather.wind.speed))"
 				unity="mph"
 			/>
 
-			<humidity-card :value="String(displayedWeather.humidity)" />
+			<weather-humidity-card :value="String(displayedWeather.humidity)" />
 
 			<visibility-card
 				:value="displayedWeather.visibility.toPrecision(2)"
 				unity="miles"
 			/>
 
-			<air-pressure-card
+			<weather-air-pressure-card
 				:value="String(Math.round(displayedWeather.air_pressure))"
 				unity="mb"
 			/>
@@ -55,9 +55,9 @@ import { WeatherTemperature } from '@/core/domain/entities/weather-temperature.e
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
 import WeatherMiniCard from './weather-mini-card.vue';
-import WindStatusCard from './wind-status-card.vue';
-import HumidityCard from './humidity-card.vue';
-import AirPressureCard from './air-pressure-card.vue';
+import WeatherWindStatusCard from './weather-wind-status-card.vue';
+import WeatherHumidityCard from './weather-humidity-card.vue';
+import WeatherAirPressureCard from './weather-air-pressure-card.vue';
 import VisibilityCard from './visibility-card.vue';
 
 export default Vue.extend({
@@ -79,9 +79,9 @@ export default Vue.extend({
 	components: {
 		VBtn,
 		WeatherMiniCard,
-		WindStatusCard,
-		HumidityCard,
-		AirPressureCard,
+		WeatherWindStatusCard,
+		WeatherHumidityCard,
+		WeatherAirPressureCard,
 		VisibilityCard,
 	},
 
@@ -144,7 +144,7 @@ export default Vue.extend({
 		gap: 26px;
 		width: 100%;
 
-		.today-highlight-card {
+		.weather-today-highlight-card {
 			width: 100%;
 			max-width: 480px;
 		}
@@ -161,7 +161,7 @@ export default Vue.extend({
 			grid-template-columns: minmax(100px, 360px) minmax(100px, 360px);
 		}
 
-		.today-highlight-card {
+		.weather-today-highlight-card {
 			max-width: 100%;
 		}
 	}

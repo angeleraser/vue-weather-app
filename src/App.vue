@@ -2,7 +2,7 @@
 	<div class="notranslate" id="app">
 		<application-layout>
 			<template #drawer>
-				<drawer
+				<weather-drawer
 					:computed-weather="computedWeather"
 					@fetch-current-location-data-error="handleRequestError"
 					@get-on-earth-localization="handleGetOnEarth"
@@ -34,7 +34,7 @@ import { OnEarthLocalization } from './core/domain/entities/on-earth-localizatio
 import { Weather } from './core/domain/entities/weather.entity';
 import { WeatherTemperature } from './core/domain/entities/weather-temperature.entity';
 import ApplicationLayout from './layouts/application-layout.vue';
-import Drawer from './components/drawer.vue';
+import WeatherDrawer from './components/weather-drawer.vue';
 import RenderComponent from './components/render-component.vue';
 import Vue from 'vue';
 import WeatherContent from './components/weather-content.vue';
@@ -62,7 +62,7 @@ export const getComputedWeather = (
 export default Vue.extend({
 	components: {
 		ApplicationLayout,
-		Drawer,
+		WeatherDrawer,
 		RenderComponent,
 		WeatherContent,
 	},

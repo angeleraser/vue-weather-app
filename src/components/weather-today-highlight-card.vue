@@ -1,9 +1,11 @@
 <template>
-	<div class="today-highlight-card font-raleway">
-		<div class="today-highlight-card__content">
-			<div class="today-highlight-card__content__title">{{ title }}</div>
+	<div class="weather-today-highlight-card font-raleway">
+		<div class="weather-today-highlight-card__content">
+			<div class="weather-today-highlight-card__content__title">
+				{{ title }}
+			</div>
 
-			<div class="today-highlight-card__content__slot">
+			<div class="weather-today-highlight-card__content__slot">
 				<slot />
 			</div>
 		</div>
@@ -21,7 +23,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.today-highlight-card {
+.weather-today-highlight-card {
 	padding: 22px 48px;
 	background-color: $dark-blue;
 

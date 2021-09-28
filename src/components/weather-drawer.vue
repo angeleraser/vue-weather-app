@@ -49,7 +49,7 @@
 					/>
 				</div>
 
-				<clouds-background class="drawer__clouds-background" />
+				<animated-clouds-background class="drawer__clouds-background" />
 			</template>
 		</render-component>
 
@@ -69,7 +69,6 @@
 <script lang="ts">
 import { Localization } from '@/core/domain/entities/localization.entity';
 import { OnEarthLocalization } from '@/core/domain/entities/on-earth-localization.entity';
-import CloudsSpinner from './clouds-spinner.vue';
 import DrawerWeatherNav from './drawer-weather-nav.vue';
 import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
@@ -78,7 +77,8 @@ import VBtn from './v-btn.vue';
 import Vue from 'vue';
 import WeatherService from '@/core/services/weather.service';
 import WeatherServiceError from '@/core/errors/weather.service.error';
-import CloudsBackground from './clouds-background.vue';
+import AnimatedCloudsBackground from './animated-clouds-background.vue';
+import CloudsSpinner from './spinners/clouds-spinner.vue';
 
 export default Vue.extend({
 	props: {
@@ -94,7 +94,7 @@ export default Vue.extend({
 		DrawerWeatherNav,
 		RenderComponent,
 		CloudsSpinner,
-		CloudsBackground,
+		AnimatedCloudsBackground,
 	},
 
 	methods: {

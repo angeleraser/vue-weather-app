@@ -1,23 +1,26 @@
 <template>
-	<today-highlight-card class="wind-status-card" title="Wind Status">
+	<weather-today-highlight-card
+		class="weather-wind-status-card"
+		title="Wind Status"
+	>
 		<div class="strong value">
 			{{ value }} <span class="unity">{{ unity }}</span>
 		</div>
 
-		<div class="wind-status-card__orientation">
+		<div class="weather-wind-status-card__orientation">
 			<div class="orientation-icon"><near-me-icon /></div>
 			{{ orientation }}
 		</div>
-	</today-highlight-card>
+	</weather-today-highlight-card>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import NearMeIcon from './icons/near-me-icon.vue';
-import TodayHighlightCard from './today-highlight-card.vue';
+import WeatherTodayHighlightCard from './weather-today-highlight-card.vue';
 
 export default Vue.extend({
-	components: { TodayHighlightCard, NearMeIcon },
+	components: { WeatherTodayHighlightCard, NearMeIcon },
 
 	props: {
 		value: {
@@ -39,7 +42,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.wind-status-card {
+.weather-wind-status-card {
 	display: flex;
 	align-items: center;
 	flex-direction: column;

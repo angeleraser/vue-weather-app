@@ -1,27 +1,27 @@
 <template>
-	<today-highlight-card class="humidity-card" title="Humidity">
+	<weather-today-highlight-card class="weather-humidity-card" title="Humidity">
 		<div class="strong value">{{ value }} <span class="unity">%</span></div>
 
-		<div class="humidity-card__progress-bar">
+		<div class="weather-humidity-card__progress-bar">
 			<progress-bar :value="String(value)" />
 		</div>
-	</today-highlight-card>
+	</weather-today-highlight-card>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import ProgressBar from './progress-bar.vue';
-import TodayHighlightCard from './today-highlight-card.vue';
+import WeatherTodayHighlightCard from './weather-today-highlight-card.vue';
 
 export default Vue.extend({
-	components: { TodayHighlightCard, ProgressBar },
+	components: { WeatherTodayHighlightCard, ProgressBar },
 
 	props: { value: { type: String, required: true } },
 });
 </script>
 
 <style lang="scss">
-.humidity-card {
+.weather-humidity-card {
 	width: 100%;
 
 	&__progress-bar {
