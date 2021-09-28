@@ -34,6 +34,7 @@ export default Vue.extend({
 
 		&__title {
 			font-size: 14px;
+			font-weight: $text-medium;
 			margin-bottom: 32px;
 		}
 
