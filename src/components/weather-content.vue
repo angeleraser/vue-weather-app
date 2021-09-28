@@ -29,9 +29,16 @@
 		</div>
 
 		<div class="weather-content__today-highlights">
+			<wind-status-card
+				:orientation="displayedWeather.wind.direction_compass"
+				:value="String(Math.round(displayedWeather.wind.speed))"
+				unity="mph"
+			/>
+
+			<humidity-card :value="String(displayedWeather.humidity)" />
+
 			<wind-status-card value="700" unity="mph" orientation="WSW" />
-			<wind-status-card value="700" unity="mph" orientation="WSW" />
-			<wind-status-card value="700" unity="mph" orientation="WSW" />
+
 			<wind-status-card value="700" unity="mph" orientation="WSW" />
 		</div>
 	</div>
@@ -43,11 +50,16 @@ import VBtn from './v-btn.vue';
 import Vue from 'vue';
 import WeatherMiniCard from './weather-mini-card.vue';
 import WindStatusCard from './wind-status-card.vue';
+import HumidityCard from './humidity-card.vue';
 
 export default Vue.extend({
 	props: {
 		computedWeathers: {
 			type: Array,
+		},
+
+		displayedWeather: {
+			required: true,
 		},
 
 		temperatureUnity: {
@@ -56,7 +68,7 @@ export default Vue.extend({
 		},
 	},
 
-	components: { VBtn, WeatherMiniCard, WindStatusCard },
+	components: { VBtn, WeatherMiniCard, WindStatusCard, HumidityCard },
 
 	methods: {
 		toggleTemperatureUnity: function (value: WeatherTemperature['unity']) {
@@ -151,6 +163,7 @@ export default Vue.extend({
 
 		&__today-highlights {
 			grid-template-columns: repeat(2, 1fr);
+			gap: 48px;
 		}
 	}
 }

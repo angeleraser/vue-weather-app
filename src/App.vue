@@ -15,8 +15,10 @@
 					<template v-slot:content>
 						<weather-content
 							:computed-weathers="computedWeathers"
+							:displayed-weather="displayedWeather"
 							:temperature-unity="tempUnity"
 							@toggle-temperature-unity="handleTemperatureToggle"
+							v-if="Boolean(displayedWeather)"
 						/>
 					</template>
 				</render-component>

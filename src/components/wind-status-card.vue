@@ -1,14 +1,12 @@
 <template>
-	<today-highlight-card title="Wind Status">
-		<div class="wind-status-card">
-			<div class="strong value">
-				{{ value }} <span class="unity">{{ unity }}</span>
-			</div>
+	<today-highlight-card class="wind-status-card" title="Wind Status">
+		<div class="strong value">
+			{{ value }} <span class="unity">{{ unity }}</span>
+		</div>
 
-			<div class="wind-status-card__orientation">
-				<div class="orientation-icon"><near-me-icon /></div>
-				{{ orientation }}
-			</div>
+		<div class="wind-status-card__orientation">
+			<div class="orientation-icon"><near-me-icon /></div>
+			{{ orientation }}
 		</div>
 	</today-highlight-card>
 </template>
