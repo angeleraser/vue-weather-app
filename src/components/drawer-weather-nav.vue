@@ -178,7 +178,7 @@ export default Vue.extend({
 				margin-bottom: 48px;
 				padding: 0 1px;
 
-				.search-input {
+				.drawer-search-input {
 					width: 100%;
 					margin-right: 12px;
 				}
