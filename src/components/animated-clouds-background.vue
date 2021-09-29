@@ -58,7 +58,7 @@ export default Vue.extend({
 		}
 
 		&:nth-child(4) {
-			top: 1em;
+			top: 2.5em;
 			animation-delay: 8s;
 			animation-duration: 46s;
 		}
