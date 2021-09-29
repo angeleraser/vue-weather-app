@@ -127,6 +127,10 @@ export default Vue.extend({
 		},
 	},
 
+	created: function () {
+		document.body.classList.add(`__app-${this.appTheme}-theme`);
+	},
+
 	data: function () {
 		return {
 			displayedWeather: null as Weather | null,
@@ -134,7 +138,7 @@ export default Vue.extend({
 			onEarthLocalization: null as null | OnEarthLocalization,
 			requestError: null as null | WeatherServiceError,
 			tempUnity: 'celcius' as WeatherTemperature['unity'],
-			appTheme: 'dark',
+			appTheme: 'light',
 		};
 	},
 });
