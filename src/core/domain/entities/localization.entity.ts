@@ -1,7 +1,8 @@
 import { LocalizationType } from '@/core/constants/localization-type.constant';
+import { LocalizationModel } from '../models/localization.model';
 import { Coordinates } from './coordinates.entity';
 
-class Localization {
+class Localization implements LocalizationModel {
 	readonly type: LocalizationType;
 	readonly title: string;
 	readonly oeid: number;

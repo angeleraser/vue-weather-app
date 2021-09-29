@@ -1,8 +1,9 @@
+import { WeatherModel } from '../models/weather.model';
 import { WeatherState } from './weather-state.entity';
 import { WeatherTemperature } from './weather-temperature.entity';
 import { WeatherWind } from './weather-wind.entity';
 
-class Weather {
+class Weather implements WeatherModel {
 	readonly air_pressure: number;
 	readonly applicable_date: string;
 	readonly humidity: number;

@@ -1,4 +1,6 @@
-class Coordinates {
+import { CoordinatesModel } from '../models/coordinates.model';
+
+class Coordinates implements CoordinatesModel {
 	readonly latitude: number;
 	readonly longitude: number;
 

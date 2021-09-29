@@ -1,9 +1,10 @@
 import { LocalizationType } from '@/core/constants/localization-type.constant';
+import { OnEarthLocalizationModel } from '../models/on-earth-localization.model';
 import { Coordinates } from './coordinates.entity';
 import { Localization } from './localization.entity';
 import { Weather } from './weather.entity';
 
-class OnEarthLocalization {
+class OnEarthLocalization implements OnEarthLocalizationModel {
 	readonly parent: Localization;
 	readonly time: string;
 	readonly weathers: Weather[];
