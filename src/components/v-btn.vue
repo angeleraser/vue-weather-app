@@ -3,6 +3,7 @@
 		@click="$emit('on-click')"
 		:class="classNames"
 		class="v-btn text-medium font-raleway"
+		:title="tooltip"
 	>
 		<span class="v-btn__content">
 			<slot v-if="!label"> </slot>
@@ -18,6 +19,10 @@ import Vue from 'vue';
 export default Vue.extend({
 	props: {
 		label: {
+			type: String,
+		},
+
+		tooltip: {
 			type: String,
 		},
 

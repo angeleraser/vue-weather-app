@@ -3,6 +3,7 @@
 		:color="mode === 'light' ? 'pale-blue' : 'white'"
 		@on-click="$emit('toggle', mode === 'dark' ? 'light' : 'dark')"
 		round
+		tooltip="Switch theme"
 	>
 		<light-mode-icon />
 	</v-btn>

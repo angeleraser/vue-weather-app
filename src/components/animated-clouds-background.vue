@@ -4,6 +4,7 @@
 		<cloud-icon class="clouds-background__cloud" />
 		<cloud-icon class="clouds-background__cloud" />
 		<cloud-icon class="clouds-background__cloud" />
+		<cloud-icon class="clouds-background__cloud" />
 	</div>
 </template>
 
@@ -53,6 +54,12 @@ export default Vue.extend({
 
 		&:nth-child(4) {
 			top: 3em;
+			animation-duration: 46s;
+		}
+
+		&:nth-child(4) {
+			top: 1em;
+			animation-delay: 8s;
 			animation-duration: 46s;
 		}
 

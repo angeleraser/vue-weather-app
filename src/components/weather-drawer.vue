@@ -14,6 +14,7 @@
 				class="drawer__actions__gps-btn"
 				color="gray"
 				round
+				tooltip="Switch to current location"
 				@on-click="handleSearchCurrentLocation"
 			>
 				<gps-fixed-icon />

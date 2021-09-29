@@ -5,6 +5,7 @@
 				:color="temperatureUnity === 'celcius' ? 'pale-blue' : 'white'"
 				@on-click="toggleTemperatureUnity('celcius')"
 				round
+				tooltip="Celcius"
 			>
 				°C
 			</v-btn>
@@ -13,6 +14,7 @@
 				:color="temperatureUnity === 'fahrenheit' ? 'pale-blue' : 'white'"
 				@on-click="toggleTemperatureUnity('fahrenheit')"
 				round
+				tooltip="Fahrenheit"
 			>
 				°F
 			</v-btn>
