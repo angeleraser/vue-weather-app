@@ -165,6 +165,9 @@ export default Vue.extend({
 			.v-btn {
 				line-height: 0;
 				padding: 0;
+				svg {
+					fill: var(--foreground-color-2);
+				}
 			}
 		}
 

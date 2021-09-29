@@ -68,6 +68,7 @@ export default Vue.extend({
 
 		&__date {
 			font-weight: $text-medium;
+			letter-spacing: 0.6px;
 		}
 
 		&__img {

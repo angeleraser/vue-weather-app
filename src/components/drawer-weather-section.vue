@@ -86,6 +86,7 @@ export default Vue.extend({
 		align-items: center;
 		font-weight: $text-semibold;
 		font-size: 1.125rem;
+		letter-spacing: 0.6px;
 
 		&__date {
 			span {

@@ -1,6 +1,6 @@
 <template>
 	<weather-today-hightlight-card class="weather-humidity-card" title="Humidity">
-		<div class="strong value">{{ value }} <span class="unity">%</span></div>
+		<div class="strong value">{{ value }} <span class="unit">%</span></div>
 
 		<div class="weather-humidity-card__progress-bar">
 			<progress-bar :value="String(value)" />

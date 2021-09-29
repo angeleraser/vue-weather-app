@@ -166,6 +166,7 @@ export default Vue.extend({
 			font-size: 24px;
 			font-weight: $text-bold;
 			margin-bottom: 24px;
+			letter-spacing: 0.6px;
 		}
 
 		.weather-today-highlight-card {

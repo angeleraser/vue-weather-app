@@ -41,6 +41,7 @@ export default Vue.extend({
 			font-size: 16px;
 			font-weight: $text-medium;
 			margin-bottom: 24px;
+			letter-spacing: 0.6px;
 		}
 
 		&__slot {

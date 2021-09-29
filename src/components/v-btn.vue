@@ -73,7 +73,7 @@ export default Vue.extend({
 	border-width: 2px;
 	color: black;
 	font-size: $text-s;
-	letter-spacing: 0.05em;
+	letter-spacing: 0.6px;
 	line-height: 1.75em;
 	outline: none;
 	padding: 4px 12px;
