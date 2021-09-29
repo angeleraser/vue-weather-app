@@ -22,7 +22,7 @@ export default {};
 	height: 100%;
 
 	&__drawer {
-		background-color: var(--drawer-bg-color);
+		background-color: var(--card-bg-color);
 		position: relative;
 	}
 

@@ -153,7 +153,7 @@ export default Vue.extend({
 	&__wrapper {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--drawer-bg-color);
+		background-color: var(--card-bg-color);
 		height: 100%;
 		padding: 24px 16px;
 

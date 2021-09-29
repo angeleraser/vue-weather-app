@@ -25,7 +25,10 @@ export default Vue.extend({
 <style lang="scss">
 .weather-today-highlight-card {
 	padding: 22px 48px;
-	background-color: var(--drawer-bg-color);
+	background-color: var(--card-bg-color);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+		rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+	border-radius: 8px;
 
 	&__content {
 		display: flex;

@@ -15,7 +15,7 @@ $white: #fff;
 
 :root {
 	--app-bg-color: #100e1d;
-	--drawer-bg-color: #1e213a;
+	--card-bg-color: #1e213a;
 	--foreground-color-1: #a09fb1;
 	--foreground-color-2: #e7e7eb;
 	--foreground-color-3: #ffffff;
@@ -25,7 +25,7 @@ $white: #fff;
 
 .__app-light-theme {
 	--app-bg-color: #f0f2f5;
-	--drawer-bg-color: #ffffff;
+	--card-bg-color: #ffffff;
 	--foreground-color-1: #100e1d;
 	--foreground-color-2: #1e213a;
 	--foreground-color-3: #ffffff;
@@ -35,7 +35,7 @@ $white: #fff;
 
 .__app-dark-theme {
 	--app-bg-color: #100e1d;
-	--drawer-bg-color: #1e213a;
+	--card-bg-color: #1e213a;
 	--foreground-color-1: #a09fb1;
 	--foreground-color-2: #e7e7eb;
 	--foreground-color-3: #ffffffff;
