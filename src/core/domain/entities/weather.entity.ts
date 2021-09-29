@@ -1,18 +1,17 @@
-import { WeatherModel } from '../models/weather.model';
-import { WeatherStateModel } from '../models/weather-state.model';
-import { WeatherTemperatureModel } from '../models/weather-temperature.model';
-import { WeatherWindModel } from '../models/weather-wind.model';
+import { WeatherState } from './weather-state.entity';
+import { WeatherTemperature } from './weather-temperature.entity';
+import { WeatherWind } from './weather-wind.entity';
 
-class Weather implements WeatherModel {
+class Weather {
 	readonly air_pressure: number;
 	readonly applicable_date: string;
 	readonly humidity: number;
 	readonly id: number;
 	readonly predictability: number;
-	readonly state: WeatherStateModel;
-	readonly temperature: WeatherTemperatureModel;
+	readonly state: WeatherState;
+	readonly temperature: WeatherTemperature;
 	readonly visibility: number;
-	readonly wind: WeatherWindModel;
+	readonly wind: WeatherWind;
 
 	constructor({
 		air_pressure,
@@ -30,10 +29,10 @@ class Weather implements WeatherModel {
 		humidity: number;
 		id: number;
 		predictability: number;
-		state: WeatherStateModel;
-		temperature: WeatherTemperatureModel;
+		state: WeatherState;
+		temperature: WeatherTemperature;
 		visibility: number;
-		wind: WeatherWindModel;
+		wind: WeatherWind;
 	}) {
 		this.air_pressure = air_pressure;
 		this.applicable_date = applicable_date;

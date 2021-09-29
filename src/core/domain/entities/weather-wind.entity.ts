@@ -1,6 +1,4 @@
-import { WeatherWindModel } from '../models/weather-wind.model';
-
-class WeatherWind implements WeatherWindModel {
+class WeatherWind {
 	readonly direction_compass: string;
 	readonly direction: number;
 	readonly speed: number;

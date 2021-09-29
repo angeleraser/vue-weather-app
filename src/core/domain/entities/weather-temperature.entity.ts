@@ -1,10 +1,8 @@
-import { WeatherTemperatureModel } from '../models/weather-temperature.model';
-
-class WeatherTemperature implements WeatherTemperatureModel {
+class WeatherTemperature {
 	readonly min: number;
 	readonly current: number;
 	readonly max: number;
-	readonly unity: WeatherTemperatureModel['unity'];
+	readonly unity: 'celcius' | 'fahrenheit';
 
 	constructor({
 		min,
@@ -15,7 +13,7 @@ class WeatherTemperature implements WeatherTemperatureModel {
 		min: number;
 		current: number;
 		max: number;
-		unity: WeatherTemperatureModel['unity'];
+		unity: 'celcius' | 'fahrenheit';
 	}) {
 		this.min = min;
 		this.current = current;

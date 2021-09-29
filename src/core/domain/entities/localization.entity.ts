@@ -1,12 +1,11 @@
 import { LocalizationType } from '@/core/constants/localization-type.constant';
-import { CoordinatesModel } from '../models/coordinates.model';
-import { LocalizationModel } from '../models/localization.model';
+import { Coordinates } from './coordinates.entity';
 
-class Localization implements LocalizationModel {
+class Localization {
 	readonly type: LocalizationType;
 	readonly title: string;
 	readonly oeid: number;
-	readonly coordinates: CoordinatesModel;
+	readonly coordinates: Coordinates;
 
 	constructor({
 		coordinates,
@@ -14,7 +13,7 @@ class Localization implements LocalizationModel {
 		title,
 		oeid,
 	}: {
-		coordinates: CoordinatesModel;
+		coordinates: Coordinates;
 		type: LocalizationType;
 		title: string;
 		oeid: number;
