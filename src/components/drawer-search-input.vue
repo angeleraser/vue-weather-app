@@ -58,7 +58,7 @@ export default Vue.extend({
 			border: none;
 			background-color: transparent;
 			font-family: $font-raleway;
-			color: $v-light-gray;
+			color: var(--foreground-color-2);
 			width: 100%;
 			font-size: $text-s;
 			font-weight: $text-medium;

@@ -25,13 +25,13 @@ export default Vue.extend({
 <style lang="scss">
 .weather-today-highlight-card {
 	padding: 22px 48px;
-	background-color: $v-dark-blue-primary;
+	background-color: var(--drawer-bg-color);
 
 	&__content {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		color: $v-light-gray;
+		color: var(--foreground-color-2);
 		text-align: center;
 
 		&__title {

@@ -71,7 +71,7 @@ export default Vue.extend({
 
 <style WeatherStateImg lang="scss">
 .drawer-weather-section {
-	color: $v-gray-primary;
+	color: var(--foreground-color-1);
 	margin-bottom: 72px;
 	width: 100%;
 
@@ -107,7 +107,7 @@ export default Vue.extend({
 
 		&__temperature {
 			font-size: 8rem;
-			color: $v-white;
+			color: var(--foreground-color-2);
 			margin-bottom: 32px;
 
 			&__unity {

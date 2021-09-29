@@ -20,7 +20,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import ChevronRightIcon from './icons/chevron-right-icon.vue';
-import SearchResultItemSpinner from './search-result-item-spinner.vue';
+import SearchResultItemSpinner from './spinners/search-result-item-spinner.vue';
 
 export default Vue.extend({
 	props: {
@@ -94,11 +94,11 @@ export default Vue.extend({
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		color: $v-white;
+		color: var(--foreground-color-2);
 		width: 100%;
 
 		svg {
-			fill: $v-gray-tertiary;
+			fill: var(--foreground-color-2);
 			opacity: 0;
 			transition: all 0.3s;
 		}

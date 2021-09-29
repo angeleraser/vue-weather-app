@@ -7,8 +7,41 @@ $v-gray-tertiary: #616475;
 $v-light-gray: #e7e7eb;
 $v-pale-blue: #585676;
 $v-blue: #3c47e9;
+$-white: #ffffff;
 $v-white: #ffffff;
 $v-yellow: #ffec65;
+$-v-web-hash: #f0f2f5;
+$white: #fff;
+
+:root {
+	--app-bg-color: #100e1d;
+	--drawer-bg-color: #1e213a;
+	--foreground-color-1: #a09fb1;
+	--foreground-color-2: #e7e7eb;
+	--foreground-color-3: #ffffff;
+	--foreground-color-4: #616475;
+	--foreground-color-5: #88869d;
+}
+
+.__app-light-theme {
+	--app-bg-color: #f0f2f5;
+	--drawer-bg-color: #ffffff;
+	--foreground-color-1: #100e1d;
+	--foreground-color-2: #1e213a;
+	--foreground-color-3: #ffffff;
+	--foreground-color-4: #616475;
+	--foreground-color-5: #88869d;
+}
+
+.__app-dark-theme {
+	--app-bg-color: #100e1d;
+	--drawer-bg-color: #1e213a;
+	--foreground-color-1: #a09fb1;
+	--foreground-color-2: #e7e7eb;
+	--foreground-color-3: #ffffffff;
+	--foreground-color-4: #616475;
+	--foreground-color-5: #88869d;
+}
 
 $font-raleway: 'Raleway', 'SF Pro Text', -apple-system, BlinkMacSystemFont,
 	Roboto, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',

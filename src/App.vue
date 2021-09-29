@@ -19,6 +19,8 @@
 							:displayed-weather="displayedWeather"
 							:temperature-unity="tempUnity"
 							@toggle-temperature-unity="handleTemperatureToggle"
+							@toggle-theme="handleToggleTheme"
+							:theme-mode="appTheme"
 							v-if="Boolean(displayedWeather)"
 						/>
 					</template>
@@ -87,6 +89,18 @@ export default Vue.extend({
 		handleTemperatureToggle: function (value: WeatherTemperature['unity']) {
 			this.tempUnity = value;
 		},
+
+		handleToggleTheme: function (mode: string) {
+			this.appTheme = mode;
+
+			if (mode === 'light') {
+				document.body.classList.add('__app-light-theme');
+				document.body.classList.remove('__app-dark-theme');
+			} else {
+				document.body.classList.remove('__app-light-theme');
+				document.body.classList.add('__app-dark-theme');
+			}
+		},
 	},
 
 	computed: {
@@ -120,6 +134,7 @@ export default Vue.extend({
 			onEarthLocalization: null as null | OnEarthLocalization,
 			requestError: null as null | WeatherServiceError,
 			tempUnity: 'celcius' as WeatherTemperature['unity'],
+			appTheme: 'dark',
 		};
 	},
 });
@@ -140,8 +155,8 @@ html {
 	font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, Roboto,
 		'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji', 'Segoe UI Symbol';
-	background-color: $v-dark-blue-secondary;
-	color: $v-light-gray;
+	background-color: var(--app-bg-color);
+	color: var(--foreground-color-2);
 }
 
 body.no-scroll {

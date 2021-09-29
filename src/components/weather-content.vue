@@ -16,15 +16,20 @@
 			>
 				°F
 			</v-btn>
+
+			<toggle-theme-btn
+				:mode="themeMode"
+				@toggle="theme => $emit('toggle-theme', theme)"
+			/>
 		</div>
 
 		<div class="weather-content__weather-cards">
 			<weather-mini-card
-				v-for="(weather, index) in computedWeathers"
-				:key="index"
 				:date="index === 0 ? 'Tomorrow' : weather.date"
+				:key="index"
 				:state-img="weather.state_img"
 				:temperature="weather.temperature"
+				v-for="(weather, index) in computedWeathers"
 			/>
 		</div>
 
@@ -65,6 +70,7 @@ import WeatherWindStatusCard from './weather-wind-status-card.vue';
 import WeatherHumidityCard from './weather-humidity-card.vue';
 import WeatherAirPressureCard from './weather-air-pressure-card.vue';
 import WeatherVisibilityCard from './weather-visibility-card.vue';
+import ToggleThemeBtn from './toggle-theme-btn.vue';
 
 export default Vue.extend({
 	props: {
@@ -80,6 +86,11 @@ export default Vue.extend({
 			type: String,
 			required: true,
 		},
+
+		themeMode: {
+			type: String,
+			required: true,
+		},
 	},
 
 	components: {
@@ -89,6 +100,7 @@ export default Vue.extend({
 		WeatherHumidityCard,
 		WeatherAirPressureCard,
 		WeatherVisibilityCard,
+		ToggleThemeBtn,
 	},
 
 	methods: {
@@ -121,7 +133,7 @@ export default Vue.extend({
 		.v-btn {
 			font-weight: 700;
 
-			&:first-child {
+			&:not(:last-child) {
 				margin-right: 16px;
 			}
 		}
