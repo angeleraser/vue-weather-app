@@ -2,7 +2,7 @@
 	<div class="weather-content font-raleway">
 		<div class="weather-content__call-to-actions">
 			<v-btn
-				:color="temperatureUnity === 'celcius' ? 'white' : 'pale-blue'"
+				:color="temperatureUnity === 'celcius' ? 'pale-blue' : 'white'"
 				@on-click="toggleTemperatureUnity('celcius')"
 				round
 			>
@@ -10,7 +10,7 @@
 			</v-btn>
 
 			<v-btn
-				:color="temperatureUnity === 'fahrenheit' ? 'white' : 'pale-blue'"
+				:color="temperatureUnity === 'fahrenheit' ? 'pale-blue' : 'white'"
 				@on-click="toggleTemperatureUnity('fahrenheit')"
 				round
 			>

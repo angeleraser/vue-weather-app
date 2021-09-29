@@ -1,6 +1,6 @@
 <template>
 	<v-btn
-		:color="mode === 'light' ? 'white' : 'pale-blue'"
+		:color="mode === 'light' ? 'pale-blue' : 'white'"
 		@on-click="$emit('toggle', mode === 'dark' ? 'light' : 'dark')"
 		round
 	>
