@@ -12,8 +12,8 @@ const getLocalizationSearchArgument = (params: LocalizationQueries): string => {
 	return `query=${params.query}`;
 };
 
-const allowCors = (url: string): string => {
-	return `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+const getUrlWithCorsAnywhere = (url: string): string => {
+	return `https://cors-anywhere.herokuapp.com/${url}`;
 };
 
 const convertToDate = (dateStr: string /*yyyy-mm-dd*/): Date => {
@@ -90,7 +90,7 @@ const getTemperatureObject = (
 
 export {
 	getLocalizationSearchArgument,
-	allowCors,
+	getUrlWithCorsAnywhere,
 	convertToDate,
 	formatDate,
 	delay,

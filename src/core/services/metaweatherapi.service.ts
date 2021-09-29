@@ -1,4 +1,3 @@
-import { AllowCorsServiceResponse } from '../api/metaweather.api';
 import { Coordinates } from '../domain/entities/coordinates.entity';
 import { getLocalizationSearchArgument } from '../utils';
 import { Localization } from '../domain/entities/localization.entity';
@@ -35,9 +34,7 @@ class MetaweatherService implements WeatherService {
 
 		const response = await this.http.get(url);
 
-		const data = (await response.json()) as AllowCorsServiceResponse;
-
-		const contents = JSON.parse(data.contents) as MetaweatherLocalization[];
+		const contents = (await response.json()) as MetaweatherLocalization[];
 
 		if (contents.length === 0) {
 			throw new WeatherServiceError({
@@ -65,11 +62,7 @@ class MetaweatherService implements WeatherService {
 
 		const response = await this.http.get(url);
 
-		const data = (await response.json()) as AllowCorsServiceResponse;
-
-		const contents = JSON.parse(
-			data.contents,
-		) as MetaweatherOnEarthLocalization;
+		const contents = (await response.json()) as MetaweatherOnEarthLocalization;
 
 		return new OnEarthLocalization({
 			coordinates: new Coordinates({
@@ -148,7 +141,7 @@ class MetaweatherService implements WeatherService {
 		return new HttpService({
 			apiUrl: this.api_url,
 			headers: new Headers(),
-			use_allow_cors: true,
+			use_cors_anywhere: true,
 		});
 	}
 

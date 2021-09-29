@@ -1,22 +1,22 @@
 import { WeatherServiceErrorMessages } from '@/core/constants/errors-messages.constant';
 import WeatherServiceError from '../errors/weather.service.error';
-import { allowCors } from '../utils';
+import { getUrlWithCorsAnywhere } from '../utils';
 
 interface HttpServiceConfig {
 	apiUrl: string;
 	headers: HeadersInit;
-	use_allow_cors?: boolean;
+	use_cors_anywhere?: boolean;
 }
 
 export default class HttpService {
 	private api_url: string;
 	private req_headers: HeadersInit;
-	private use_allow_cors?: boolean;
+	private use_cors_anywhere?: boolean;
 
-	constructor({ apiUrl, headers, use_allow_cors }: HttpServiceConfig) {
+	constructor({ apiUrl, headers, use_cors_anywhere }: HttpServiceConfig) {
 		this.api_url = apiUrl;
 		this.req_headers = headers;
-		this.use_allow_cors = use_allow_cors || false;
+		this.use_cors_anywhere = use_cors_anywhere || false;
 	}
 
 	public async get(endpoint: string): Promise<Response> {
@@ -52,8 +52,8 @@ export default class HttpService {
 		endpoint: string,
 		options: unknown,
 	): Promise<Response> {
-		const url = this.use_allow_cors
-			? allowCors(`${this.api_url}${endpoint}`)
+		const url = this.use_cors_anywhere
+			? getUrlWithCorsAnywhere(`${this.api_url}${endpoint}`)
 			: `${this.api_url}${endpoint}`;
 
 		try {
