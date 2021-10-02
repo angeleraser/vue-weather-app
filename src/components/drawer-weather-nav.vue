@@ -26,7 +26,9 @@
 						:loading="isFetchingLocalization"
 					>
 						<template #loading>
-							<ripple-spinner />
+							<ripple-spinner
+								class="drawer-weather-nav__wrapper__content__results__spinner"
+							/>
 						</template>
 
 						<template #error>

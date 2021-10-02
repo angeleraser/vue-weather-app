@@ -18,7 +18,7 @@ export default {};
 
 	div {
 		position: absolute;
-		border: 4px solid #fff;
+		border: 4px solid var(--foreground-color-2);
 		opacity: 1;
 		border-radius: 50%;
 		animation: lds-ripple 1.25s cubic-bezier(0, 0.2, 0.8, 1) infinite;
