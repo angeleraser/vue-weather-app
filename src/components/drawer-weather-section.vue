@@ -72,7 +72,7 @@ export default Vue.extend({
 <style WeatherStateImg lang="scss">
 .drawer-weather-section {
 	color: var(--foreground-color-1);
-	margin-bottom: 72px;
+	margin: auto 0;
 	width: 100%;
 
 	&__img {

@@ -138,7 +138,7 @@ export default Vue.extend({
 			onEarthLocalization: null as null | OnEarthLocalization,
 			requestError: null as null | WeatherServiceError,
 			tempUnity: 'celcius' as WeatherTemperature['unity'],
-			appTheme: 'light',
+			appTheme: 'dark',
 		};
 	},
 });

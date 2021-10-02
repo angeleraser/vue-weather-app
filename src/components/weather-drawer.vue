@@ -11,11 +11,11 @@
 
 			<v-btn
 				:disabled="isFetchingCurrentLocationData"
+				@on-click="handleSearchCurrentLocation"
 				class="drawer__actions__gps-btn"
 				color="gray"
 				round
 				tooltip="Switch to current location"
-				@on-click="handleSearchCurrentLocation"
 			>
 				<gps-fixed-icon />
 			</v-btn>
@@ -43,10 +43,10 @@
 				<div class="drawer__content">
 					<drawer-weather-section
 						:date="computedWeather.date"
+						:location="localization"
 						:state-img="computedWeather.state_img"
 						:state="computedWeather.state"
 						:temperature="computedWeather.temperature"
-						:location="localization"
 					/>
 				</div>
 
@@ -70,16 +70,16 @@
 <script lang="ts">
 import { Localization } from '@/core/domain/entities/localization.entity';
 import { OnEarthLocalization } from '@/core/domain/entities/on-earth-localization.entity';
+import AnimatedCloudsBackground from './animated-clouds-background.vue';
+import CloudsSpinner from './spinners/clouds-spinner.vue';
 import DrawerWeatherNav from './drawer-weather-nav.vue';
 import DrawerWeatherSection from './drawer-weather-section.vue';
 import GpsFixedIcon from './icons/gps-fixed-icon.vue';
 import RenderComponent from './render-component.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
-import WeatherService from '@/core/services/weather.service';
+import WeatherService from '@/services/weather.service';
 import WeatherServiceError from '@/core/errors/weather.service.error';
-import AnimatedCloudsBackground from './animated-clouds-background.vue';
-import CloudsSpinner from './spinners/clouds-spinner.vue';
 
 export default Vue.extend({
 	props: {
@@ -89,13 +89,13 @@ export default Vue.extend({
 	},
 
 	components: {
-		VBtn,
-		GpsFixedIcon,
-		DrawerWeatherSection,
-		DrawerWeatherNav,
-		RenderComponent,
-		CloudsSpinner,
 		AnimatedCloudsBackground,
+		CloudsSpinner,
+		DrawerWeatherNav,
+		DrawerWeatherSection,
+		GpsFixedIcon,
+		RenderComponent,
+		VBtn,
 	},
 
 	methods: {
@@ -240,6 +240,7 @@ export default Vue.extend({
 
 	& > .render-component--loading,
 	& > .render-component--error,
+	& > .render-component--content,
 	&__content {
 		display: flex;
 		justify-content: center;

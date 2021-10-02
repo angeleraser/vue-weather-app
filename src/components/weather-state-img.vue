@@ -14,13 +14,13 @@
 		</div>
 
 		<img
-			:width="width"
-			:height="height"
-			lazy
-			v-else
-			:src="src"
 			:alt="alt"
 			:aria-label="ariaLabel"
+			:height="height"
+			:src="src"
+			:width="width"
+			lazy
+			v-else
 		/>
 	</div>
 </template>

@@ -1,28 +1,36 @@
 <template>
 	<div class="weather-content font-raleway">
 		<div class="weather-content__call-to-actions">
-			<v-btn
-				:color="temperatureUnity === 'celcius' ? 'pale-blue' : 'white'"
-				@on-click="toggleTemperatureUnity('celcius')"
-				round
-				tooltip="Celcius"
-			>
-				°C
-			</v-btn>
+			<div class="weather-content__call-to-actions__app-title">
+				Vue Weather App
 
-			<v-btn
-				:color="temperatureUnity === 'fahrenheit' ? 'pale-blue' : 'white'"
-				@on-click="toggleTemperatureUnity('fahrenheit')"
-				round
-				tooltip="Fahrenheit"
-			>
-				°F
-			</v-btn>
+				<cloudy-icon />
+			</div>
 
-			<toggle-theme-btn
-				:mode="themeMode"
-				@toggle="theme => $emit('toggle-theme', theme)"
-			/>
+			<div class="weather-content__call-to-actions__buttons">
+				<v-btn
+					:color="temperatureUnity === 'celcius' ? 'pale-blue' : 'white'"
+					@on-click="toggleTemperatureUnity('celcius')"
+					round
+					tooltip="Celcius"
+				>
+					°C
+				</v-btn>
+
+				<v-btn
+					:color="temperatureUnity === 'fahrenheit' ? 'pale-blue' : 'white'"
+					@on-click="toggleTemperatureUnity('fahrenheit')"
+					round
+					tooltip="Fahrenheit"
+				>
+					°F
+				</v-btn>
+
+				<toggle-theme-btn
+					:mode="themeMode"
+					@toggle="theme => $emit('toggle-theme', theme)"
+				/>
+			</div>
 		</div>
 
 		<div class="weather-content__weather-cards">
@@ -60,6 +68,16 @@
 				/>
 			</div>
 		</div>
+
+		<div class="weather-content__footer">
+			Created by
+			<a
+				href="https://github.com/angeleraser"
+				target="_blank"
+				rel="noopener noreferrer"
+				>@angeleraser</a
+			>
+		</div>
 	</div>
 </template>
 
@@ -73,6 +91,7 @@ import WeatherHumidityCard from './weather-humidity-card.vue';
 import WeatherAirPressureCard from './weather-air-pressure-card.vue';
 import WeatherVisibilityCard from './weather-visibility-card.vue';
 import ToggleThemeBtn from './toggle-theme-btn.vue';
+import CloudyIcon from './icons/cloudy-icon.vue';
 
 export default Vue.extend({
 	props: {
@@ -103,6 +122,7 @@ export default Vue.extend({
 		WeatherAirPressureCard,
 		WeatherVisibilityCard,
 		ToggleThemeBtn,
+		CloudyIcon,
 	},
 
 	methods: {
@@ -131,6 +151,26 @@ export default Vue.extend({
 		width: 100%;
 		display: flex;
 		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+
+		&__app-title {
+			font-size: $text-l;
+			font-weight: $text-bold;
+			margin: 24px 0 40px;
+			display: flex;
+			align-items: center;
+
+			svg {
+				width: 1em;
+				height: 1em;
+				margin-left: 16px;
+			}
+		}
+
+		&__buttons {
+			display: flex;
+		}
 
 		.v-btn {
 			font-weight: 700;
@@ -169,11 +209,23 @@ export default Vue.extend({
 			font-weight: $text-bold;
 			margin-bottom: 24px;
 			letter-spacing: 0.6px;
+			text-align: center;
 		}
 
 		.weather-today-highlight-card {
 			width: 100%;
 			max-width: 480px;
+		}
+	}
+
+	&__footer {
+		width: 100%;
+		text-align: center;
+		font-weight: $text-medium;
+
+		a {
+			color: $v-blue;
+			font-weight: $text-semibold;
 		}
 	}
 
@@ -195,7 +247,13 @@ export default Vue.extend({
 
 	@media screen and (min-width: 1280px) {
 		&__call-to-actions {
-			justify-content: flex-end;
+			flex-direction: row;
+			justify-content: space-between;
+
+			&__app-title {
+				margin: 0;
+				font-size: 56px;
+			}
 		}
 
 		&__weather-cards {
@@ -206,6 +264,10 @@ export default Vue.extend({
 		&__today-highlights {
 			grid-template-columns: repeat(2, 1fr);
 			gap: 48px;
+
+			&__title {
+				text-align: left;
+			}
 		}
 	}
 }
