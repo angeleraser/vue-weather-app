@@ -34,7 +34,7 @@ export default Vue.extend({
 		height: 1em;
 		animation: slide_cloud 30s linear infinite;
 		fill: $v-gray-primary;
-		opacity: 0.1;
+		opacity: 0.2;
 
 		&:nth-child(1) {
 			top: 0;
