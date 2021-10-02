@@ -1,5 +1,6 @@
 <template>
 	<div class="weather-humidity-chart chart-container">
+		<div class="chart-container__title">Humidity</div>
 		<canvas ref="weather-humidity-chart"></canvas>
 	</div>
 </template>

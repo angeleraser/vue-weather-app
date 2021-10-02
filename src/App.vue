@@ -43,7 +43,7 @@ import Vue from 'vue';
 import WeatherContent from './components/weather-content.vue';
 import WeatherServiceError from './core/errors/weather.service.error';
 
-interface ComputedWeather {
+export interface ComputedWeather {
 	temperature: WeatherTemperature;
 	date: string;
 	state: string;
@@ -139,7 +139,7 @@ export default Vue.extend({
 			onEarthLocalization: null as null | OnEarthLocalization,
 			requestError: null as null | WeatherServiceError,
 			tempUnity: 'celcius' as WeatherTemperature['unity'],
-			appTheme: 'dark',
+			appTheme: 'light',
 		};
 	},
 });

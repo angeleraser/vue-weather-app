@@ -1,5 +1,6 @@
 <template>
 	<div class="weather-air-pressure-chart chart-container">
+		<div class="chart-container__title">{{ title }}</div>
 		<canvas ref="weather-air-pressure-chart"></canvas>
 	</div>
 </template>
@@ -23,6 +24,11 @@ export default Vue.extend({
 		},
 
 		label: {
+			type: String,
+			required: true,
+		},
+
+		title: {
 			type: String,
 			required: true,
 		},

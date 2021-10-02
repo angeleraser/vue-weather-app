@@ -72,27 +72,46 @@
 		<div class="weather-content__charts__conainter">
 			<div class="weather-content__today-highlights__title">Charts</div>
 
+			<weahter-temperature-chart
+				:title="`Temperature (${temperatureUnity})`"
+				:key="temperatureUnity"
+				min-label="min"
+				:min-data="
+					getTempChartData([displayedWeather, ...computedWeathers]).min
+				"
+				current-label="current"
+				:current-data="
+					getTempChartData([displayedWeather, ...computedWeathers]).current
+				"
+				max-label="max"
+				:max-data="
+					getTempChartData([displayedWeather, ...computedWeathers]).max
+				"
+				:labels="chartLabels"
+			/>
+
 			<div class="weather-content__charts">
 				<weather-wind-status-chart
-					label="Wind status (mph)"
+					label="mph"
 					:data="getWindStatusChartData(weathers)"
 					:labels="chartLabels"
 				/>
 
 				<weather-humidity-chart
-					label="Humidity (%)"
+					label="percentage (%)"
 					:data="getHumidityChartData(weathers)"
 					:labels="chartLabels"
 				/>
 
 				<weather-visibility-chart
-					label="Visibility (miles)"
+					label="miles"
 					:data="getVisibilityChartData(weathers)"
 					:labels="chartLabels"
 				/>
 
 				<weather-air-pressure-chart
-					label="Visibility (miles)"
+					title="Air pressure (mb)"
+					label="Air pressure"
 					:data="getAirPressureChartData(weathers)"
 					:labels="chartLabels"
 				/>
@@ -112,6 +131,7 @@
 </template>
 
 <script lang="ts">
+import { ComputedWeather } from '@/App.vue';
 import { convertToDate } from '@/core/utils';
 import { Weather } from '@/core/domain/entities/weather.entity';
 import { WeatherTemperature } from '@/core/domain/entities/weather-temperature.entity';
@@ -120,15 +140,16 @@ import format from 'date-fns/format';
 import ToggleThemeBtn from './toggle-theme-btn.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
+import WeahterTemperatureChart from './weahter-temperature-chart.vue';
 import WeatherAirPressureCard from './weather-air-pressure-card.vue';
+import WeatherAirPressureChart from './weather-air-pressure-chart.vue';
 import WeatherHumidityCard from './weather-humidity-card.vue';
+import WeatherHumidityChart from './weather-humidity-chart.vue';
 import WeatherMiniCard from './weather-mini-card.vue';
 import WeatherVisibilityCard from './weather-visibility-card.vue';
+import WeatherVisibilityChart from './weather-visibility-chart.vue';
 import WeatherWindStatusCard from './weather-wind-status-card.vue';
 import WeatherWindStatusChart from './weather-wind-status-chart.vue';
-import WeatherHumidityChart from './weather-humidity-chart.vue';
-import WeatherVisibilityChart from './weather-visibility-chart.vue';
-import WeatherAirPressureChart from './weather-air-pressure-chart.vue';
 
 export default Vue.extend({
 	props: {
@@ -142,6 +163,7 @@ export default Vue.extend({
 		},
 
 		displayedWeather: {
+			type: Object as () => ComputedWeather,
 			required: true,
 		},
 
@@ -169,6 +191,7 @@ export default Vue.extend({
 		WeatherHumidityChart,
 		WeatherVisibilityChart,
 		WeatherAirPressureChart,
+		WeahterTemperatureChart,
 	},
 
 	computed: {
@@ -214,6 +237,18 @@ export default Vue.extend({
 			return weathers.map(weather => {
 				return Number(weather.air_pressure);
 			});
+		},
+
+		getTempChartData: function (weathers: ComputedWeather[]) {
+			const min = weathers.map(weather => weather.temperature.min);
+			const max = weathers.map(weather => weather.temperature.max);
+			const current = weathers.map(weather => weather.temperature.current);
+
+			return {
+				min,
+				max,
+				current,
+			};
 		},
 	},
 });
@@ -291,7 +326,7 @@ export default Vue.extend({
 		width: 100%;
 
 		&__title {
-			font-size: 24px;
+			font-size: 32px;
 			font-weight: $text-bold;
 			margin-bottom: 24px;
 			letter-spacing: 0.6px;
@@ -310,20 +345,32 @@ export default Vue.extend({
 		gap: 26px;
 		justify-items: center;
 		width: 100%;
+	}
 
-		.chart-container {
-			width: 100%;
-			max-width: 480px;
-			background-color: $white;
-			box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-				rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-			border-radius: 8px;
-			padding: 18px 22px;
+	.chart-container {
+		width: 100%;
+		background-color: $white;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+			rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+		border-radius: 8px;
+		padding: 18px 22px;
 
-			canvas {
-				width: 100%;
-			}
+		&__title {
+			font-weight: $text-bold;
+			letter-spacing: 0.6px;
+			margin-bottom: 12px;
+			font-size: 18px;
+			color: var(--foreground-color-2);
+			text-decoration: underline;
 		}
+
+		canvas {
+			width: 100%;
+		}
+	}
+
+	.weather-temperature-chart {
+		margin-bottom: 26px;
 	}
 
 	&__footer {
@@ -381,6 +428,10 @@ export default Vue.extend({
 			.chart-container {
 				max-width: 100%;
 			}
+		}
+
+		.weather-temperature-chart {
+			margin-bottom: 48px;
 		}
 	}
 }

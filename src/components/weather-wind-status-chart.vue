@@ -1,5 +1,7 @@
 <template>
 	<div class="weather-wind-status-chart chart-container">
+		<div class="chart-container__title">Wind Status</div>
+
 		<canvas ref="weather-wind-status-chart"></canvas>
 	</div>
 </template>

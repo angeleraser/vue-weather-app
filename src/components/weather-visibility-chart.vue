@@ -1,5 +1,6 @@
 <template>
 	<div class="weather-visibility-chart chart-container">
+		<div class="chart-container__title">Visibility</div>
 		<canvas ref="weather-visibility-chart"></canvas>
 	</div>
 </template>
