@@ -14,13 +14,14 @@
 				<render-component :error="Boolean(requestError)" :loading="isLoading">
 					<template v-slot:content>
 						<weather-content
-							:key="displayedWeather.id"
 							:computed-weathers="computedWeathers"
 							:displayed-weather="displayedWeather"
+							:key="displayedWeather.id"
 							:temperature-unity="tempUnity"
+							:theme-mode="appTheme"
+							:weathers="onEarthLocalization.weathers"
 							@toggle-temperature-unity="handleTemperatureToggle"
 							@toggle-theme="handleToggleTheme"
-							:theme-mode="appTheme"
 							v-if="Boolean(displayedWeather)"
 						/>
 					</template>

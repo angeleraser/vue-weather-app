@@ -69,6 +69,36 @@
 			</div>
 		</div>
 
+		<div class="weather-content__charts__conainter">
+			<div class="weather-content__today-highlights__title">Charts</div>
+
+			<div class="weather-content__charts">
+				<weather-wind-status-chart
+					label="Wind status (mph)"
+					:data="getWindStatusChartData(weathers)"
+					:labels="chartLabels"
+				/>
+
+				<weather-humidity-chart
+					label="Humidity (%)"
+					:data="getHumidityChartData(weathers)"
+					:labels="chartLabels"
+				/>
+
+				<weather-visibility-chart
+					label="Visibility (miles)"
+					:data="getVisibilityChartData(weathers)"
+					:labels="chartLabels"
+				/>
+
+				<weather-air-pressure-chart
+					label="Visibility (miles)"
+					:data="getAirPressureChartData(weathers)"
+					:labels="chartLabels"
+				/>
+			</div>
+		</div>
+
 		<div class="weather-content__footer">
 			Created by
 			<a
@@ -82,21 +112,33 @@
 </template>
 
 <script lang="ts">
+import { convertToDate } from '@/core/utils';
+import { Weather } from '@/core/domain/entities/weather.entity';
 import { WeatherTemperature } from '@/core/domain/entities/weather-temperature.entity';
+import CloudyIcon from './icons/cloudy-icon.vue';
+import format from 'date-fns/format';
+import ToggleThemeBtn from './toggle-theme-btn.vue';
 import VBtn from './v-btn.vue';
 import Vue from 'vue';
-import WeatherMiniCard from './weather-mini-card.vue';
-import WeatherWindStatusCard from './weather-wind-status-card.vue';
-import WeatherHumidityCard from './weather-humidity-card.vue';
 import WeatherAirPressureCard from './weather-air-pressure-card.vue';
+import WeatherHumidityCard from './weather-humidity-card.vue';
+import WeatherMiniCard from './weather-mini-card.vue';
 import WeatherVisibilityCard from './weather-visibility-card.vue';
-import ToggleThemeBtn from './toggle-theme-btn.vue';
-import CloudyIcon from './icons/cloudy-icon.vue';
+import WeatherWindStatusCard from './weather-wind-status-card.vue';
+import WeatherWindStatusChart from './weather-wind-status-chart.vue';
+import WeatherHumidityChart from './weather-humidity-chart.vue';
+import WeatherVisibilityChart from './weather-visibility-chart.vue';
+import WeatherAirPressureChart from './weather-air-pressure-chart.vue';
 
 export default Vue.extend({
 	props: {
 		computedWeathers: {
 			type: Array,
+		},
+
+		weathers: {
+			type: Array as () => Array<Weather>,
+			required: true,
 		},
 
 		displayedWeather: {
@@ -123,11 +165,55 @@ export default Vue.extend({
 		WeatherVisibilityCard,
 		ToggleThemeBtn,
 		CloudyIcon,
+		WeatherWindStatusChart,
+		WeatherHumidityChart,
+		WeatherVisibilityChart,
+		WeatherAirPressureChart,
+	},
+
+	computed: {
+		chartLabels: function () {
+			const dates = this.weathers
+				.map(weather => convertToDate(weather.applicable_date))
+				.map((date, index) => {
+					if (index === 0) return 'Today';
+
+					if (index === 1) return 'Tomorrow';
+
+					return format(date, 'iii');
+				});
+
+			return dates;
+		},
 	},
 
 	methods: {
 		toggleTemperatureUnity: function (value: WeatherTemperature['unity']) {
 			this.$emit('toggle-temperature-unity', value);
+		},
+
+		getWindStatusChartData: function (weathers: Weather[]) {
+			return weathers.map(weather => {
+				return Number(weather.wind.speed.toFixed(2));
+			});
+		},
+
+		getHumidityChartData: function (weathers: Weather[]) {
+			return weathers.map(weather => {
+				return weather.humidity;
+			});
+		},
+
+		getVisibilityChartData: function (weathers: Weather[]) {
+			return weathers.map(weather => {
+				return Number(weather.visibility.toFixed(2));
+			});
+		},
+
+		getAirPressureChartData: function (weathers: Weather[]) {
+			return weathers.map(weather => {
+				return Number(weather.air_pressure);
+			});
 		},
 	},
 });
@@ -218,6 +304,28 @@ export default Vue.extend({
 		}
 	}
 
+	&__charts {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 26px;
+		justify-items: center;
+		width: 100%;
+
+		.chart-container {
+			width: 100%;
+			max-width: 480px;
+			background-color: $white;
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+				rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+			border-radius: 8px;
+			padding: 18px 22px;
+
+			canvas {
+				width: 100%;
+			}
+		}
+	}
+
 	&__footer {
 		width: 100%;
 		text-align: center;
@@ -261,12 +369,17 @@ export default Vue.extend({
 			justify-content: space-between;
 		}
 
-		&__today-highlights {
+		&__today-highlights,
+		&__charts {
 			grid-template-columns: repeat(2, 1fr);
 			gap: 48px;
 
 			&__title {
 				text-align: left;
+			}
+
+			.chart-container {
+				max-width: 100%;
 			}
 		}
 	}
