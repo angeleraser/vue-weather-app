@@ -354,6 +354,7 @@ export default Vue.extend({
 			rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 		border-radius: 8px;
 		padding: 18px 22px;
+		overflow-x: hidden;
 
 		&__title {
 			font-weight: $text-semibold;
