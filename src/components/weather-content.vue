@@ -356,12 +356,11 @@ export default Vue.extend({
 		padding: 18px 22px;
 
 		&__title {
-			font-weight: $text-bold;
+			font-weight: $text-semibold;
 			letter-spacing: 0.6px;
-			margin-bottom: 12px;
+			margin-bottom: 18px;
 			font-size: 18px;
-			color: var(--foreground-color-2);
-			text-decoration: underline;
+			color: $v-dark-blue-primary;
 		}
 
 		canvas {
