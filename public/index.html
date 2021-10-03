@@ -1,17 +1,54 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<link rel="icon" href="<%= BASE_URL %>cloudy.png" />
+
+		<meta
+			name="description"
+			content="Check your today's Weather by one click, search for cities and view your weather stadictics."
+		/>
+		<meta property="og:site_name" content="Vue Weather App" />
+		<meta
+			property="og:description"
+			content="Check your today's Weather by one click, search for cities and view your weather stadictics."
+		/>
+		<meta property="og:title" content="Vue Weather App" />
+		<meta property="og:type" content="website" />
+		<meta
+			property="og:url"
+			content="https://vue-weather-app-angeleraser.vercel.app/"
+		/>
+		<meta
+			property="og:image"
+			content="https://res.cloudinary.com/dixrgy8ki/image/upload/c_scale,h_630,w_1200/v1633221890/portfolio/projects/vue-weather-app_wk06cy.png"
+		/>
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@angeleraser" />
+		<meta name="twitter:title" content="Vue Weather App" />
+		<meta
+			name="twitter:description"
+			content="Check your today's Weather by one click, search for cities and view your weather stadictics."
+		/>
+		<meta
+			name="twitter:image"
+			content="https://res.cloudinary.com/dixrgy8ki/image/upload/c_scale,h_630,w_1200/v1633221890/portfolio/projects/vue-weather-app_wk06cy.png"
+		/>
+		<meta name="twitter:image:alt" content="Vue Weather App" />
+
+		<title>Vue Weather App</title>
+	</head>
+	<body>
+		<noscript>
+			<strong
+				>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+				properly without JavaScript enabled. Please enable it to
+				continue.</strong
+			>
+		</noscript>
+		<div id="app"></div>
+		<!-- built files will be auto injected -->
+	</body>
 </html>
