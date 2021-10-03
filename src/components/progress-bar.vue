@@ -57,17 +57,6 @@ export default Vue.extend({
 			border-radius: 12px;
 			animation: fill 1s forwards linear;
 			transform-origin: left;
-			transform: scaleX(0);
-
-			@keyframes fill {
-				from {
-					transform: scaleX(0);
-				}
-
-				to {
-					transform: scaleX(100%);
-				}
-			}
 		}
 	}
 
