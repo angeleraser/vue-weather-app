@@ -196,7 +196,7 @@ export default Vue.extend({
 				padding: 0 1px;
 
 				&__message {
-					color: $v-light-gray;
+					color: var(--foreground-color-2);
 					opacity: 0.5;
 					font-size: 14px;
 				}
