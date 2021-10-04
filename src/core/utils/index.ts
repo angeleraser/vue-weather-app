@@ -68,9 +68,9 @@ const getUrlWithCorsAnywhere = (url: string): string => {
 };
 
 const useNavigatorGeolocation = (): Promise<GeolocationPosition> => {
-	return new Promise(resolve => {
+	return new Promise((resolve, reject) => {
 		function error() {
-			throw new Error('Geolocation permissions request denied!');
+			reject('Geolocation permissions request denied!');
 		}
 
 		if (!navigator.geolocation) error();
