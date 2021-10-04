@@ -63,6 +63,22 @@ const celciusToFahrenheit = (celcius: number): number => {
 	return (celcius * 9) / 5 + 32;
 };
 
+const useNavigatorGeolocation = (): Promise<GeolocationPosition> => {
+	return new Promise(resolve => {
+		function error() {
+			throw new Error('Geolocation permissions request denied!');
+		}
+
+		if (!navigator.geolocation) error();
+
+		function success(position: GeolocationPosition) {
+			resolve(position);
+		}
+
+		navigator.geolocation.getCurrentPosition(success, error);
+	});
+};
+
 const getTemperatureObject = (
 	weatherTemp: WeatherTemperature,
 	unity: WeatherTemperature['unity'],
@@ -96,4 +112,5 @@ export {
 	delay,
 	celciusToFahrenheit,
 	getTemperatureObject,
+	useNavigatorGeolocation,
 };

@@ -1,5 +1,8 @@
 import { Coordinates } from '../domain/entities/coordinates.entity';
-import { getLocalizationSearchArgument } from '../utils';
+import {
+	getLocalizationSearchArgument,
+	useNavigatorGeolocation,
+} from '../utils';
 import { Localization } from '../domain/entities/localization.entity';
 import { LocalizationQueries } from '../domain/services/weather.service';
 import { LocalizationType } from '../constants/localization-type.constant';
@@ -16,7 +19,6 @@ import { WeatherTemperature } from '../domain/entities/weather-temperature.entit
 import { WeatherWind } from '../domain/entities/weather-wind.entity';
 import HttpService from './http.service';
 import WeatherServiceError from '../errors/weather.service.error';
-import { ApiGeoIpifyService } from './geo-ipify.service';
 
 class MetaweatherService implements WeatherService {
 	private readonly api_url: string;
@@ -119,10 +121,10 @@ class MetaweatherService implements WeatherService {
 		params: LocalizationQueries,
 	): Promise<OnEarthLocalization> => {
 		try {
-			const geoIpifyData = await this.geoIpifyService.getCurrentLocation();
+			const geoPosition = await useNavigatorGeolocation();
 
 			const localizations = await this.findLocalizations({
-				latt_long: `${geoIpifyData.location.lat},${geoIpifyData.location.lng}`,
+				latt_long: `${geoPosition.coords.latitude},${geoPosition.coords.longitude}`,
 			});
 
 			const [current] = localizations;
@@ -143,10 +145,6 @@ class MetaweatherService implements WeatherService {
 			headers: new Headers(),
 			use_cors_anywhere: true,
 		});
-	}
-
-	private get geoIpifyService() {
-		return new ApiGeoIpifyService();
 	}
 
 	private getWeatherImgUrl = (state: WeatherStateAbbr): string => {
