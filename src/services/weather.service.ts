@@ -1,7 +1,7 @@
 import { Localization } from '../core/domain/entities/localization.entity';
 import { LocalizationQueries } from '../core/domain/services/weather.service';
 import { OnEarthLocalization } from '../core/domain/entities/on-earth-localization.entity';
-import MetaweatherService from '../core/services/local.metaweather.service';
+import MetaweatherService from '../core/services/local.metaweatherapi.service';
 
 const MetaweatherServiceInstansce = new MetaweatherService();
 
